@@ -69,7 +69,7 @@ PRIMARY KEY(idactores)  ,
 CREATE INDEX actores_FKIndex1 ON actores (personas_identificacion);
 
 
-CREATE INDEX IFK_pueden ser ON actores (personas_identificacion);
+CREATE INDEX IFK_pueden_ser ON actores (personas_identificacion);
 
 
 CREATE TABLE ciudades (
@@ -107,7 +107,7 @@ CREATE INDEX locales_has_ciudades_FKIndex1 ON sucursales (locales_idlocales);
 CREATE INDEX locales_has_ciudades_FKIndex2 ON sucursales (ciudades_idciudades);
 
 
-CREATE INDEX IFK_tiene ON sucursales (locales_idlocales);
+CREATE INDEX IFK_tiene1 ON sucursales (locales_idlocales);
 CREATE INDEX IFK_en ON sucursales (ciudades_idciudades);
 
 
@@ -130,7 +130,7 @@ CREATE INDEX empleados_FKIndex1 ON empleados (personas_identificacion);
 CREATE INDEX empleados_FKIndex2 ON empleados (locales_idlocales);
 
 
-CREATE INDEX IFK_aplican como ON empleados (personas_identificacion);
+CREATE INDEX IFK_aplican_como ON empleados (personas_identificacion);
 CREATE INDEX IFK_trabajan ON empleados (locales_idlocales);
 
 
@@ -173,7 +173,7 @@ CREATE INDEX peliculas_has_categorias_FKIndex1 ON peliculas_tiene_categorias (pe
 CREATE INDEX peliculas_has_categorias_FKIndex2 ON peliculas_tiene_categorias (categorias_idcategorias);
 
 
-CREATE INDEX IFK_se clasifica ON peliculas_tiene_categorias (peliculas_idpeliculas);
+CREATE INDEX IFK_se_clasifica ON peliculas_tiene_categorias (peliculas_idpeliculas);
 CREATE INDEX IFK_tiene ON peliculas_tiene_categorias (categorias_idcategorias);
 
 
@@ -221,7 +221,7 @@ CREATE INDEX locales_has_peliculas_FKIndex2 ON catalogo_de_peliculas (peliculas_
 
 
 CREATE INDEX IFK_gestiona ON catalogo_de_peliculas (locales_idlocales);
-CREATE INDEX IFK_se guardan ON catalogo_de_peliculas (peliculas_idpeliculas);
+CREATE INDEX IFK_se_guardan ON catalogo_de_peliculas (peliculas_idpeliculas);
 
 
 CREATE TABLE catalogo_de_actores (
@@ -242,7 +242,7 @@ CREATE INDEX peliculas_has_actores_FKIndex1 ON catalogo_de_actores (peliculas_id
 CREATE INDEX peliculas_has_actores_FKIndex2 ON catalogo_de_actores (actores_idactores);
 
 
-CREATE INDEX IFK_tiene ON catalogo_de_actores (peliculas_idpeliculas);
+CREATE INDEX IFK_tiene2 ON catalogo_de_actores (peliculas_idpeliculas);
 CREATE INDEX IFK_participan ON catalogo_de_actores (actores_idactores);
 
 

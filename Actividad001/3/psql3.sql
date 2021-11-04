@@ -62,7 +62,7 @@ PRIMARY KEY(idexpositores)  ,
 CREATE INDEX expositores_FKIndex1 ON expositores (personas_idpersonas);
 
 
-CREATE INDEX IFK_aplican como ON expositores (personas_idpersonas);
+CREATE INDEX IFK_aplican_como ON expositores (personas_idpersonas);
 
 
 CREATE TABLE charlas (
