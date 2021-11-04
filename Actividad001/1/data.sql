@@ -1,6 +1,7 @@
-INSERT INTO persona (nid, nom1, nom2, apell1, apell2, fnac)
+INSERT INTO persona (nid, tipoid, nom1, nom2, apll1, apll2, fnac)
 VALUES (
         132545,
+        'C.C',
         'Juan',
         'Antonio',
         'Hernandez',
@@ -9,6 +10,7 @@ VALUES (
     ),
 (
         2144645,
+        'C.C',
         'Jhoan',
         'Daniel',
         'Ramirez',
@@ -17,14 +19,16 @@ VALUES (
 ),
 (
         514356,
+        'C.C',
         'Luz',
-        null,
+        'Maria',
         'Estrella',
         'Gonzalez',
         '2001-08-20'
 ),
 (
         614356,
+        'C.C',
         'Maria',
         'Camila',
         'Pereira',
@@ -50,13 +54,13 @@ VALUES (
         'Peru'
     );
 
-INSERT INTO series (id_series, nombre_serie, fecha_estreno, emicion, duracion_episodio, descripcion, mezcla_sonido, formato_relacion_aspecto)
+INSERT INTO series (idseries, nombre_serie, fecha_estreno, emicion, duracion_episodio, descripcion, mezcla_sonido, formato_relacion_aspecto)
 VALUES (
         1,
         'The Walking Dead',
         '2010-10-31',
         TRUE,
-        00:45:00,
+        '00:45:00',
         'Una serie de ciencia ficción que narra la historia de una población de una región del norte de América, que se enfrenta a una pandemia que amenaza con la supervivencia de la humanidad.',
         'TensionSong',
         '16:9'
@@ -66,7 +70,7 @@ VALUES (
         'The Big Bang Theory',
         '2007-09-24',
         FALSE,
-        00:30:00,
+        '00:30:00',
         'Una serie de televisión que narra la vida de una familia de quienes trabajan en una empresa de informática, donde la mayoría de sus miembros son estudiantes universitarios.',
         'AccionSong',
         '16:9'
@@ -76,8 +80,8 @@ VALUES (
         'Los Simpsons',
         '1989-12-17',
         TRUE,
-        00:30:00,
-        'Son una familia normal estadounidense que vive en Springfield, una ciudad ficticia de la America Media.'
+        '00:30:00',
+        'Son una familia normal estadounidense que vive en Springfield, una ciudad ficticia de la America Media.',
         'IntroSong',
         '3:4'
 ),(
@@ -85,8 +89,8 @@ VALUES (
         'Arcane',
         '2021-09-12',
         FALSE,
-        00:30:00,
-        'Arcane está ambientado en el universo del exitoso MOBA de Riot Games, y cuenta la historia de dos de las hermanas más populares de su universo: Jinx y Vi.'
+        '00:30:00',
+        'Arcane está ambientado en el universo del exitoso MOBA de Riot Games, y cuenta la historia de dos de las hermanas más populares de su universo: Jinx y Vi.',
         'EpicSong',
         '16:9'
 );
@@ -146,5 +150,3 @@ VALUES (
         'mariela@gmail.com',
         'deusamadeus'
 );
-
-INSERT INTO premios_serie (idpremios, series_idseries, )
