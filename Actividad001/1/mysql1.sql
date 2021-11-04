@@ -22,7 +22,7 @@ CREATE TABLE series (
   nombre_serie VARCHAR(45)  NOT NULL  ,
   fecha_estreno DATE  NOT NULL  ,
   emicion BOOL  NOT NULL  ,
-  duracion_episodio INTEGER UNSIGNED  NOT NULL  ,
+  duracion_episodio TIME NOT NULL  ,
   descripcion TEXT  NOT NULL  ,
   mezcla_sonido VARCHAR(45)  NOT NULL  ,
   formato_relacion_aspecto VARCHAR(45)  NOT NULL    ,
