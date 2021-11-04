@@ -146,3 +146,5 @@ VALUES (
         'mariela@gmail.com',
         'deusamadeus'
 );
+
+INSERT INTO premios_serie (idpremios, series_idseries, )

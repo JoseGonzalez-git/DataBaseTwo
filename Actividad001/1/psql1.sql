@@ -76,7 +76,7 @@ PRIMARY KEY(idpremios)  ,
 CREATE INDEX premios_FKIndex1 ON premios_serie (series_idseries);
 
 
-CREATE INDEX IFK_es nominada ON premios_serie (series_idseries);
+CREATE INDEX IFK_es_nominada ON premios_serie (series_idseries);
 
 
 CREATE TABLE ciudades (
@@ -109,7 +109,7 @@ PRIMARY KEY(idactores)  ,
 CREATE INDEX actores_FKIndex1 ON actores (persona_nid);
 
 
-CREATE INDEX IFK_trabaja como ON actores (persona_nid);
+CREATE INDEX IFK_trabaja_como ON actores (persona_nid);
 
 
 CREATE TABLE temporadas (
@@ -141,7 +141,7 @@ PRIMARY KEY(iddirector)  ,
 CREATE INDEX director_FKIndex1 ON director (persona_nid);
 
 
-CREATE INDEX IFK_trabaja como ON director (persona_nid);
+CREATE INDEX IFK_trabaja_como ON director (persona_nid);
 
 
 CREATE TABLE valoracion_numerica_serie (
@@ -285,7 +285,7 @@ CREATE INDEX personajes_FKIndex2 ON personajes (episodios_n_episodios);
 
 
 CREATE INDEX IFK_interpreta ON personajes (actores_idactores);
-CREATE INDEX IFK_es parte de ON personajes (episodios_n_episodios);
+CREATE INDEX IFK_es_parte_de ON personajes (episodios_n_episodios);
 
 
 CREATE TABLE lugar_rodaje (
@@ -308,7 +308,7 @@ CREATE INDEX lugar_rodaje_FKIndex1 ON lugar_rodaje (ciudades_idciudad);
 CREATE INDEX lugar_rodaje_FKIndex2 ON lugar_rodaje (episodios_n_episodios);
 
 
-CREATE INDEX IFK_se ubica en ON lugar_rodaje (ciudades_idciudad);
+CREATE INDEX IFK_se_ubica_en ON lugar_rodaje (ciudades_idciudad);
 CREATE INDEX IFK_tiene ON lugar_rodaje (episodios_n_episodios);
 
 
@@ -328,7 +328,7 @@ PRIMARY KEY(idpremios_actores)  ,
 CREATE INDEX premios_actores_FKIndex1 ON premios_actores (actores_idactores);
 
 
-CREATE INDEX IFK_es nominado ON premios_actores (actores_idactores);
+CREATE INDEX IFK_es_nominado ON premios_actores (actores_idactores);
 
 
 CREATE TABLE valoracion_numerica_episodio (
@@ -398,7 +398,7 @@ CREATE INDEX guionistas_FKIndex1 ON guionistas (persona_nid);
 CREATE INDEX guionistas_FKIndex2 ON guionistas (episodios_n_episodios);
 
 
-CREATE INDEX IFK_trabaja como ON guionistas (persona_nid);
+CREATE INDEX IFK_trabaja_como ON guionistas (persona_nid);
 CREATE INDEX IFK_participa ON guionistas (episodios_n_episodios);
 
 
