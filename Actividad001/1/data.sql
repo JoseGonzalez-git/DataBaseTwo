@@ -122,4 +122,27 @@ VALUES (
         1,
         132545,
         'juan',
+        'juachito@gmail.com',
+        'Craken'
+),
+(
+        2,
+        2144645,
+        'jhoan',
+        'eljoalo@gmail.com',
+        'surucutanga'
+),
+(
+        3,
+        514356,
+        'luz',
+        'labebecita@gmail.com',
+        'bebelin'
+),
+(
+        4,
+        614356,
+        'maria',
+        'mariela@gmail.com',
+        'deusamadeus'
 );
