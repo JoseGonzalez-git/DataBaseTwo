@@ -211,6 +211,16 @@ INSERT INTO director (iddirector, persona_nid)
 VALUES (1, 2144645),
     (2, 514356);
 INSERT INTO valoracion_escrita_serie (
+        idvaloracion_escrita,
+        usuario_idusuario,
+        series_idseries,
+        comentario
+    )
+VALUES (1, 1, 1, 'Epico'),
+    (2, 2, 1, 'Lo mejor de lo mejor'),
+    (3, 3, 1, 'Esta bien'),
+    (4, 4, 1, 'nada agradable');
+    INSERT INTO valoracion_numerica_serie (
         idvaloracion_num,
         usuario_idusuario,
         series_idseries,
@@ -226,8 +236,6 @@ INSERT INTO episodios (
         temporadas_n_temporada,
         nombre_episodio,
         descripcion,
-        valoracion_numerica,
-        valoracion_escrita,
         fecha_publicacion
     )
 VALUES (
@@ -300,4 +308,30 @@ VALUES(1, 1, 'Mejor actor', '2021-10-31', TRUE),
     (3, 3, 'Mejor actor', '2022-10-31', FALSE),
     (4, 4, 'Mejor actor', '2021-10-31', FALSE);
 
+INSERT INTO valoracion_numerica_episodio (
+        idvaloracion_numerica_episodio,
+        episodio_id_episodio,
+        usuario_idusuario,
+        valoracion
+    )
+VALUES(1, 1, 1, 5),
+    (2, 2, 2, 4),
+    (3, 3, 3, 3),
+    (4, 4, 4, 2);
 
+INSERT INTO valoracion_escrita_episodio (
+        idvaloracion_escrita_episodio,
+        episodio_id_episodio,
+        usuario_idusuario,
+        comentario
+    )
+VALUES(1, 1, 1, 'Epico'),
+    (2, 2, 2, 'Ta bien'),
+    (3, 3, 3, 'mmm me'),
+    (4, 4, 4, 'Mucho relleno');
+
+INSERT INTO guionistas (idguionistas, episodio_id_episodio, persona_nid)
+VALUES(1, 1, 675443),
+    (2, 2, 675443),
+    (3, 3, 3215346),
+    (4, 4, 3215346);
