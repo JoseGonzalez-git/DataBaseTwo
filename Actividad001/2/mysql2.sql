@@ -1,16 +1,15 @@
-CREATE TABLE estados (
-  idestado INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  nombre_estado VARCHAR(20)  NOT NULL    ,
-PRIMARY KEY(idestado));
-
-
-
 CREATE TABLE familias (
   idfamilia INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   nombre_familia VARCHAR(20)  NOT NULL  ,
-  n_integrantes INTEGER UNSIGNED  NOT NULL  ,
   tiempo_familia DATE  NOT NULL    ,
 PRIMARY KEY(idfamilia));
+
+
+
+CREATE TABLE bienes_actividad (
+  idbienes_actividad INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  descripcion TEXT  NOT NULL    ,
+PRIMARY KEY(idbienes_actividad));
 
 
 
@@ -30,29 +29,29 @@ INDEX miembro_FKIndex1(familias_idfamilia),
 
 
 
+CREATE TABLE edades (
+  idedades INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  miembros_idmiembro INTEGER UNSIGNED  NOT NULL  ,
+  categoria_edad VARCHAR(20)  NOT NULL    ,
+PRIMARY KEY(idedades)  ,
+INDEX edades_FKIndex1(miembros_idmiembro),
+  FOREIGN KEY(miembros_idmiembro)
+    REFERENCES miembros(idmiembro)
+      ON DELETE RESTRICT
+      ON UPDATE CASCADE);
+
+
+
 CREATE TABLE actividades (
   idactividad INTEGER UNSIGNED ZEROFILL  NOT NULL   AUTO_INCREMENT,
-  estados_idestado INTEGER UNSIGNED  NOT NULL  ,
+  bienes_actividad_idbienes_actividad INTEGER UNSIGNED  NOT NULL  ,
   nombre_actividad VARCHAR(45)  NOT NULL    ,
 PRIMARY KEY(idactividad)  ,
-INDEX actividad_FKIndex1(estados_idestado),
-  FOREIGN KEY(estados_idestado)
-    REFERENCES estados(idestado)
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE);
-
-
-
-CREATE TABLE bienes_actividad (
-  idbienes_actividad INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  actividades_idactividad INTEGER UNSIGNED ZEROFILL  NOT NULL  ,
-  descripcion TEXT  NOT NULL    ,
-PRIMARY KEY(idbienes_actividad)  ,
-INDEX bienes_actividad_FKIndex1(actividades_idactividad),
-  FOREIGN KEY(actividades_idactividad)
-    REFERENCES actividades(idactividad)
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE);
+INDEX actividades_FKIndex1(bienes_actividad_idbienes_actividad),
+  FOREIGN KEY(bienes_actividad_idbienes_actividad)
+    REFERENCES bienes_actividad(idbienes_actividad)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION);
 
 
 
@@ -69,22 +68,22 @@ INDEX bienes_familia_FKIndex1(familias_idfamilia),
 
 
 
-CREATE TABLE edades (
-  idedades INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  estados_idestado INTEGER UNSIGNED  NOT NULL  ,
-  miembros_idmiembro INTEGER UNSIGNED  NOT NULL  ,
-  categoria_edad VARCHAR(20)  NOT NULL    ,
-PRIMARY KEY(idedades)  ,
-INDEX edades_FKIndex1(miembros_idmiembro)  ,
-INDEX edades_FKIndex2(estados_idestado),
-  FOREIGN KEY(miembros_idmiembro)
-    REFERENCES miembros(idmiembro)
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE,
-  FOREIGN KEY(estados_idestado)
-    REFERENCES estados(idestado)
-      ON DELETE RESTRICT
-      ON UPDATE CASCADE);
+CREATE TABLE estados (
+  idestado INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  edades_idedades INTEGER UNSIGNED  NOT NULL  ,
+  actividades_idactividad INTEGER UNSIGNED ZEROFILL  NOT NULL  ,
+  nombre_estado VARCHAR(20)  NOT NULL    ,
+PRIMARY KEY(idestado)  ,
+INDEX estados_FKIndex1(actividades_idactividad)  ,
+INDEX estados_FKIndex2(edades_idedades),
+  FOREIGN KEY(actividades_idactividad)
+    REFERENCES actividades(idactividad)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+  FOREIGN KEY(edades_idedades)
+    REFERENCES edades(idedades)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION);
 
 
 
