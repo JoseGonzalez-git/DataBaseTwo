@@ -93,7 +93,7 @@ PRIMARY KEY(idciudad)  ,
 CREATE INDEX ciudad_FKIndex1 ON ciudades (paises_idpais);
 
 
-CREATE INDEX IFK_tiene1 ON ciudades (paises_idpais);
+CREATE INDEX IFK_tiene3 ON ciudades (paises_idpais);
 
 
 CREATE TABLE actores (
@@ -109,13 +109,14 @@ PRIMARY KEY(idactores)  ,
 CREATE INDEX actores_FKIndex1 ON actores (persona_nid);
 
 
-CREATE INDEX IFK_trabaja_como1 ON actores (persona_nid);
+CREATE INDEX IFK_trabaja_como3 ON actores (persona_nid);
 
 
 CREATE TABLE temporadas (
-  n_temporada SERIAL  NOT NULL ,
-  series_idseries INTEGER   NOT NULL   ,
-PRIMARY KEY(n_temporada)  ,
+  id_temporada SERIAL  NOT NULL ,
+  series_idseries INTEGER   NOT NULL ,
+  n_temporada INTEGER   NOT NULL   ,
+PRIMARY KEY(id_temporada)  ,
   FOREIGN KEY(series_idseries)
     REFERENCES series(idseries)
       ON DELETE RESTRICT
@@ -123,6 +124,7 @@ PRIMARY KEY(n_temporada)  ,
 
 
 CREATE INDEX temporadas_FKIndex1 ON temporadas (series_idseries);
+
 
 CREATE INDEX IFK_contiene ON temporadas (series_idseries);
 
@@ -140,7 +142,7 @@ PRIMARY KEY(iddirector)  ,
 CREATE INDEX director_FKIndex1 ON director (persona_nid);
 
 
-CREATE INDEX IFK_trabaja_como2 ON director (persona_nid);
+CREATE INDEX IFK_trabaja_como1 ON director (persona_nid);
 
 
 CREATE TABLE valoracion_numerica_serie (
@@ -164,7 +166,7 @@ CREATE INDEX valoracion_numerica_serie_FKIndex2 ON valoracion_numerica_serie (us
 
 
 CREATE INDEX IFK_recibe1 ON valoracion_numerica_serie (series_idseries);
-CREATE INDEX IFK_realiza1 ON valoracion_numerica_serie (usuario_idusuario);
+CREATE INDEX IFK_realiza5 ON valoracion_numerica_serie (usuario_idusuario);
 
 
 CREATE TABLE valoracion_escrita_serie (
@@ -186,22 +188,21 @@ CREATE INDEX valoracion_escrita_serie_FKIndex1 ON valoracion_escrita_serie (seri
 CREATE INDEX valoracion_escrita_serie_FKIndex2 ON valoracion_escrita_serie (usuario_idusuario);
 
 
-CREATE INDEX IFK_recibe2 ON valoracion_escrita_serie (series_idseries);
-CREATE INDEX IFK_realiza2 ON valoracion_escrita_serie (usuario_idusuario);
+CREATE INDEX IFK_recibe ON valoracion_escrita_serie (series_idseries);
+CREATE INDEX IFK_realiza ON valoracion_escrita_serie (usuario_idusuario);
 
 
 CREATE TABLE episodios (
-  n_episodios SERIAL  NOT NULL ,
+  id_episodio SERIAL  NOT NULL ,
+  temporadas_id_temporada INTEGER   NOT NULL ,
   director_iddirector INTEGER   NOT NULL ,
-  temporadas_n_temporada INTEGER   NOT NULL ,
+  n_episodio INTEGER    ,
   nombre_episodio VARCHAR(45)   NOT NULL ,
   descripcion TEXT   NOT NULL ,
-  valoracion_numerica INTEGER   NOT NULL ,
-  valoracion_escrita TEXT   NOT NULL ,
   fecha_publicacion DATE   NOT NULL   ,
-PRIMARY KEY(n_episodios)    ,
-  FOREIGN KEY(temporadas_n_temporada)
-    REFERENCES temporadas(n_temporada)
+PRIMARY KEY(id_episodio)    ,
+  FOREIGN KEY(temporadas_id_temporada)
+    REFERENCES temporadas(id_temporada)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
   FOREIGN KEY(director_iddirector)
@@ -210,11 +211,11 @@ PRIMARY KEY(n_episodios)    ,
       ON UPDATE CASCADE);
 
 
-CREATE INDEX episodios_FKIndex1 ON episodios (temporadas_n_temporada);
+CREATE INDEX episodios_FKIndex1 ON episodios (temporadas_id_temporada);
 CREATE INDEX episodios_FKIndex2 ON episodios (director_iddirector);
 
 
-CREATE INDEX IFK_agrupa ON episodios (temporadas_n_temporada);
+CREATE INDEX IFK_agrupa ON episodios (temporadas_id_temporada);
 CREATE INDEX IFK_dirige ON episodios (director_iddirector);
 
 
@@ -242,30 +243,30 @@ CREATE INDEX IFK_posee ON categorias_has_series (series_idseries);
 
 CREATE TABLE productores (
   idproductores SERIAL  NOT NULL ,
-  episodios_n_episodios INTEGER   NOT NULL ,
+  episodios_id_episodio INTEGER   NOT NULL ,
   persona_nid VARCHAR(20)   NOT NULL   ,
 PRIMARY KEY(idproductores)    ,
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
 
 CREATE INDEX productores_FKIndex1 ON productores (persona_nid);
-CREATE INDEX productores_FKIndex2 ON productores (episodios_n_episodios);
+CREATE INDEX productores_FKIndex2 ON productores (episodios_id_episodio);
 
 
-CREATE INDEX IFK_trabaja_como3 ON productores (persona_nid);
-CREATE INDEX IFK_gestiona ON productores (episodios_n_episodios);
+CREATE INDEX IFK_trabaja_como2 ON productores (persona_nid);
+CREATE INDEX IFK_gestiona ON productores (episodios_id_episodio);
 
 
 CREATE TABLE personajes (
   idpersonajes SERIAL  NOT NULL ,
-  episodios_n_episodios INTEGER   NOT NULL ,
+  episodios_id_episodio INTEGER   NOT NULL ,
   actores_idactores INTEGER   NOT NULL ,
   nombre VARCHAR(45)      ,
 PRIMARY KEY(idpersonajes)    ,
@@ -273,23 +274,23 @@ PRIMARY KEY(idpersonajes)    ,
     REFERENCES actores(idactores)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
 
 CREATE INDEX personajes_FKIndex1 ON personajes (actores_idactores);
-CREATE INDEX personajes_FKIndex2 ON personajes (episodios_n_episodios);
+CREATE INDEX personajes_FKIndex2 ON personajes (episodios_id_episodio);
 
 
 CREATE INDEX IFK_interpreta ON personajes (actores_idactores);
-CREATE INDEX IFK_es_parte_de ON personajes (episodios_n_episodios);
+CREATE INDEX IFK_es_parte_de ON personajes (episodios_id_episodio);
 
 
 CREATE TABLE lugar_rodaje (
   idlugar_rodaje SERIAL  NOT NULL ,
-  episodios_n_episodios INTEGER   NOT NULL ,
+  episodios_id_episodio INTEGER   NOT NULL ,
   ciudades_idciudad INTEGER   NOT NULL ,
   nombre_lugar VARCHAR(20)   NOT NULL   ,
 PRIMARY KEY(idlugar_rodaje)    ,
@@ -297,18 +298,18 @@ PRIMARY KEY(idlugar_rodaje)    ,
     REFERENCES ciudades(idciudad)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
 
 CREATE INDEX lugar_rodaje_FKIndex1 ON lugar_rodaje (ciudades_idciudad);
-CREATE INDEX lugar_rodaje_FKIndex2 ON lugar_rodaje (episodios_n_episodios);
+CREATE INDEX lugar_rodaje_FKIndex2 ON lugar_rodaje (episodios_id_episodio);
 
 
 CREATE INDEX IFK_se_ubica_en ON lugar_rodaje (ciudades_idciudad);
-CREATE INDEX IFK_tiene3 ON lugar_rodaje (episodios_n_episodios);
+CREATE INDEX IFK_tiene2 ON lugar_rodaje (episodios_id_episodio);
 
 
 CREATE TABLE premios_actores (
@@ -332,12 +333,12 @@ CREATE INDEX IFK_es_nominado ON premios_actores (actores_idactores);
 
 CREATE TABLE valoracion_numerica_episodio (
   idvaloracion_numerica_episodio SERIAL  NOT NULL ,
+  episodios_id_episodio INTEGER   NOT NULL ,
   usuario_idusuario INTEGER   NOT NULL ,
-  episodios_n_episodios INTEGER   NOT NULL ,
   valoracion INTEGER   NOT NULL   ,
 PRIMARY KEY(idvaloracion_numerica_episodio)    ,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
   FOREIGN KEY(usuario_idusuario)
@@ -346,22 +347,22 @@ PRIMARY KEY(idvaloracion_numerica_episodio)    ,
       ON UPDATE CASCADE);
 
 
-CREATE INDEX valoracion_numerica_episodio_FKIndex1 ON valoracion_numerica_episodio (episodios_n_episodios);
+CREATE INDEX valoracion_numerica_episodio_FKIndex1 ON valoracion_numerica_episodio (episodios_id_episodio);
 CREATE INDEX valoracion_numerica_episodio_FKIndex2 ON valoracion_numerica_episodio (usuario_idusuario);
 
 
-CREATE INDEX IFK_tiene4 ON valoracion_numerica_episodio (episodios_n_episodios);
-CREATE INDEX IFK_realiza3 ON valoracion_numerica_episodio (usuario_idusuario);
+CREATE INDEX IFK_tiene1 ON valoracion_numerica_episodio (episodios_id_episodio);
+CREATE INDEX IFK_realiza2 ON valoracion_numerica_episodio (usuario_idusuario);
 
 
 CREATE TABLE valoracion_escrita_episodio (
   idvaloracion_escrita_episodio SERIAL  NOT NULL ,
+  episodios_id_episodio INTEGER   NOT NULL ,
   usuario_idusuario INTEGER   NOT NULL ,
-  episodios_n_episodios INTEGER   NOT NULL ,
   comentario TEXT   NOT NULL   ,
 PRIMARY KEY(idvaloracion_escrita_episodio)    ,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
   FOREIGN KEY(usuario_idusuario)
@@ -370,35 +371,35 @@ PRIMARY KEY(idvaloracion_escrita_episodio)    ,
       ON UPDATE CASCADE);
 
 
-CREATE INDEX valoracion_escrita_episodio_FKIndex1 ON valoracion_escrita_episodio (episodios_n_episodios);
+CREATE INDEX valoracion_escrita_episodio_FKIndex1 ON valoracion_escrita_episodio (episodios_id_episodio);
 CREATE INDEX valoracion_escrita_episodio_FKIndex2 ON valoracion_escrita_episodio (usuario_idusuario);
 
 
-CREATE INDEX IFK_recibe3 ON valoracion_escrita_episodio (episodios_n_episodios);
-CREATE INDEX IFK_realiza4 ON valoracion_escrita_episodio (usuario_idusuario);
+CREATE INDEX IFK_recibe4 ON valoracion_escrita_episodio (episodios_id_episodio);
+CREATE INDEX IFK_realiza1 ON valoracion_escrita_episodio (usuario_idusuario);
 
 
 CREATE TABLE guionistas (
   idguionistas SERIAL  NOT NULL ,
-  episodios_n_episodios INTEGER   NOT NULL ,
+  episodios_id_episodio INTEGER   NOT NULL ,
   persona_nid VARCHAR(20)   NOT NULL   ,
 PRIMARY KEY(idguionistas)    ,
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
 
 CREATE INDEX guionistas_FKIndex1 ON guionistas (persona_nid);
-CREATE INDEX guionistas_FKIndex2 ON guionistas (episodios_n_episodios);
+CREATE INDEX guionistas_FKIndex2 ON guionistas (episodios_id_episodio);
 
 
-CREATE INDEX IFK_trabaja_como4 ON guionistas (persona_nid);
-CREATE INDEX IFK_participa ON guionistas (episodios_n_episodios);
+CREATE INDEX IFK_trabaja_como3 ON guionistas (persona_nid);
+CREATE INDEX IFK_participa ON guionistas (episodios_id_episodio);
 
 
 

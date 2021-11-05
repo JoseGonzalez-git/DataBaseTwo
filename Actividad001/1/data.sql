@@ -289,4 +289,39 @@ VALUES (
     2
 );
 
--- INSERT INTO episodios (n_episodios, director_iddirector, temporadas_n_temporada, nombre_episodio, descripcion, valoracion_numerica, valoracion_escrita, fecha_publicacion)
+INSERT INTO episodios (n_episodios, director_iddirector, temporadas_n_temporada, nombre_episodio, descripcion, valoracion_numerica, valoracion_escrita, fecha_publicacion)
+VALUES (
+    1,
+    1,
+    1,
+    1,
+    'Mosca',
+    'El primer episodio de la serie',
+    '2020-10-31'
+),
+(
+    2,
+    2,
+    1,
+    1,
+    'Ozymandias',
+    'El primer episodio de la segunda temporada de la serie',
+    '2020-11-31'
+),
+(
+    3,
+    3,
+    2,
+    1,
+    'Estrellas en la noche',
+    'El primer episodio de la serie',
+    '2010-10-20'
+),
+(   4,
+    4,
+    2,
+    1,
+    'El rey leon',
+    'El primer episodio de la serie',
+    '2020-01-31'
+    );

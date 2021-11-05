@@ -22,7 +22,7 @@ CREATE TABLE series (
   nombre_serie VARCHAR(45)  NOT NULL  ,
   fecha_estreno DATE  NOT NULL  ,
   emicion BOOL  NOT NULL  ,
-  duracion_episodio TIME NOT NULL  ,
+  duracion_episodio TIME  NOT NULL  ,
   descripcion TEXT  NOT NULL  ,
   mezcla_sonido VARCHAR(45)  NOT NULL  ,
   formato_relacion_aspecto VARCHAR(45)  NOT NULL    ,
@@ -93,9 +93,10 @@ INDEX actores_FKIndex1(persona_nid),
 
 
 CREATE TABLE temporadas (
-  n_temporada INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  series_idseries INTEGER UNSIGNED  NOT NULL    ,
-PRIMARY KEY(n_temporada)  ,
+  id_temporada INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  series_idseries INTEGER UNSIGNED  NOT NULL  ,
+  n_temporada INTEGER UNSIGNED  NOT NULL    ,
+PRIMARY KEY(id_temporada)  ,
 INDEX temporadas_FKIndex1(series_idseries),
   FOREIGN KEY(series_idseries)
     REFERENCES series(idseries)
@@ -155,19 +156,18 @@ INDEX valoracion_escrita_serie_FKIndex2(usuario_idusuario),
 
 
 CREATE TABLE episodios (
-  n_episodios INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  id_episodio INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  temporadas_id_temporada INTEGER UNSIGNED  NOT NULL  ,
   director_iddirector INTEGER UNSIGNED  NOT NULL  ,
-  temporadas_n_temporada INTEGER UNSIGNED  NOT NULL  ,
+  n_episodio INTEGER UNSIGNED  NULL  ,
   nombre_episodio VARCHAR(45)  NOT NULL  ,
   descripcion TEXT  NOT NULL  ,
-  valoracion_numerica INTEGER UNSIGNED  NOT NULL  ,
-  valoracion_escrita TEXT  NOT NULL  ,
   fecha_publicacion DATE  NOT NULL    ,
-PRIMARY KEY(n_episodios)  ,
-INDEX episodios_FKIndex1(temporadas_n_temporada)  ,
+PRIMARY KEY(id_episodio)  ,
+INDEX episodios_FKIndex1(temporadas_id_temporada)  ,
 INDEX episodios_FKIndex2(director_iddirector),
-  FOREIGN KEY(temporadas_n_temporada)
-    REFERENCES temporadas(n_temporada)
+  FOREIGN KEY(temporadas_id_temporada)
+    REFERENCES temporadas(id_temporada)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
   FOREIGN KEY(director_iddirector)
@@ -196,17 +196,17 @@ INDEX categorias_has_series_FKIndex2(series_idseries),
 
 CREATE TABLE productores (
   idproductores INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  episodios_n_episodios INTEGER UNSIGNED  NOT NULL  ,
+  episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
   persona_nid VARCHAR(20)  NOT NULL    ,
 PRIMARY KEY(idproductores)  ,
 INDEX productores_FKIndex1(persona_nid)  ,
-INDEX productores_FKIndex2(episodios_n_episodios),
+INDEX productores_FKIndex2(episodios_id_episodio),
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
@@ -214,18 +214,18 @@ INDEX productores_FKIndex2(episodios_n_episodios),
 
 CREATE TABLE personajes (
   idpersonajes INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  episodios_n_episodios INTEGER UNSIGNED  NOT NULL  ,
+  episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
   actores_idactores INTEGER UNSIGNED  NOT NULL  ,
   nombre VARCHAR(45)  NULL    ,
 PRIMARY KEY(idpersonajes)  ,
 INDEX personajes_FKIndex1(actores_idactores)  ,
-INDEX personajes_FKIndex2(episodios_n_episodios),
+INDEX personajes_FKIndex2(episodios_id_episodio),
   FOREIGN KEY(actores_idactores)
     REFERENCES actores(idactores)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
@@ -233,18 +233,18 @@ INDEX personajes_FKIndex2(episodios_n_episodios),
 
 CREATE TABLE lugar_rodaje (
   idlugar_rodaje INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  episodios_n_episodios INTEGER UNSIGNED  NOT NULL  ,
+  episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
   ciudades_idciudad INTEGER UNSIGNED  NOT NULL  ,
   nombre_lugar VARCHAR(20)  NOT NULL    ,
 PRIMARY KEY(idlugar_rodaje)  ,
 INDEX lugar_rodaje_FKIndex1(ciudades_idciudad)  ,
-INDEX lugar_rodaje_FKIndex2(episodios_n_episodios),
+INDEX lugar_rodaje_FKIndex2(episodios_id_episodio),
   FOREIGN KEY(ciudades_idciudad)
     REFERENCES ciudades(idciudad)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
@@ -267,14 +267,14 @@ INDEX premios_actores_FKIndex1(actores_idactores),
 
 CREATE TABLE valoracion_numerica_episodio (
   idvaloracion_numerica_episodio INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
   usuario_idusuario INTEGER UNSIGNED  NOT NULL  ,
-  episodios_n_episodios INTEGER UNSIGNED  NOT NULL  ,
   valoracion INTEGER UNSIGNED  NOT NULL    ,
 PRIMARY KEY(idvaloracion_numerica_episodio)  ,
-INDEX valoracion_numerica_episodio_FKIndex1(episodios_n_episodios)  ,
+INDEX valoracion_numerica_episodio_FKIndex1(episodios_id_episodio)  ,
 INDEX valoracion_numerica_episodio_FKIndex2(usuario_idusuario),
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
   FOREIGN KEY(usuario_idusuario)
@@ -286,14 +286,14 @@ INDEX valoracion_numerica_episodio_FKIndex2(usuario_idusuario),
 
 CREATE TABLE valoracion_escrita_episodio (
   idvaloracion_escrita_episodio INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
+  episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
   usuario_idusuario INTEGER UNSIGNED  NOT NULL  ,
-  episodios_n_episodios INTEGER UNSIGNED  NOT NULL  ,
   comentario TEXT  NOT NULL    ,
 PRIMARY KEY(idvaloracion_escrita_episodio)  ,
-INDEX valoracion_escrita_episodio_FKIndex1(episodios_n_episodios)  ,
+INDEX valoracion_escrita_episodio_FKIndex1(episodios_id_episodio)  ,
 INDEX valoracion_escrita_episodio_FKIndex2(usuario_idusuario),
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
   FOREIGN KEY(usuario_idusuario)
@@ -305,17 +305,17 @@ INDEX valoracion_escrita_episodio_FKIndex2(usuario_idusuario),
 
 CREATE TABLE guionistas (
   idguionistas INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  episodios_n_episodios INTEGER UNSIGNED  NOT NULL  ,
+  episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
   persona_nid VARCHAR(20)  NOT NULL    ,
 PRIMARY KEY(idguionistas)  ,
 INDEX guionistas_FKIndex1(persona_nid)  ,
-INDEX guionistas_FKIndex2(episodios_n_episodios),
+INDEX guionistas_FKIndex2(episodios_id_episodio),
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
       ON DELETE RESTRICT
       ON UPDATE CASCADE,
-  FOREIGN KEY(episodios_n_episodios)
-    REFERENCES episodios(n_episodios)
+  FOREIGN KEY(episodios_id_episodio)
+    REFERENCES episodios(id_episodio)
       ON DELETE RESTRICT
       ON UPDATE CASCADE);
 
