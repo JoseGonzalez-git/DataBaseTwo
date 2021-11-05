@@ -1,8 +1,8 @@
 CREATE TABLE persona (
-  nid VARCHAR(20)  NOT NULL  ,
+  nid VARCHAR(50)  NOT NULL  ,
   tipoID VARCHAR(4)  NOT NULL  ,
-  nom1 VARCHAR(20)  NOT NULL  ,
-  nom2 VARCHAR(20)  NOT NULL  ,
+  nom1 VARCHAR(50)  NOT NULL  ,
+  nom2 VARCHAR(50)  NOT NULL  ,
   apll1 VARCHAR(30)  NOT NULL  ,
   apll2 VARCHAR(30)  NOT NULL  ,
   fnac DATE  NOT NULL    ,
@@ -12,7 +12,7 @@ PRIMARY KEY(nid));
 
 CREATE TABLE paises (
   idpais INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  nombre_pais VARCHAR(20)  NOT NULL    ,
+  nombre_pais VARCHAR(50)  NOT NULL    ,
 PRIMARY KEY(idpais));
 
 
@@ -39,8 +39,8 @@ PRIMARY KEY(idcategorias));
 
 CREATE TABLE usuario (
   idusuario INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  persona_nid VARCHAR(20)  NOT NULL  ,
-  nombre_usuario VARCHAR(20)  NOT NULL  ,
+  persona_nid VARCHAR(50)  NOT NULL  ,
+  nombre_usuario VARCHAR(50)  NOT NULL  ,
   correo_electronico VARCHAR(255)  NOT NULL  ,
   contrasena VARCHAR(100)  NOT NULL    ,
 PRIMARY KEY(idusuario)  ,
@@ -55,7 +55,7 @@ INDEX usuario_FKIndex1(persona_nid),
 CREATE TABLE premios_serie (
   idpremios INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   series_idseries INTEGER UNSIGNED  NOT NULL  ,
-  nombre_premio VARCHAR(20)  NOT NULL  ,
+  nombre_premio VARCHAR(50))  NOT NULL  ,
   fecha_entrega DATE  NULL  ,
   gano BOOL  NOT NULL    ,
 PRIMARY KEY(idpremios)  ,
@@ -70,7 +70,7 @@ INDEX premios_FKIndex1(series_idseries),
 CREATE TABLE ciudades (
   idciudad INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   paises_idpais INTEGER UNSIGNED  NOT NULL  ,
-  nombre_ciudad VARCHAR(20)  NULL    ,
+  nombre_ciudad VARCHAR(50)  NULL    ,
 PRIMARY KEY(idciudad)  ,
 INDEX ciudad_FKIndex1(paises_idpais),
   FOREIGN KEY(paises_idpais)
@@ -82,7 +82,7 @@ INDEX ciudad_FKIndex1(paises_idpais),
 
 CREATE TABLE actores (
   idactores INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  persona_nid VARCHAR(20)  NOT NULL    ,
+  persona_nid VARCHAR(50)  NOT NULL    ,
 PRIMARY KEY(idactores)  ,
 INDEX actores_FKIndex1(persona_nid),
   FOREIGN KEY(persona_nid)
@@ -107,7 +107,7 @@ INDEX temporadas_FKIndex1(series_idseries),
 
 CREATE TABLE director (
   iddirector INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  persona_nid VARCHAR(20)  NOT NULL    ,
+  persona_nid VARCHAR(50)  NOT NULL    ,
 PRIMARY KEY(iddirector)  ,
 INDEX director_FKIndex1(persona_nid),
   FOREIGN KEY(persona_nid)
@@ -157,9 +157,9 @@ INDEX valoracion_escrita_serie_FKIndex2(usuario_idusuario),
 
 CREATE TABLE episodios (
   id_episodio INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  temporadas_id_temporada INTEGER UNSIGNED  NOT NULL  ,
   director_iddirector INTEGER UNSIGNED  NOT NULL  ,
   n_episodio INTEGER UNSIGNED  NULL  ,
+  temporadas_id_temporada INTEGER UNSIGNED  NOT NULL  ,
   nombre_episodio VARCHAR(45)  NOT NULL  ,
   descripcion TEXT  NOT NULL  ,
   fecha_publicacion DATE  NOT NULL    ,
@@ -197,7 +197,7 @@ INDEX categorias_has_series_FKIndex2(series_idseries),
 CREATE TABLE productores (
   idproductores INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
-  persona_nid VARCHAR(20)  NOT NULL    ,
+  persona_nid VARCHAR(50)  NOT NULL    ,
 PRIMARY KEY(idproductores)  ,
 INDEX productores_FKIndex1(persona_nid)  ,
 INDEX productores_FKIndex2(episodios_id_episodio),
@@ -235,7 +235,7 @@ CREATE TABLE lugar_rodaje (
   idlugar_rodaje INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
   ciudades_idciudad INTEGER UNSIGNED  NOT NULL  ,
-  nombre_lugar VARCHAR(20)  NOT NULL    ,
+  nombre_lugar VARCHAR(50)  NOT NULL    ,
 PRIMARY KEY(idlugar_rodaje)  ,
 INDEX lugar_rodaje_FKIndex1(ciudades_idciudad)  ,
 INDEX lugar_rodaje_FKIndex2(episodios_id_episodio),
@@ -306,7 +306,7 @@ INDEX valoracion_escrita_episodio_FKIndex2(usuario_idusuario),
 CREATE TABLE guionistas (
   idguionistas INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   episodios_id_episodio INTEGER UNSIGNED  NOT NULL  ,
-  persona_nid VARCHAR(20)  NOT NULL    ,
+  persona_nid VARCHAR(50)  NOT NULL    ,
 PRIMARY KEY(idguionistas)  ,
 INDEX guionistas_FKIndex1(persona_nid)  ,
 INDEX guionistas_FKIndex2(episodios_id_episodio),
