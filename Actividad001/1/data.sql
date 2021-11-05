@@ -325,3 +325,26 @@ VALUES (
     'El primer episodio de la serie',
     '2020-01-31'
     );
+
+INSERT INTO categorias_has_series (categorias_idcategorias, series_idseries)
+VALUES (
+        1,
+        1
+    ),
+(
+        2,
+        2
+    ),
+(
+        3,
+        1
+    ),
+(
+        4,
+        4
+    ),
+(
+        2,
+        2
+    );
+
