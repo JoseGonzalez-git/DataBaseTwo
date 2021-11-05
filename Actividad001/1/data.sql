@@ -150,3 +150,85 @@ VALUES (
         'mariela@gmail.com',
         'deusamadeus'
 );
+
+INSERT INTO premios_serie (idpremios, series_idseries, nombre_premio, fecha_premio, gano)
+VALUES (
+        1,
+        1,
+        'Mejor serie de accion',
+        '2010-10-31',
+        TRUE
+    ),
+(
+        2,
+        2,
+        'Mejor serie de terror',
+        '2010-10-31',
+        TRUE
+    ),
+(
+        3,
+        3,
+        'Mejor serie de fantasia',
+        '2010-10-31',
+        TRUE
+    ),
+(
+        4,
+        4,
+        'Mejor serie de anime',
+        '2010-10-31',
+        TRUE
+    );
+
+INSERT INTO ciudades (idciudad, paises_idpais, nombre_ciudad)
+VALUES (
+        1,
+        2,
+        'Barranquilla'
+    ),
+(
+        2,
+        2,
+        'Sucre'
+    ),
+(
+        3,
+        1,
+        'Popotla'
+    ),
+(
+        4,
+        1,
+        'Ciudad de Mexico'
+    );
+
+INSERT INTO actores (idactores, persona_nid)
+VALUES (
+        1,
+        614356
+    );
+
+INSERT INTO temporadas (n_temporada, series_idseries)
+VALUES (
+        1,
+        2
+    ),
+(
+        2,
+        3
+    ),
+(
+        3,
+        1
+    ),
+(
+        4,
+        1
+    );
+
+INSERT INTO director (iddirector, persona_nid)
+VALUES (
+        1,
+        2144645
+    );
