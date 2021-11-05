@@ -1,8 +1,8 @@
 CREATE TABLE persona (
-  nid VARCHAR(20)   NOT NULL ,
+  nid VARCHAR(50)   NOT NULL ,
   tipoID VARCHAR(4)   NOT NULL ,
-  nom1 VARCHAR(20)   NOT NULL ,
-  nom2 VARCHAR(20)   NOT NULL ,
+  nom1 VARCHAR(50)   NOT NULL ,
+  nom2 VARCHAR(50)   NOT NULL ,
   apll1 VARCHAR(30)   NOT NULL ,
   apll2 VARCHAR(30)   NOT NULL ,
   fnac DATE   NOT NULL   ,
@@ -13,7 +13,7 @@ PRIMARY KEY(nid));
 
 CREATE TABLE paises (
   idpais SERIAL  NOT NULL ,
-  nombre_pais VARCHAR(20)   NOT NULL   ,
+  nombre_pais VARCHAR(50)   NOT NULL   ,
 PRIMARY KEY(idpais));
 
 
@@ -43,8 +43,8 @@ PRIMARY KEY(idcategorias));
 
 CREATE TABLE usuario (
   idusuario SERIAL  NOT NULL ,
-  persona_nid VARCHAR(20)   NOT NULL ,
-  nombre_usuario VARCHAR(20)   NOT NULL ,
+  persona_nid VARCHAR(50)   NOT NULL ,
+  nombre_usuario VARCHAR(50)   NOT NULL ,
   correo_electronico VARCHAR(255)   NOT NULL ,
   contrasena VARCHAR(100)   NOT NULL   ,
 PRIMARY KEY(idusuario)  ,
@@ -63,7 +63,7 @@ CREATE INDEX IFK_crea ON usuario (persona_nid);
 CREATE TABLE premios_serie (
   idpremios SERIAL  NOT NULL ,
   series_idseries INTEGER   NOT NULL ,
-  nombre_premio VARCHAR(20)   NOT NULL ,
+  nombre_premio VARCHAR(50)   NOT NULL ,
   fecha_entrega DATE    ,
   gano BOOL   NOT NULL   ,
 PRIMARY KEY(idpremios)  ,
@@ -82,7 +82,7 @@ CREATE INDEX IFK_es_nominada ON premios_serie (series_idseries);
 CREATE TABLE ciudades (
   idciudad SERIAL  NOT NULL ,
   paises_idpais INTEGER   NOT NULL ,
-  nombre_ciudad VARCHAR(20)      ,
+  nombre_ciudad VARCHAR(50)      ,
 PRIMARY KEY(idciudad)  ,
   FOREIGN KEY(paises_idpais)
     REFERENCES paises(idpais)
@@ -98,7 +98,7 @@ CREATE INDEX IFK_tiene3 ON ciudades (paises_idpais);
 
 CREATE TABLE actores (
   idactores SERIAL  NOT NULL ,
-  persona_nid VARCHAR(20)   NOT NULL   ,
+  persona_nid VARCHAR(50)   NOT NULL   ,
 PRIMARY KEY(idactores)  ,
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
@@ -131,7 +131,7 @@ CREATE INDEX IFK_contiene ON temporadas (series_idseries);
 
 CREATE TABLE director (
   iddirector SERIAL  NOT NULL ,
-  persona_nid VARCHAR(20)   NOT NULL   ,
+  persona_nid VARCHAR(50)   NOT NULL   ,
 PRIMARY KEY(iddirector)  ,
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
@@ -194,9 +194,9 @@ CREATE INDEX IFK_realiza ON valoracion_escrita_serie (usuario_idusuario);
 
 CREATE TABLE episodios (
   id_episodio SERIAL  NOT NULL ,
-  temporadas_id_temporada INTEGER   NOT NULL ,
   director_iddirector INTEGER   NOT NULL ,
   n_episodio INTEGER    ,
+  temporadas_id_temporada INTEGER   NOT NULL ,
   nombre_episodio VARCHAR(45)   NOT NULL ,
   descripcion TEXT   NOT NULL ,
   fecha_publicacion DATE   NOT NULL   ,
@@ -237,14 +237,14 @@ CREATE INDEX categorias_has_series_FKIndex1 ON categorias_has_series (categorias
 CREATE INDEX categorias_has_series_FKIndex2 ON categorias_has_series (series_idseries);
 
 
-CREATE INDEX IFK_tiene2 ON categorias_has_series (categorias_idcategorias);
+CREATE INDEX IFK_tiene ON categorias_has_series (categorias_idcategorias);
 CREATE INDEX IFK_posee ON categorias_has_series (series_idseries);
 
 
 CREATE TABLE productores (
   idproductores SERIAL  NOT NULL ,
   episodios_id_episodio INTEGER   NOT NULL ,
-  persona_nid VARCHAR(20)   NOT NULL   ,
+  persona_nid VARCHAR(50)   NOT NULL   ,
 PRIMARY KEY(idproductores)    ,
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
@@ -292,7 +292,7 @@ CREATE TABLE lugar_rodaje (
   idlugar_rodaje SERIAL  NOT NULL ,
   episodios_id_episodio INTEGER   NOT NULL ,
   ciudades_idciudad INTEGER   NOT NULL ,
-  nombre_lugar VARCHAR(20)   NOT NULL   ,
+  nombre_lugar VARCHAR(50)   NOT NULL   ,
 PRIMARY KEY(idlugar_rodaje)    ,
   FOREIGN KEY(ciudades_idciudad)
     REFERENCES ciudades(idciudad)
@@ -382,7 +382,7 @@ CREATE INDEX IFK_realiza1 ON valoracion_escrita_episodio (usuario_idusuario);
 CREATE TABLE guionistas (
   idguionistas SERIAL  NOT NULL ,
   episodios_id_episodio INTEGER   NOT NULL ,
-  persona_nid VARCHAR(20)   NOT NULL   ,
+  persona_nid VARCHAR(50)   NOT NULL   ,
 PRIMARY KEY(idguionistas)    ,
   FOREIGN KEY(persona_nid)
     REFERENCES persona(nid)
@@ -398,7 +398,7 @@ CREATE INDEX guionistas_FKIndex1 ON guionistas (persona_nid);
 CREATE INDEX guionistas_FKIndex2 ON guionistas (episodios_id_episodio);
 
 
-CREATE INDEX IFK_trabaja_como3 ON guionistas (persona_nid);
+CREATE INDEX IFK_trabaja_como4 ON guionistas (persona_nid);
 CREATE INDEX IFK_participa ON guionistas (episodios_id_episodio);
 
 
