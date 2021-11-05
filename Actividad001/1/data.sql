@@ -34,6 +34,32 @@ VALUES (
         'Pereira',
         'Lopez',
         '2003-08-20'
+),
+(
+        714356,
+        'C.C',
+        'Adalia',
+        'De Jesus',
+        'Mestra',
+        'Arguelles',
+        '2000-08-20'
+),
+(
+        3215346,
+        'C.C',
+        'Luisa',
+        'Maria',
+        'Velazquez',
+        'Espitia',
+        '2002-05-20'
+),
+( 
+        675443,
+        'T.I',
+        'Juan',
+        'Carlos',
+        'Henriquez',
+        'Peñanieto',
 );
 
 INSERT INTO paises (idpais, nombre_pais)
@@ -231,4 +257,36 @@ INSERT INTO director (iddirector, persona_nid)
 VALUES (
         1,
         2144645
+    ),
+    (
+        2,
+        514356
     );
+
+INSERT INTO valoracion_escrita_serie (idvaloracion_num, usuario_idusuario, series_idseries, valoracion)
+VALUES (
+    1,
+    1,
+    1,
+    5
+),
+(
+    2,
+    2,
+    1,
+    4
+),
+(
+    3,
+    3,
+    1,
+    3
+),
+(
+    4,
+    4,
+    1,
+    2
+);
+
+-- INSERT INTO episodios (n_episodios, director_iddirector, temporadas_n_temporada, nombre_episodio, descripcion, valoracion_numerica, valoracion_escrita, fecha_publicacion)
