@@ -22,7 +22,7 @@ PRIMARY KEY(idcategorias));
 
 CREATE TABLE paises (
   idpaises SERIAL  NOT NULL ,
-  nombre INTEGER   NOT NULL   ,
+  nombre VARCHAR(50)   NOT NULL   ,
 PRIMARY KEY(idpaises));
 
 
@@ -34,7 +34,7 @@ CREATE TABLE locales (
   contacto VARCHAR(45)   NOT NULL ,
   correo VARCHAR(255)   NOT NULL ,
   direccion VARCHAR(45)   NOT NULL ,
-  zipcode VARCHAR(20))   NOT NULL   ,
+  zipcode VARCHAR(20)   NOT NULL   ,
 PRIMARY KEY(idlocales));
 
 
@@ -141,7 +141,7 @@ CREATE TABLE peliculas (
   descripcion TEXT   NOT NULL ,
   duracion TIME   NOT NULL ,
   fecha_lanzamiento DATE   NOT NULL ,
-  precio DOUBLE   NOT NULL   ,
+  precio DECIMAL   NOT NULL   ,
 PRIMARY KEY(idpeliculas)  ,
   FOREIGN KEY(actores_idactores)
     REFERENCES actores(idactores)
@@ -174,7 +174,7 @@ CREATE INDEX peliculas_has_categorias_FKIndex2 ON peliculas_tiene_categorias (ca
 
 
 CREATE INDEX IFK_se_clasifica ON peliculas_tiene_categorias (peliculas_idpeliculas);
-CREATE INDEX IFK_tiene ON peliculas_tiene_categorias (categorias_idcategorias);
+CREATE INDEX IFK_tiene2 ON peliculas_tiene_categorias (categorias_idcategorias);
 
 
 CREATE TABLE pedidos (
@@ -242,7 +242,7 @@ CREATE INDEX peliculas_has_actores_FKIndex1 ON catalogo_de_actores (peliculas_id
 CREATE INDEX peliculas_has_actores_FKIndex2 ON catalogo_de_actores (actores_idactores);
 
 
-CREATE INDEX IFK_tiene2 ON catalogo_de_actores (peliculas_idpeliculas);
+CREATE INDEX IFK_tiene3 ON catalogo_de_actores (peliculas_idpeliculas);
 CREATE INDEX IFK_participan ON catalogo_de_actores (actores_idactores);
 
 
