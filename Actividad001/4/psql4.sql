@@ -1,5 +1,5 @@
 CREATE TABLE personas (
-  identificacion INTEGER   NOT NULL ,
+  identificacion VARCHAR(45)   NOT NULL ,
   nom1 VARCHAR(20)   NOT NULL ,
   nom2 VARCHAR(20)   NOT NULL ,
   apll1 VARCHAR(35)   NOT NULL ,
@@ -58,7 +58,7 @@ CREATE INDEX IFK_tiene ON recursos (lugar_idlugar);
 
 
 CREATE TABLE agenda (
-  personas_identificacion INTEGER   NOT NULL ,
+  personas_identificacion VARCHAR(45)   NOT NULL ,
   reuniones_idreuniones INTEGER   NOT NULL   ,
 PRIMARY KEY(personas_identificacion, reuniones_idreuniones)    ,
   FOREIGN KEY(personas_identificacion)

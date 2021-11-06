@@ -1,6 +1,6 @@
 
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, genero, fnac, telefono, email)
-VALUES ('29', 'Juan', 'Antonio', 'Hernandez', 'Perez', 'Perez', 'M', '2000-02-19', '3142345435', 'juancho@gmail.com'); 
+VALUES ('29', 'Juan', 'Antonio', 'Hernandez', 'Perez', 'M', '2000-02-19', '3142345435', 'juancho@gmail.com'); 
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, genero, fnac, telefono, email)
 VALUES ('30', 'Jhoan', 'Daniel', 'Ramirez', 'Arteaga','M', '2001-02-19', '31523445435', 'jhoan@gmail.com');
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, genero, fnac, telefono, email)  

@@ -1,5 +1,5 @@
 CREATE TABLE personas (
-  identificacion INTEGER UNSIGNED  NOT NULL  ,
+  identificacion VARCHAR(45)  NOT NULL  ,
   nom1 VARCHAR(20)  NOT NULL  ,
   nom2 VARCHAR(20)  NOT NULL  ,
   apll1 VARCHAR(35)  NOT NULL  ,
@@ -48,7 +48,7 @@ INDEX recursos_FKIndex1(lugar_idlugar),
 
 
 CREATE TABLE agenda (
-  personas_identificacion INTEGER UNSIGNED  NOT NULL  ,
+  personas_identificacion VARCHAR(45)  NOT NULL  ,
   reuniones_idreuniones INTEGER UNSIGNED  NOT NULL    ,
 PRIMARY KEY(personas_identificacion, reuniones_idreuniones)  ,
 INDEX personas_has_reuniones_FKIndex1(personas_identificacion)  ,
