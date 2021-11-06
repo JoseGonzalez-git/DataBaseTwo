@@ -37,7 +37,7 @@ PRIMARY KEY(idreuniones)  ,
 CREATE INDEX reuniones_FKIndex1 ON reuniones (lugar_idlugar);
 
 
-CREATE INDEX IFK_se realizan ON reuniones (lugar_idlugar);
+CREATE INDEX IFK_se_realizan ON reuniones (lugar_idlugar);
 
 
 CREATE TABLE recursos (
