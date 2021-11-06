@@ -1,7 +1,7 @@
 CREATE TABLE insumos (
   idinsumos SERIAL  NOT NULL ,
   nombre VARCHAR(45)   NOT NULL ,
-  precio_unidad DOUBLE   NOT NULL   ,
+  precio_unidad DECIMAL  NOT NULL   ,
 PRIMARY KEY(idinsumos));
 
 
@@ -50,7 +50,7 @@ PRIMARY KEY(idpacientes)  ,
 CREATE INDEX pacientes_FKIndex1 ON pacientes (personas_identificacion);
 
 
-CREATE INDEX IFK_puede ser ON pacientes (personas_identificacion);
+CREATE INDEX IFK_puede_ser ON pacientes (personas_identificacion);
 
 
 CREATE TABLE pabellones (
@@ -74,7 +74,7 @@ CREATE TABLE instrumentaria (
   idinstrumentaria SERIAL  NOT NULL ,
   pabellones_idpabellon INTEGER   NOT NULL ,
   nombre VARCHAR(45)   NOT NULL ,
-  precio_hora DOUBLE   NOT NULL   ,
+  precio_hora DECIMAL   NOT NULL   ,
 PRIMARY KEY(idinstrumentaria)  ,
   FOREIGN KEY(pabellones_idpabellon)
     REFERENCES pabellones(idpabellon)
@@ -101,7 +101,7 @@ PRIMARY KEY(idmedicos)  ,
 CREATE INDEX medicos_FKIndex1 ON cirujano (personas_identificacion);
 
 
-CREATE INDEX IFK_aplica como ON cirujano (personas_identificacion);
+CREATE INDEX IFK_aplica_como ON cirujano (personas_identificacion);
 
 
 CREATE TABLE arsenalero (
@@ -117,7 +117,7 @@ PRIMARY KEY(idarsenalero)  ,
 CREATE INDEX arsenalero_FKIndex1 ON arsenalero (personas_identificacion);
 
 
-CREATE INDEX IFK_trabaja como ON arsenalero (personas_identificacion);
+CREATE INDEX IFK_trabaja_como ON arsenalero (personas_identificacion);
 
 
 CREATE TABLE anestesista (
@@ -133,7 +133,7 @@ PRIMARY KEY(idanestesista)  ,
 CREATE INDEX anestesista_FKIndex1 ON anestesista (personas_identificacion);
 
 
-CREATE INDEX IFK_se emplea como ON anestesista (personas_identificacion);
+CREATE INDEX IFK_se_emplea_como ON anestesista (personas_identificacion);
 
 
 CREATE TABLE especializacion_has_medicos (
@@ -154,8 +154,8 @@ CREATE INDEX especializacion_has_medicos_FKIndex1 ON especializacion_has_medicos
 CREATE INDEX especializacion_has_medicos_FKIndex2 ON especializacion_has_medicos (cirujano_idmedicos);
 
 
-CREATE INDEX IFK_tiene ON especializacion_has_medicos (especializacion_idespecializacion);
-CREATE INDEX IFK_posee ON especializacion_has_medicos (cirujano_idmedicos);
+CREATE INDEX IFK_tiene1 ON especializacion_has_medicos (especializacion_idespecializacion);
+CREATE INDEX IFK_posee2 ON especializacion_has_medicos (cirujano_idmedicos);
 
 
 CREATE TABLE equipo_medico (
@@ -184,8 +184,8 @@ CREATE INDEX equipo_medico_FKIndex3 ON equipo_medico (anestesista_idanestesista)
 
 
 CREATE INDEX IFK_participa ON equipo_medico (cirujano_idmedicos);
-CREATE INDEX IFK_participa ON equipo_medico (arsenalero_idarsenalero);
-CREATE INDEX IFK_participa ON equipo_medico (anestesista_idanestesista);
+CREATE INDEX IFK_participa2 ON equipo_medico (arsenalero_idarsenalero);
+CREATE INDEX IFK_participa3 ON equipo_medico (anestesista_idanestesista);
 
 
 CREATE TABLE horarios (
@@ -211,7 +211,7 @@ CREATE TABLE cirugias (
   pabellones_idpabellon INTEGER   NOT NULL ,
   hora_entrada TIME   NOT NULL ,
   hora_salida TIME   NOT NULL ,
-  tiempo estimado  TIME   NOT NULL ,
+  tiempo_estimado  TIME   NOT NULL ,
   fecha DATE   NOT NULL   ,
 PRIMARY KEY(idcirugias)    ,
   FOREIGN KEY(pabellones_idpabellon)
@@ -228,8 +228,8 @@ CREATE INDEX cirugias_FKIndex1 ON cirugias (pabellones_idpabellon);
 CREATE INDEX cirugias_FKIndex2 ON cirugias (equipo_medico_idequipo_medico);
 
 
-CREATE INDEX IFK_se realizan ON cirugias (pabellones_idpabellon);
-CREATE INDEX IFK_se encarga ON cirugias (equipo_medico_idequipo_medico);
+CREATE INDEX IFK_se_realizan ON cirugias (pabellones_idpabellon);
+CREATE INDEX IFK_se_encarga ON cirugias (equipo_medico_idequipo_medico);
 
 
 CREATE TABLE instrumentaria_ejemplar (
@@ -251,7 +251,7 @@ CREATE INDEX instrumentaria_has_cirugias_FKIndex1 ON instrumentaria_ejemplar (in
 CREATE INDEX instrumentaria_has_cirugias_FKIndex2 ON instrumentaria_ejemplar (cirugias_idcirugias);
 
 
-CREATE INDEX IFK_tiene ON instrumentaria_ejemplar (instrumentaria_idinstrumentaria);
+CREATE INDEX IFK_tiene2 ON instrumentaria_ejemplar (instrumentaria_idinstrumentaria);
 CREATE INDEX IFK_usan ON instrumentaria_ejemplar (cirugias_idcirugias);
 
 
@@ -274,7 +274,7 @@ CREATE INDEX cirugias_has_pacientes_FKIndex2 ON cirugias_has_pacientes (paciente
 
 
 CREATE INDEX IFK_es ON cirugias_has_pacientes (cirugias_idcirugias);
-CREATE INDEX IFK_tiene ON cirugias_has_pacientes (pacientes_idpacientes);
+CREATE INDEX IFK_tiene3 ON cirugias_has_pacientes (pacientes_idpacientes);
 
 
 CREATE TABLE estado_cirugia (
@@ -289,7 +289,7 @@ CREATE TABLE estado_cirugia (
 CREATE INDEX estado_cirugia_FKIndex1 ON estado_cirugia (cirugias_idcirugias);
 
 
-CREATE INDEX IFK_se encuentra ON estado_cirugia (cirugias_idcirugias);
+CREATE INDEX IFK_se_encuentra ON estado_cirugia (cirugias_idcirugias);
 
 
 CREATE TABLE insumos_ejemplares (
@@ -311,8 +311,8 @@ CREATE INDEX insumos_has_cirugias_FKIndex1 ON insumos_ejemplares (insumos_idinsu
 CREATE INDEX insumos_has_cirugias_FKIndex2 ON insumos_ejemplares (cirugias_idcirugias);
 
 
-CREATE INDEX IFK_tiene ON insumos_ejemplares (insumos_idinsumos);
-CREATE INDEX IFK_usan ON insumos_ejemplares (cirugias_idcirugias);
+CREATE INDEX IFK_tiene4 ON insumos_ejemplares (insumos_idinsumos);
+CREATE INDEX IFK_usan2 ON insumos_ejemplares (cirugias_idcirugias);
 
 
 
