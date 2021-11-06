@@ -55,7 +55,7 @@ INDEX usuario_FKIndex1(persona_nid),
 CREATE TABLE premios_serie (
   idpremios INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
   series_idseries INTEGER UNSIGNED  NOT NULL  ,
-  nombre_premio VARCHAR(50))  NOT NULL  ,
+  nombre_premio VARCHAR(50)  NOT NULL  ,
   fecha_entrega DATE  NULL  ,
   gano BOOL  NOT NULL    ,
 PRIMARY KEY(idpremios)  ,
