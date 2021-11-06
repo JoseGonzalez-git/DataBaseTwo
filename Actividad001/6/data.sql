@@ -25,7 +25,7 @@ VALUES (3,'Especialidad3');
 INSERT INTO especializacion (idespecializacion, nombre)
 VALUES (4, 'Especialidad4');
 
---pacientes
+
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, fnac, telefono)
 VALUES (24, 'Julieta','Ponce', 'Peña','Posada', '1987-08-26', '312459383');
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, fnac, telefono)
@@ -33,13 +33,13 @@ VALUES (25, 'Valeria', 'Elvia ', 'Hernández', 'Meneses', '1986-07-16', '3215633
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, fnac, telefono)
 VALUES (26, 'Mauricio', 'Andres', 'Jiménez', 'Piedrahíta', '1986-02-13', '312247689');
 
---Cirujano
+
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, fnac, telefono)
 VALUES (27, 'Martín', 'Elías','Acosta','Muñoz', '1990-08-21', '3143576748');
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, fnac, telefono)
 VALUES (28, 'Pedro', 'Andres', 'Perez', 'Diaz', '1989-04-27', '3134345564');
 
---Arsenalero
+
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, fnac, telefono)
 VALUES (29, 'Juan', 'Antonio', 'Hernandez', 'Perez', '1974-02-19', '3142345435'); 
 INSERT INTO personas (identificacion, nom1, nom2, apll1, apll2, fnac, telefono)
@@ -150,8 +150,6 @@ INSERT INTO estado_cirugia (cirugias_idcirugias, estado)
 VALUES (2, 'Activa');
 INSERT INTO estado_cirugia (cirugias_idcirugias, estado)
 VALUES (3, 'Cancelado');
-INSERT INTO estado_cirugia (cirugias_idcirugias, estado)
-VALUES (4, 'Replanificada');
 
 INSERT INTO insumos_ejemplares (insumos_idinsumos, cirugias_idcirugias, idejemplar)
 VALUES (2, 3, 1);
