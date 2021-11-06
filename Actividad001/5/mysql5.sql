@@ -20,7 +20,7 @@ PRIMARY KEY(idcategorias));
 
 CREATE TABLE paises (
   idpaises INTEGER UNSIGNED  NOT NULL   AUTO_INCREMENT,
-  nombre INTEGER UNSIGNED  NOT NULL    ,
+  nombre VARCHAR(50)  NOT NULL    ,
 PRIMARY KEY(idpaises));
 
 
@@ -31,7 +31,7 @@ CREATE TABLE locales (
   contacto VARCHAR(45)  NOT NULL  ,
   correo VARCHAR(255)  NOT NULL  ,
   direccion VARCHAR(45)  NOT NULL  ,
-  zipcode VARCHAR(20))  NOT NULL    ,
+  zipcode VARCHAR(20)  NOT NULL    ,
 PRIMARY KEY(idlocales));
 
 
@@ -115,7 +115,7 @@ CREATE TABLE peliculas (
   descripcion TEXT  NOT NULL  ,
   duracion TIME  NOT NULL  ,
   fecha_lanzamiento DATE  NOT NULL  ,
-  precio DOUBLE  NOT NULL    ,
+  precio DECIMAL  NOT NULL    ,
 PRIMARY KEY(idpeliculas)  ,
 INDEX peliculas_FKIndex1(actores_idactores),
   FOREIGN KEY(actores_idactores)
