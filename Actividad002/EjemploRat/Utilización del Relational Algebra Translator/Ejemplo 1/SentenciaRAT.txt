@@ -1,0 +1,6 @@
+
+----- SENTENCIA RAT 
+R1  ← Π{cedula,nombre,direccion, email}(Persona)
+R2  ← Π{codigoCliente} (σ{valorFiscal>'100'}(Vehiculos))
+R3  ← Π{nombre,direccion, email} (σ{cedula = codigoCliente}(R1 × R2))
+R3

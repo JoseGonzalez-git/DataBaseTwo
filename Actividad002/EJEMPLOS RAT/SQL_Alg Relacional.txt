@@ -1,0 +1,33 @@
+En MySQL no existe una forma directa de hacer la instersección ni la diferencia entre tablas. Solo la unión tiene una traducción directa.
+
+La unión de dos tablas se hace directamente con la operación UNION de la siguiente manera
+
+SELECT campo1, campo2... | * FROM tabla 1 WHERE condición1
+
+UNION
+
+SELECT campo3, campo4... | * FROM tabla 2 WHERE condición2
+
+EJEMPLO:
+
+SELECT * FROM ALUMNOS WHERE FECHA_NACIMIENTO<='1970-01-01'
+
+UNION
+
+SELECT * FROM ALUMNOS WHERE FECHA_NACIMIENTO >='1980-01-01';
+
+La intersección no existe en MySQL. Para ello se usa in INNER JOIN.
+
+SELECT * FROM A INNER JOIN B ON A.CAMPO = B.CAMPO
+
+La diferencia tampoco existe en MySQL. Para sustituirla se utiliza cualquiera de las dos siguientes:
+
+SELECT * FROM TablaA LEFT OUTER JOIN TablaB ON TablaA.nombre = TablaB.nombre WHERE TablaB.id IS NULL
+
+Se podría hacder lo mismo con un RIGHT OUTER JOIN.
+
+Particularmente la diferencia prefiero hacerla con la operación NOT EXISTS
+
+SELECT DISTINCT campo1 FROM TABLA1 WHERE NOT EXISTS (
+
+SELECT campo2 FROM TABLA2 WHERE TABLA1.campo = TABLA2.campo);
