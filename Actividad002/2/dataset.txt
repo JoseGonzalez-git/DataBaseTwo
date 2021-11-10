@@ -23,3 +23,11 @@ hospital_cod:number, doctor_no:number, apellido:string, especialidad:string
 ENFERMO = {
 inscripcion:number, apellido:string, direccion:string, fecha:date, s:string, nss:number
 }
+
+EMP = {
+emp_no:number, apellido:string, oficio:string, dir:number, fecha_alta:date, salario:number, comision:number, dept_no:number 
+}
+
+DEPT2 = {
+dept_no:number, dnombre:string, loc:string
+}
