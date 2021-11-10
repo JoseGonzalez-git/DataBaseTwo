@@ -21,5 +21,5 @@ hospital_cod:number, doctor_no:number, apellido:string, especialidad:string
 }
 
 ENFERMO = {
-inscripcion:number, apellido:string, direccion:string, fecha:date
+inscripcion:number, apellido:string, direccion:string, fecha:date, s:string, nss:number
 }
