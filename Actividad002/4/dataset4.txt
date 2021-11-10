@@ -1,7 +1,7 @@
 group: ejercicio4
 
 EMPLEADO = {
-    ssn:number, superssn:number, dno:number, nombre:string, apellido:string, nacfecha:date, posnumero:number, direccion:string, sexo:string, salario:number
+ssn:number, superssn:number, dno:number, nombre:string, apellido:string, nacfecha:date, posnumero:number, direccion:string, sexo:string, salario:number
 }
 
 DEPARTAMENTO = {
