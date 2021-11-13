@@ -17,7 +17,7 @@ PRIMARY KEY(numdep));
 CREATE TABLE clientes (
   rut INTEGER UNSIGNED  NOT NULL  ,
   nombre VARCHAR(100)  NOT NULL  ,
-  comuna INTEGER UNSIGNED  NOT NULL    ,
+  comuna VARCHAR(100)  NOT NULL    ,
 PRIMARY KEY(rut));
 
 
