@@ -1,0 +1,13 @@
+group: ejercicio3
+
+PROVEEDOR = {
+snum:string, snombre:string, estado:number, ciudadproveedor:string
+}
+
+PIEZA = {
+pnum:string, pnombre:string, color:string, peso:number, ciudadpieza:string
+}
+
+ENVIOR = {
+snum:string, pnum:string, cantidad:number
+}

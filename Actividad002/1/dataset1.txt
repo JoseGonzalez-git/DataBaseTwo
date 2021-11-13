@@ -1,0 +1,28 @@
+EMPLEADOS = {
+rut:number, nombre:string, cargo:string, rut_jefe:number, sueldo:number, comision:number, numdep:number
+
+}
+
+DEPTOS = {
+numdep:number, nombre:string, ciudad:string
+}
+
+GRADOS = {
+grado:number , sueldo_inf:number, sueldo_sup:number
+}
+
+CLIENTES = {
+rut:number, nombre:string, comuna:string
+}
+
+PRODUCTOS = {
+codigo:number, nombre:string, precio:number
+}
+
+VENTAS = {
+num_venta:number, monto:number, fecha:date, rut_vende:number, rut_cliente:number
+}
+
+VENTAS_DETALLE = {
+num_venta:number, cod_producto:number, cantidad:number
+}
