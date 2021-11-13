@@ -20,7 +20,7 @@ CREATE TABLE employe (
   departament_dnumber INTEGER UNSIGNED  NOT NULL  ,
   fname VARCHAR(20)  NULL  ,
   lname VARCHAR(35)  NULL  ,
-  date DATE  NULL  ,
+  bdate DATE  NULL  ,
   positions_posnumber INTEGER UNSIGNED  NOT NULL  ,
   address VARCHAR(100)  NULL  ,
   sex VARCHAR(2)  NULL  ,

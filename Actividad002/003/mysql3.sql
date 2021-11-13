@@ -8,7 +8,7 @@ PRIMARY KEY(snum));
 
 
 CREATE TABLE pieza (
-  pnum INTEGER UNSIGNED  NOT NULL  ,
+  pnum VARCHAR(2)  NOT NULL  ,
   pnombre VARCHAR(20)  NULL  ,
   color VARCHAR(10)  NULL  ,
   peso INTEGER UNSIGNED  NULL  ,
@@ -19,7 +19,7 @@ PRIMARY KEY(pnum));
 
 CREATE TABLE envio (
   proveedor_snum VARCHAR(2)  NOT NULL  ,
-  pieza_pnum INTEGER UNSIGNED  NOT NULL  ,
+  pieza_pnum VARCHAR(2)  NOT NULL  ,
   cant INTEGER UNSIGNED  NULL    ,
 PRIMARY KEY(proveedor_snum, pieza_pnum)  ,
 INDEX proveedor_has_pieza_FKIndex1(proveedor_snum)  ,
