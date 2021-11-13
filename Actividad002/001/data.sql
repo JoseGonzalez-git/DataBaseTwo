@@ -32,7 +32,7 @@ VALUE (7,'Simon Bolivar','El Bosque');
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
 VALUE (8,'TURNER','Empleado',10,3000000,0.10,3);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
-VALUE (32,'CLARK','MANAGER',32,5000000, 0.30,3);
+VALUE (32,'CLARK','MANAGER',32,4000000, 0.30,3);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
 VALUE (1,'MARTIN','Empleado',10,2000000,0.10,1);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
@@ -55,18 +55,27 @@ VALUE (5,10,7,670500,'2021-11-23');
 INSERT INTO ventas (num_venta, empleados_rut,clientes_rut,monto,fecha)
 VALUE (6,1,2,300500,'2021-11-02');
 
-INSERT INTO grados (grado,empleados_rut,sueldo_inf,sueldo_sup)
-VALUE (1,32,1000000,1999999);
-INSERT INTO grados (grado,empleados_rut,sueldo_inf,sueldo_sup)
-VALUE (3,8,3000000,3999999);
-INSERT INTO grados (grado,empleados_rut,sueldo_inf,sueldo_sup)
-VALUE (2,1,2000000,2999999);
-INSERT INTO grados (grado,empleados_rut,sueldo_inf,sueldo_sup)
-VALUE (1,12,1000000,1999999);
-INSERT INTO grados (grado,empleados_rut,sueldo_inf,sueldo_sup)
-VALUE (3,50,3000000,3999999);
-INSERT INTO grados (grado,empleados_rut,sueldo_inf,sueldo_sup)
-VALUE (4,10,4000000,4999999);
+INSERT INTO grados (grado,sueldo_inf,sueldo_sup)
+VALUE (1,1000000,1999999);
+INSERT INTO grados (grado,sueldo_inf,sueldo_sup)
+VALUE (2,2000000,2999999);
+INSERT INTO grados (grado,sueldo_inf,sueldo_sup)
+VALUE (3,3000000,3999999);
+INSERT INTO grados (grado,sueldo_inf,sueldo_sup)
+VALUE (4,4000000,4999999);
+
+INSERT INTO grados_has_empleados (grados_grado,empleados_rut)
+VALUE (1,12);
+INSERT INTO grados_has_empleados (grados_grado,empleados_rut)
+VALUE (2,1);
+INSERT INTO grados_has_empleados (grados_grado,empleados_rut)
+VALUE (3,8);
+INSERT INTO grados_has_empleados (grados_grado,empleados_rut)
+VALUE (3,50);
+INSERT INTO grados_has_empleados (grados_grado,empleados_rut)
+VALUE (4,32);
+INSERT INTO grados_has_empleados (grados_grado,empleados_rut)
+VALUE (4,10);
 
 INSERT INTO ventas_detalle (productos_codigo, ventas_num_venta, cantidad)
 VALUES (1,1,10);
