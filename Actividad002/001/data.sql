@@ -14,7 +14,7 @@ VALUE (1,'Departamento de Ventas','Monteria');
 INSERT INTO deptos (numdep, nombre, ciudad)
 VALUE (2,'Departamento de Marketing','NEW YORK');
 INSERT INTO deptos (numdep, nombre, ciudad)
-VALUE (3,'Departamento de Finanzas','Monpox');
+VALUE (3,'Departamento de Finanzas','CORDOBA');
 
 INSERT INTO clientes (rut,nombre,comuna)
 VALUE (4,'María de los Ángeles','Providencia');
