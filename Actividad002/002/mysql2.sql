@@ -63,7 +63,7 @@ CREATE TABLE doctor (
   doctor_no INTEGER(3) UNSIGNED  NOT NULL  ,
   hospital_cod INTEGER(2) UNSIGNED  NOT NULL   AUTO_INCREMENT,
   apellido VARCHAR(13)  NULL  ,
-  especialidad INTEGER(16) UNSIGNED  NULL    ,
+  especialidad VARCHAR(16) NULL    ,
 PRIMARY KEY(doctor_no)  ,
 INDEX doctor_FKIndex1(hospital_cod),
   FOREIGN KEY(hospital_cod)
