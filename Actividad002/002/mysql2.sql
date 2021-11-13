@@ -2,7 +2,7 @@ CREATE TABLE enfermo (
   inscripcion INTEGER(5) UNSIGNED  NOT NULL  ,
   apellido VARCHAR(15)  NULL  ,
   direccion VARCHAR(20)  NULL  ,
-  fecha-nac DATE  NULL  ,
+  fecha_nac DATE  NULL  ,
   sexo VARCHAR(1)  NULL  ,
   nss INTEGER(9) UNSIGNED  NULL    ,
 PRIMARY KEY(inscripcion));
