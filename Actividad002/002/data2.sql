@@ -43,7 +43,7 @@ VALUE (7698,20,'BLAKE','Director',7698,'2002-05-10',1650,null);
 INSERT INTO emp (emp_no,dept_no_dept_no,apellido,oficio,dir,fecha_alta,salario,comision)
 VALUE (7369,5,'SMITH','Vendedor',7698,'2001-12-17',800,30);
 INSERT INTO emp (emp_no,dept_no_dept_no,apellido,oficio,dir,fecha_alta,salario,comision)
-VALUE (7499,5,'ALLEN','Vendedor',7698,'2002-05-02',1000,100);
+VALUE (7495,5,'ALLEN','Vendedor',7698,'2002-05-02',1000,100);
 INSERT INTO emp (emp_no,dept_no_dept_no,apellido,oficio,dir,fecha_alta,salario,comision)
 VALUE (7521,10,'WARD','Analista',7698,'2002-05-10',1250,null);
 INSERT INTO emp (emp_no,dept_no_dept_no,apellido,oficio,dir,fecha_alta,salario,comision)
@@ -59,11 +59,11 @@ INSERT INTO doctor (doctor_no, hospital_cod, apellido, especialidad)
 VALUE (4,45,'Araujo','Psiquiatria');
 
 INSERT INTO plantilla (emp_no,hospital_cod,sala_cod,apellido,funcion,turno,salario)
-VALUE (7499,12,1,'BLAKE','ENFERMERA','T',800);
+VALUE (7499,12,1,'BLAKE','ENFERMERA','T',2500000);
 INSERT INTO plantilla (emp_no,hospital_cod,sala_cod,apellido,funcion,turno,salario)
-VALUE (7369,23,2,'SMITH','ENFERMERA','M',1000);
+VALUE (7369,23,2,'SMITH','ENFERMERA','M',2300000);
 INSERT INTO plantilla (emp_no,hospital_cod,sala_cod,apellido,funcion,turno,salario)
-VALUE (7499,36,3,'ALLEN','INTERNO','N',880);
+VALUE (7495,36,3,'ALLEN','INTERNO','N',880);
 Insert INTO plantilla (emp_no,hospital_cod,sala_cod,apellido,funcion,turno,salario)
 VALUE (7521,45,4,'WARD','ENFERMERO','T',1200);
 Insert INTO plantilla (emp_no,hospital_cod,sala_cod,apellido,funcion,turno,salario)
