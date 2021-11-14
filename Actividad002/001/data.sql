@@ -1,13 +1,13 @@
 INSERT INTO productos (codigo, nombre, precio)
-VALUE (1,'Raid', 50000);
+VALUE (1,'dvd', 50000);
 INSERT INTO productos (codigo, nombre, precio)
-VALUE (2,'Coca-Cola', 25000);
+VALUE (2,'Coca-Cola', 30000);
 INSERT INTO productos (codigo, nombre, precio)
-VALUE (3,'Patilla',80000);
+VALUE (3,'Televisor',80000);
 INSERT INTO productos (codigo, nombre, precio) 
-VALUE (4,'Atùn',45000);
+VALUE (4,'Mesa',45000);
 INSERT INTO productos (codigo, nombre, precio) 
-VALUE (5,'Camiseta',120000);
+VALUE (5,'Proyector',120000);
 
 INSERT INTO deptos (numdep, nombre, ciudad)
 VALUE (1,'Departamento de Ventas','Monteria');
@@ -21,26 +21,26 @@ VALUE (4,'María de los Ángeles','Providencia');
 INSERT INTO clientes (rut,nombre,comuna)
 VALUE (2,'María del Carmen','Providencia');
 INSERT INTO clientes (rut,nombre,comuna)
-VALUE (13,'Drew Barrymore','Algarrobo');
+VALUE (13,'Drew Barrymore','Las Condes');
 INSERT INTO clientes (rut,nombre,comuna)
-VALUE (20,'Larry Page','Algarrobo ');
+VALUE (20,'Larry Page','Las Condes');
 INSERT INTO clientes (rut,nombre,comuna)
-VALUE (6,'Tom Delonge','El Bosque');
+VALUE (6,'Tom Delonge','Providencia');
 INSERT INTO clientes (rut,nombre,comuna)
-VALUE (7,'Simon Bolivar','El Bosque');
+VALUE (7,'Pepe','El Bosque');
 
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
-VALUE (8,'TURNER','Empleado',10,3000000,0.10,3);
+VALUE (8,'TURNER','Empleado',10,3000000,2000,3);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
-VALUE (32,'CLARK','MANAGER',32,4000000, 0.30,3);
+VALUE (32,'CLARK','MANAGER',32,4000000, 3000,3);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
-VALUE (1,'MARTIN','Empleado',10,2000000,0.10,1);
+VALUE (1,'SCOTT','Empleado',10,2000000,4000,1);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
-VALUE (12,'ALLEN','Empleado',32,1400000,0.10,2);
+VALUE (12,'ALLEN','Empleado',32,1400000,5000,2);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
-VALUE (50,'WARD','MANAGER',50,3540000,0.10,1);
+VALUE (50,'WARD','MANAGER',50,3540000,32000,1);
 INSERT INTO empleados (rut,nombre,cargo,rut_jefe,sueldo,comision,deptos_numdep)
-VALUE (10,'MARE','MANAGER',10,4780000,0.30,2);
+VALUE (10,'MARE','MANAGER',10,4780000,5430,2);
 
 INSERT INTO ventas (num_venta, empleados_rut,clientes_rut,monto,fecha)
 VALUE (1,8,4,300000,'2021-02-12');
