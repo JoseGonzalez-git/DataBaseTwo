@@ -1,3 +1,9 @@
+# AUTORES
+- [Isaac Arrieta Mercado]
+- [Jose Alejandro Gonzalez Ortiz]
+
+## Ejercicio 4
+
 1. Obtener, en el departamento 5, los empleados con salarios mayores a $30000.
 
     Algebra relacional:

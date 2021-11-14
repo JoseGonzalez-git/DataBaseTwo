@@ -1,3 +1,8 @@
+# AUTORES
+- [Isaac Arrieta Mercado]
+- [Jose Alejandro Gonzalez Ortiz]
+## Ejercicio 1
+
 1. Ciudad en la que está el departamento de ventas
     π ciudad
     σ nombre = "Departamento de ventas" deptos

@@ -1,3 +1,9 @@
+# AUTORES
+- [Isaac Arrieta Mercado]
+- [Jose Alejandro Gonzalez Ortiz]
+
+## Ejercicio 2
+
 1. Encuentre a todos los miembros del personal cuyo nombre empiece por 'C'.
 
     Algebra relacional:

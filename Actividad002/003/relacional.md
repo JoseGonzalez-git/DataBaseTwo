@@ -1,3 +1,9 @@
+# AUTORES
+- [Isaac Arrieta Mercado]
+- [Jose Alejandro Gonzalez Ortiz]
+
+## Ejercicio 3
+
 1. Listar los nombres y ciudades donde viven los proveedores que han enviado piezas color azul.
 
     Algebra relacional:
