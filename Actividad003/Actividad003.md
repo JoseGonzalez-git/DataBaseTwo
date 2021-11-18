@@ -4,18 +4,22 @@
 1. Devuelve el nombre del cliente con mayor límite de crédito.
 
 ```sql
-    select nombre_cliente from cliente where limite_credito = (select max(limite_credito) from cliente);
+    select nombre_cliente 
+    from cliente 
+    where limite_credito = (select max(limite_credito) from cliente);
 ```
 
-![1](/img/)
+![1](./img/1.png)
 
 2. Devuelve el nombre del producto que tenga el precio de venta más caro.
 
 ```sql
-    select nombre from producto where precio_venta = (select max(precio_venta) from producto);
+    select nombre 
+    from producto 
+    where precio_venta = (select max(precio_venta) from producto);
 ```
 
-![2](/img/)
+![2](./img/1.png)
 
 3. Devuelve el nombre del producto del que se han vendido más unidades. (Tenga en
 cuenta que tendrá que calcular cuál es el número total de unidades que se han vendido
@@ -23,35 +27,54 @@ de cada producto a partir de los datos de la tabla detalle_pedido. Una vez que s
 cuál es el código del producto, puede obtener su nombre fácilmente.)
 
 ```sql
-    SELECT producto.nombre, detalle_pedido.cantidad FROM producto INNER JOIN detalle_pedido ON producto.codigo_producto=detalle_pedido.codigo_producto WHERE cantidad =(SELECT MAX(cantidad) from detalle_pedido);
+    SELECT p.nombre, dp.cantidad 
+    FROM producto  p
+    INNER JOIN detalle_pedido as dp ON p.codigo_producto = dp.codigo_producto
+    WHERE cantidad = (SELECT MAX(cantidad) from detalle_pedido);
 ```
 
-![3](/img/)
+![3](./img/3.png)
 
-4. Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado. (Sin
-utilizar INNER JOIN).
+4. Los clientes cuyo límite de crédito sea mayor que los pagos que haya realizado. (Sin utilizar INNER JOIN).
 
 ```sql
+    SELECT c.codigo_cliente, c.nombre_cliente, c.limite_credito, t.total
+    FROM cliente c, (SELECT SUM(total) as total  from pago) as t
+    WHERE limite_credito > t.total;
 ```
 
-![4](/img/)
+![4](./img/4.png)
 
 5. Devuelve el producto que más unidades tiene en stock.
 
 ```sql
-    SELECT nombre, cantidad_en_stock FROM producto WHERE cantidad_en_stock =(SELECT max(cantidad_en_stock) FROM producto);
+    SELECT nombre, cantidad_en_stock 
+    FROM producto 
+    WHERE cantidad_en_stock = (SELECT max(cantidad_en_stock) FROM producto);
 ```
+
+![5](./img/5.png)
 
 6. Devuelve el producto que menos unidades tiene en stock.
 
 ```sql
+    SELECT nombre, cantidad_en_stock 
+    FROM producto 
+    WHERE cantidad_en_stock = (SELECT min(cantidad_en_stock) FROM producto);
 ```
+
+![6](./img/6.png)
 
 7. Devuelve el nombre, los apellidos y el email de los empleados que están a cargo de
 Alberto Soria.
 
 ```sql
+    SELECT nombre, apellido1, apellido2, email 
+    FROM empleado 
+    WHERE nombre = 'Alberto' AND apellido1 = 'Soria';
 ```
+
+![7](./img/7.png)
 
 ## B. Subconsultas con ALL y ANY
 8. Devuelve el nombre del cliente con mayor límite de crédito.
