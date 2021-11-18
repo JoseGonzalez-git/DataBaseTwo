@@ -1,4 +1,8 @@
 # Subconsultas
+
+## Autores
+- Jose Alejandro Gonzalez Ortiz
+- Isaac Damian Arrieta Mercado
 ## A. Con operadores básicos de comparación:
 
 1. Devuelve el nombre del cliente con mayor límite de crédito.
@@ -246,17 +250,23 @@ pedido.
 
 ```
 
+![22](./img/22.png)
+
 23. Devuelve un listado con los nombres de los clientes y el total pagado por cada uno de
 ellos. Tenga en cuenta que pueden existir clientes que no han realizado ningún pago.
 
 ```sql
 ```
 
+![23](./img/23.png)
+
 24. Devuelve el nombre de los clientes que hayan hecho pedidos en 2008 ordenados
 alfabéticamente de menor a mayor.
 
 ```sql
 ```
+
+![24](./img/24.png)
 
 25. Devuelve el nombre del cliente, el nombre y primer apellido de su representante de
 ventas y el número de teléfono de la oficina del representante de ventas, de aquellos
@@ -265,11 +275,15 @@ clientes que no hayan realizado ningún pago.
 ```sql
 ```
 
+![25](./img/25.png)
+
 26. Devuelve el listado de clientes donde aparezca el nombre del cliente, el nombre y
 primer apellido de su representante de ventas y la ciudad donde está su oficina.
 
 ```sql
 ```
+
+![26](./img/26.png)
 
 27. Devuelve el nombre, apellidos, puesto y teléfono de la oficina de aquellos empleados
 que no sean representante de ventas de ningún cliente.
@@ -277,8 +291,12 @@ que no sean representante de ventas de ningún cliente.
 ```sql
 ```
 
+![27](./img/27.png)
+
 28. Devuelve un listado indicando todas las ciudades donde hay oficinas y el número de
 empleados que tiene.
 
 ```sql
 ```
+
+![28](./img/28.png)
