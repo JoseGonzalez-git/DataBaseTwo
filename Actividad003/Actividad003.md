@@ -247,7 +247,6 @@ realizado. Tenga en cuenta que pueden existir clientes que no han realizado ning
 pedido.
 
 ```sql
-
 ```
 
 ![22](./img/22.png)
@@ -256,6 +255,9 @@ pedido.
 ellos. Tenga en cuenta que pueden existir clientes que no han realizado ningún pago.
 
 ```sql
+    Select c.codigo_cliente, p.total 
+    from cliente c  
+    inner join (select sum(total) as total from pago group by codigo_cliente) p on c.codigo_cliente = p.codigo_cliente;
 ```
 
 ![23](./img/23.png)
