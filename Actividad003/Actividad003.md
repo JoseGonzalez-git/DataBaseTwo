@@ -300,6 +300,10 @@ primer apellido de su representante de ventas y la ciudad donde está su oficina
 que no sean representante de ventas de ningún cliente.
 
 ```sql
+    select e.nombre, e.apellido1, e.apellido2, e.puesto, o.telefono
+    from empleado e
+    inner join (select codigo_oficina, telefono  from oficina ) o on e.codigo_oficina = o.codigo_oficina
+    where not exists (select codigo_empleado from cliente where codigo_empleado_rep_ventas = e.codigo_empleado);
 ```
 
 ![27](./img/27.png)
@@ -308,6 +312,10 @@ que no sean representante de ventas de ningún cliente.
 empleados que tiene.
 
 ```sql
+    Select o.ciudad, e.numero_empleados 
+    from oficina o 
+    left join (select codigo_oficina , count(codigo_empleado) as numero_empleados from empleado group by codigo_oficina) e 
+    on e.codigo_oficina = o.codigo_oficina;
 ```
 
 ![28](./img/28.png)
