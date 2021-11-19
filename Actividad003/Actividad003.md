@@ -257,7 +257,8 @@ ellos. Tenga en cuenta que pueden existir clientes que no han realizado ningún 
 ```sql
     Select c.codigo_cliente, p.total 
     from cliente c  
-    inner join (select codigo_cliente, sum(total) as total from pago group by codigo_cliente) p on c.codigo_cliente = p.codigo_cliente;
+    left join (select codigo_cliente, sum(total) as total from pago group by codigo_cliente) p on c.codigo_cliente = p.codigo_cliente
+    Order by c.codigo_cliente desc;
 ```
 
 ![23](./img/23.png)
