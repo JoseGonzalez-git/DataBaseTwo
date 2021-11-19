@@ -247,6 +247,9 @@ realizado. Tenga en cuenta que pueden existir clientes que no han realizado ning
 pedido.
 
 ```sql
+    Select c.nombre_cliente , p.total 
+    from cliente c  
+    left join (select codigo_cliente, count(codigo_cliente) as total from pedido group by codigo_cliente) p on c.codigo_cliente = p.codigo_cliente;
 ```
 
 ![22](./img/22.png)
@@ -280,6 +283,8 @@ ventas y el número de teléfono de la oficina del representante de ventas, de a
 clientes que no hayan realizado ningún pago.
 
 ```sql
+    select c.nombre_cliente, e.nombre, e.apellido1, c.ciudad 
+    from cliente c join empleado e where  c.codigo_empleado_rep_ventas in (select pago.codigo_cliente from pago);
 ```
 
 ![25](./img/25.png)
