@@ -283,8 +283,11 @@ ventas y el número de teléfono de la oficina del representante de ventas, de a
 clientes que no hayan realizado ningún pago.
 
 ```sql
-    select c.nombre_cliente, e.nombre, e.apellido1, c.ciudad 
-    from cliente c join empleado e where  c.codigo_empleado_rep_ventas in (select pago.codigo_cliente from pago);
+    select c.nombre_cliente, e.nombre, e.apellido1, o.telefono
+    from cliente c
+    left join empleado e on c.codigo_empleado_rep_ventas = e.codigo_empleado
+    left join oficina o on e.codigo_oficina = o.codigo_oficina
+    where not exists (select pago.codigo_cliente from pago where c.codigo_cliente = pago.codigo_cliente);
 ```
 
 ![25](./img/25.png)
