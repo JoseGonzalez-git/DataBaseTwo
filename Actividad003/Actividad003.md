@@ -267,6 +267,10 @@ ellos. Tenga en cuenta que pueden existir clientes que no han realizado ningún 
 alfabéticamente de menor a mayor.
 
 ```sql
+    select nombre_cliente 
+    from cliente 
+    where exists (select pedido.codigo_cliente from pedido where pedido.codigo_cliente = cliente.codigo_cliente and pedido.fecha_pedido like '2008%')
+    order by nombre_cliente;
 ```
 
 ![24](./img/24.png)
@@ -284,6 +288,10 @@ clientes que no hayan realizado ningún pago.
 primer apellido de su representante de ventas y la ciudad donde está su oficina.
 
 ```sql
+    select c.nombre_cliente, e.nombre as empleado_nombre, e.apellido1 as empleado_apellido1, o.ciudad
+    from cliente c
+    inner join empleado e on c.codigo_empleado_rep_ventas = e.codigo_empleado
+    inner join (select codigo_oficina, ciudad  from oficina ) o on e.codigo_oficina = o.codigo_oficina;
 ```
 
 ![26](./img/26.png)
