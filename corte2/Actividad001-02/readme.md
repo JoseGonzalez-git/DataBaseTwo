@@ -7,13 +7,18 @@
 
 1. Escriba un procedimiento que no tenga ningún parámetro de entrada ni de salida y quemuestre el texto¡Hola mundo!
 
-```sql
-    delimiter //
-    end //
-    delimiter ;
-```
+    ```sql
+        delimiter //
+        create procedure hola_mundo()
+        begin
+        select 'Hola mundo';
+        end//
+        delimiter ;
 
-2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensajeindicando si el número es positivo, negativo o cero.
+        call hola_mundo();
+    ```
+
+2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensaje indicando si el número es positivo, negativo o cero.
 
 ```sql
     delimiter //
