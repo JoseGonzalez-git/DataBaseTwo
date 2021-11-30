@@ -35,6 +35,7 @@
     END//
     DELIMITER ;
     CALL mensaje_tipo(1, @mensaje);
+    select @mensaje;
 ```
 
 3. Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor un número real, y un parámetro de salida, con una cadena decaracteres indicando si el número es positivo, negativo o cero.

@@ -21,3 +21,4 @@ BEGIN
 END//
 DELIMITER ;
 CALL mensaje_tipo(1, @mensaje);
+select @mensaje;
