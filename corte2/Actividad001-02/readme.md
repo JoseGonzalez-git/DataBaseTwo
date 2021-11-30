@@ -48,7 +48,7 @@
     delimiter ;
 ```
 
-4. Escriba un procedimiento que reciba un número real de entrada, que representa el valorde la nota de un alumno, y muestre un mensaje indicando qué nota ha obtenido teniendoen cuenta las siguientes condiciones:
+4. Escriba un procedimiento que reciba un número real de entrada, que representa el valorde la nota de un alumno, y muestre un mensaje indicando qué nota ha obtenido teniendo en cuenta las siguientes condiciones:
 
 * [0,5) = Insuficiente
 * [5,6) = Aprobado
@@ -58,9 +58,27 @@
 * En cualquier otro caso la nota no será válida
 
 ```sql
+    DROP PROCEDURE IF EXISTS mensaje_nota;
     delimiter //
-    end //
+    CREATE PROCEDURE mensaje_nota(IN nota NUMERIC, OUT mensaje VARCHAR(40))
+    BEGIN
+        IF nota >= 0 AND nota <= 5 THEN
+            SET mensaje = 'Insuficiente';
+        ELSEIF nota >= 5 AND nota <= 6 THEN
+            SET mensaje = 'Aprobado';
+        ELSEIF nota >= 6 AND nota <= 7 THEN
+            SET mensaje = 'Bien';
+        ELSEIF nota >= 7 AND nota <= 9 THEN
+            SET mensaje = 'Notable';
+        ELSEIF nota >= 9 AND nota <= 10 THEN
+            SET mensaje = 'Sobresaliente';
+        ELSE
+            SET mensaje = 'No es una nota válida';
+        END IF;
+    END//
     delimiter ;
+    CALL mensaje_nota(1, @mensaje);
+    SELECT @mensaje;
 ```
 
 5.  Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor de la nota en formato numérico y un parámetro de salida, con unacadena de texto indicando la nota correspondiente.
