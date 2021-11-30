@@ -1,0 +1,5 @@
+delimiter //
+BEGIN
+
+END //
+delimiter ;
