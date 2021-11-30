@@ -21,9 +21,20 @@
 2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensaje indicando si el número es positivo, negativo o cero.
 
 ```sql
-    delimiter //
-    end //
-    delimiter ;
+    DROP PROCEDURE IF EXISTS mensaje_tipo;
+    DELIMITER //
+    CREATE PROCEDURE mensaje_tipo(IN numero NUMERIC, OUT mensaje VARCHAR(40))
+    BEGIN
+        IF numero > 0 THEN
+            SET mensaje = 'Positivo';
+        ELSEIF numero < 0 THEN
+            SET mensaje = 'Negativo';
+        ELSE
+            SET mensaje = 'Cero';
+        END IF;
+    END//
+    DELIMITER ;
+    CALL mensaje_tipo(1, @mensaje);
 ```
 
 3. Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor un número real, y un parámetro de salida, con una cadena decaracteres indicando si el número es positivo, negativo o cero.
