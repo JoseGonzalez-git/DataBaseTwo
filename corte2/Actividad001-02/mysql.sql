@@ -106,21 +106,21 @@ CREATE TABLE pago (
 
 
 -- Datos
-INSERT INTO oficina VALUES ('BCN-ES','Barcelona','España','Barcelona','08019','+34 93 3561182','Avenida Diagonal, 38','3A escalera Derecha');
-INSERT INTO oficina VALUES ('BOS-USA','Boston','EEUU','MA','02108','+1 215 837 0825','1550 Court Place','Suite 102');
-INSERT INTO oficina VALUES ('LON-UK','Londres','Inglaterra','EMEA','EC2N 1HN','+44 20 78772041','52 Old Broad Street','Ground Floor');
+INSERT INTO oficina VALUES ('RJ-BRA','Rio de Janeiro','Brazil','RJ','08019','+34 93 3561182','Avenida Diagonal, 38','3A escalera Derecha');
+INSERT INTO oficina VALUES ('B-CO','Bogotá','Colombia','B','02108','+57 314 837 0825','Avenida Carrera, 20','3er Piso');
+INSERT INTO oficina VALUES ('M-I','Mánchester','Inglaterra','M','EC2N 1HN','+44 20 78772041','52 Old Broad Street','Ground Floor');
 INSERT INTO oficina VALUES ('MAD-ES','Madrid','España','Madrid','28032','+34 91 7514487','Bulevar Indalecio Prieto, 32','');
-INSERT INTO oficina VALUES ('PAR-FR','Paris','Francia','EMEA','75017','+33 14 723 4404','29 Rue Jouffroy d''abbans','');
+INSERT INTO oficina VALUES ('MAR-FR','Marsella','Francia','MF','75017','+33 14 723 4404','29 Rue Jouffroy d''abbans','');
 INSERT INTO oficina VALUES ('SFC-USA','San Francisco','EEUU','CA','94080','+1 650 219 4782','100 Market Street','Suite 300');
-INSERT INTO oficina VALUES ('SYD-AU','Sydney','Australia','APAC','NSW 2010','+61 2 9264 2451','5-11 Wentworth Avenue','Floor #2');
+INSERT INTO oficina VALUES ('D-EA','Dubai','Emiratos Arabes','DE','NSW 2010','+61 2 9264 2451','5-11 Wentworth Avenue','Floor #2');
 
-INSERT INTO empleado VALUES (1,'Marcos','Magaña','Perez','3897','marcos@jardineria.es','TAL-ES',NULL,'Director General');
-INSERT INTO empleado VALUES (2,'Ruben','López','Martinez','2899','rlopez@jardineria.es','TAL-ES',1,'Subdirector Marketing');
-INSERT INTO empleado VALUES (3,'Alberto','Soria','Carrasco','2837','asoria@jardineria.es','TAL-ES',2,'Subdirector Ventas');
-INSERT INTO empleado VALUES (4,'Maria','Solís','Jerez','2847','msolis@jardineria.es','TAL-ES',2,'Secretaria');
-INSERT INTO empleado VALUES (5,'Felipe','Rosas','Marquez','2844','frosas@jardineria.es','TAL-ES',3,'Representante Ventas');
-INSERT INTO empleado VALUES (6,'Juan Carlos','Ortiz','Serrano','2845','cortiz@jardineria.es','TAL-ES',3,'Representante Ventas');
-INSERT INTO empleado VALUES (7,'Carlos','Soria','Jimenez','2444','csoria@jardineria.es','MAD-ES',3,'Director Oficina');
+INSERT INTO empleado VALUES (1,'Marcos','Magaña','Perez','3897','marcos@jardineria.es','RJ-BRA',1,'Director General');
+INSERT INTO empleado VALUES (2,'Ruben','López','Martinez','2899','rlopez@jardineria.es','B-CO',2,'Subdirector Marketing');
+INSERT INTO empleado VALUES (3,'Alberto','Soria','Carrasco','2837','asoria@jardineria.es','M-I',3,'Subdirector Ventas');
+INSERT INTO empleado VALUES (4,'Maria','Solís','Jerez','2847','msolis@jardineria.es','MAD-ES',4,'Secretaria');
+INSERT INTO empleado VALUES (5,'Felipe','Rosas','Marquez','2844','frosas@jardineria.es','MAR-FR',5,'Representante Ventas');
+INSERT INTO empleado VALUES (6,'Juan Carlos','Ortiz','Serrano','2845','cortiz@jardineria.es','SFC-USA',6,'Representante Ventas');
+INSERT INTO empleado VALUES (7,'Carlos','Soria','Jimenez','2444','csoria@jardineria.es','D-EA',7,'Director Oficina');
 
 INSERT INTO gama_producto VALUES ('Herbaceas','Plantas para jardin decorativas',NULL,NULL);
 INSERT INTO gama_producto VALUES ('Herramientas','Herramientas para todo tipo de acción',NULL,NULL);
@@ -128,7 +128,7 @@ INSERT INTO gama_producto VALUES ('Aromáticas','Plantas aromáticas',NULL,NULL)
 INSERT INTO gama_producto VALUES ('Frutales','Árboles pequeños de producción frutal',NULL,NULL);
 INSERT INTO gama_producto VALUES ('Ornamentales','Plantas vistosas para la decoración del jardín',NULL,NULL);
 
-INSERT INTO cliente VALUES (1,'GoldFish Garden','Daniel G','GoldFish','5556901745','5556901746','False Street 52 2 A',NULL,'San Francisco',NULL,'USA','24006',1,3000);
+INSERT INTO cliente VALUES (1,'GoldFish Garden','Daniel G','GoldFish','5556901745','5556901746','False Street 52 2 A',NULL,'Bogotá',NULL,'Colombia','24006',1,3000);
 INSERT INTO cliente VALUES (2,'Club Golf Puerta del hierro','Paco','Lopez','62456810','919535678','C/sinesio delgado','Madrid','Madrid','Madrid','Spain','28930',2,40000);
 INSERT INTO cliente VALUES (3,'Gardening Associates','Anne','Wright','5557410345','5557410346','Wall-e Avenue',NULL,'Miami','Miami','USA','24010',3,6000);
 INSERT INTO cliente VALUES (4,'Gerudo Valley','Link','Flaute','5552323129','5552323128','Oaks Avenue nº22',NULL,'New York',NULL,'USA','85495',4,12000);
@@ -161,12 +161,11 @@ INSERT INTO detalle_pedido VALUES (9,'AR-001',80,1,3);
 INSERT INTO detalle_pedido VALUES (10,'FR-82',5,70,2);
 
 
-
 INSERT INTO pago VALUES (1,'PayPal','ak-std-000001','2008-11-10',2000);
-INSERT INTO pago VALUES (3,'PayPal','ak-std-000005','2009-02-19',926);
-INSERT INTO pago VALUES (4,'PayPal','ak-std-000010','2007-01-08',1849);
-INSERT INTO pago VALUES (5,'Transferencia','ak-std-000011','2006-01-18',23794);
-INSERT INTO pago VALUES (7,'Cheque','ak-std-000012','2009-01-13',2390);
-INSERT INTO pago VALUES (9,'PayPal','ak-std-000013','2009-01-06',929);
-INSERT INTO pago VALUES (13,'PayPal','ak-std-000014','2008-08-04',2246);
+INSERT INTO pago VALUES (2,'Transferencia','ak-std-000005','2009-02-19',926);
+INSERT INTO pago VALUES (3,'PayPal','ak-std-000010','2007-01-08',1849);
+INSERT INTO pago VALUES (4,'Transferencia','ak-std-000011','2006-01-18',23794);
+INSERT INTO pago VALUES (5,'Cheque','ak-std-000012','2009-01-13',2390);
+INSERT INTO pago VALUES (6,'Transferencia','ak-std-000013','2009-01-06',929);
+INSERT INTO pago VALUES (7,'Cheque','ak-std-000014','2008-08-04',2246);
 

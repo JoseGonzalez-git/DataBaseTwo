@@ -184,7 +184,7 @@
         SELECT codigo_cliente, nombre_cliente, pais FROM cliente WHERE pais = recibe_pais;
     END//
     delimiter ;
-    CALL clientes_pais('France');
+    CALL clientes_pais('Colombia');
 ```
 
 2. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, que será una cadena de caracteres (Ejemplo:PayPal, Transferencia, etc.). Y devuelva comosalida el pago de máximo valor realizado para esa forma de pago. Deberá hacer uso de la tabla pago de la base de datos jardinería.
@@ -218,7 +218,7 @@
     SELECT MAX(total), MIN(total), AVG(total), SUM(total), COUNT(total) FROM pago WHERE forma_pago = metodo_pago;
     END//
     delimiter ;
-    CALL pago_forma('PayPal');
+    CALL pago_forma('Transferencia');
 ```
 
 4. Crear una base de datos llamada “procedimientos01” que contenga una tabla llamada operaciones.  La tabla operaciones debe tener dos columnas de tipo INT UNSIGNED,una columna llamada “numero” y otra llamada “cuadrado”.
