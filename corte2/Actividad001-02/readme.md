@@ -8,31 +8,31 @@
 1. Escriba un procedimiento que no tenga ningún parámetro de entrada ni de salida y quemuestre el texto¡Hola mundo!
 
 ```sql
-    drop procedure if exists hola_mundo ;
+    DROP PROCEDURE IF EXISTS hola_mundo ;
     delimiter //
-        create procedure hola_mundo()
-        begin
-        select 'Hola mundo';
-    end//
+        CREATE PROCEDURE hola_mundo()
+        BEGIN
+        SELECT 'Hola mundo';
+    END//
     delimiter ;
 
-    call hola_mundo();
+    CALL hola_mundo();
 ```
 
 2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensaje indicando si el número es positivo, negativo o cero.
 
 ```sql
-    drop procedure if exists numposneg ;
+    DROP PROCEDURE IF EXISTS numposneg ;
     delimiter //
-    create procedure numposneg(in numero int)
-    begin if numero > 0 then select 'Numero positivo';
-    elseif numero < 0 then select 'Nuemro negativo';
-    else select 'El numero es cero';
-    end if;
-    end//
+    CREATE PROCEDURE numposneg(IN numero NUMERIC)
+    BEGIN IF numero > 0 THEN SELECT 'Numero positivo';
+    ELSEIF numero < 0 THEN SELECT 'Nuemro negativo';
+    ELSE SELECT 'El numero es cero';
+    END IF;
+    END//
     delimiter ;
 
-    call numposneg(-9);
+    CALL numposneg(-9);
 ```
 
 3. Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor un número real, y un parámetro de salida, con una cadena decaracteres indicando si el número es positivo, negativo o cero.
@@ -141,7 +141,36 @@
     SELECT @mensaje;
 ```
 
-7. Escriba un procedimiento que reciba como parámetro de entrada un valor numérico querepresente un día de la semana y que devuelva una cadena de caracteres con el nombre del día de la semana correspondiente. Por ejemplo, para el valor de entrada1deberíadevolver la cadenalunes.
+7. Escriba un procedimiento que reciba como parámetro de entrada un valor numérico querepresente un día de la semana y que devuelva una cadena de caracteres con el nombre del día de la semana correspondiente. Por ejemplo, para el valor de entrada 1 debería devolver la cadena lunes.
+
+```sql
+    DROP PROCEDURE IF EXISTS dia_semana;
+    delimiter //
+    CREATE PROCEDURE dia_semana(IN nota NUMERIC, OUT mensaje VARCHAR(40))
+    BEGIN
+        CASE nota
+            WHEN 0 THEN
+                SET mensaje = 'Domingo';
+            WHEN 1 THEN
+                SET mensaje = 'Lunes';
+            WHEN 2 THEN
+                SET mensaje = 'Martes';
+            WHEN 3 THEN
+                SET mensaje = 'Miercoles';
+            WHEN 4 THEN
+                SET mensaje = 'Jueves';
+			WHEN 5 THEN
+                SET mensaje = 'Viernes';
+			WHEN 6 THEN
+                SET mensaje = 'Sabado';
+            ELSE
+                SET mensaje = 'No es un dia valido';
+        END CASE;
+    END//
+    delimiter ;
+    CALL dia_semana(10, @mensaje);
+    SELECT @mensaje;
+```
 
 ## Procedimientos con sentencias SQL1.
 
