@@ -174,9 +174,31 @@
 
 ## Procedimientos con sentencias SQL1.
 
-1. Escriba un procedimiento que reciba el nombre de un país como parámetro de entrada yrealice una consulta sobre la tablaclientepara obtener todos los clientes que existen en latabla de ese país.
+1. Escriba un procedimiento que reciba el nombre de un país como parámetro de entrada y realice una consulta sobre la tabla cliente para obtener todos los clientes que existen en la tabla de ese país.
 
-2. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, queserá una cadena de caracteres (Ejemplo:PayPal, Transferencia, etc.). Y devuelva comosalida el pago de máximo valor realizado para esa forma de pago. Deberá hacer uso de latablapagode la base de datosjardinería.
+```sql
+    DROP PROCEDURE IF EXISTS clientes_pais;
+    delimiter //
+    CREATE PROCEDURE clientes_pais(IN recibe_pais VARCHAR(40))
+    BEGIN
+        SELECT codigo_cliente, nombre_cliente, pais FROM cliente WHERE pais = recibe_pais;
+    END//
+    delimiter ;
+    CALL clientes_pais('France');
+```
+
+2. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, que será una cadena de caracteres (Ejemplo:PayPal, Transferencia, etc.). Y devuelva comosalida el pago de máximo valor realizado para esa forma de pago. Deberá hacer uso de la tabla pago de la base de datos jardinería.
+
+```sql
+    DROP PROCEDURE IF EXISTS max_pago;
+    delimiter //
+    CREATE PROCEDURE max_pago(IN metodo_pago VARCHAR(40))
+    BEGIN
+        SELECT MAX(total) FROM pago WHERE forma_pago = metodo_pago;
+    END//
+    delimiter ;
+    CALL max_pago('PayPal');
+```
 
 3. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, queserá una cadena de caracteres (Ejemplo:PayPal,Transferencia, etc). Y devuelva como salida los siguientes valores teniendo en cuenta la forma de pago seleccionada comoparámetro de entrada:
 
@@ -186,7 +208,18 @@
 * la suma de todos los pagos,
 * el número de pagos realizados para esa forma de pago.
 
-    Deberá hacer uso de la tablapagode la base de datosjardinería.
+    Deberá hacer uso de la tabla pago de la base de datos jardinería.
+
+```sql
+    DROP PROCEDURE IF EXISTS pago_forma;
+    delimiter //
+    CREATE PROCEDURE pago_forma(IN metodo_pago VARCHAR(40))
+    BEGIN
+    SELECT MAX(total), MIN(total), AVG(total), SUM(total), COUNT(total) FROM pago WHERE forma_pago = metodo_pago;
+    END//
+    delimiter ;
+    CALL pago_forma('PayPal');
+```
 
 4. Crear una base de datos llamada “procedimientos01” que contenga una tabla llamada operaciones.  La tabla operaciones debe tener dos columnas de tipo INT UNSIGNED,una columna llamada “numero” y otra llamada “cuadrado”.
 
