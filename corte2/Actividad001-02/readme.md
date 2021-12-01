@@ -8,6 +8,7 @@
 1. Escriba un procedimiento que no tenga ningún parámetro de entrada ni de salida y quemuestre el texto¡Hola mundo!
 
 ```sql
+    drop procedure if exists hola_mundo ;
     delimiter //
         create procedure hola_mundo()
         begin
@@ -19,6 +20,22 @@
 ```
 
 2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensaje indicando si el número es positivo, negativo o cero.
+
+```sql
+    drop procedure if exists numposneg ;
+    delimiter //
+    create procedure numposneg(in numero int)
+    begin if numero > 0 then select 'Numero positivo';
+    elseif numero < 0 then select 'Nuemro negativo';
+    else select 'El numero es cero';
+    end if;
+    end//
+    delimiter ;
+
+    call numposneg(-9);
+```
+
+3. Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor un número real, y un parámetro de salida, con una cadena decaracteres indicando si el número es positivo, negativo o cero.
 
 ```sql
     DROP PROCEDURE IF EXISTS mensaje_tipo;
@@ -36,14 +53,6 @@
     DELIMITER ;
     CALL mensaje_tipo(1, @mensaje);
     select @mensaje;
-```
-
-3. Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor un número real, y un parámetro de salida, con una cadena decaracteres indicando si el número es positivo, negativo o cero.
-
-```sql
-    delimiter //
-    end //
-    delimiter ;
 ```
 
 4. Escriba un procedimiento que reciba un número real de entrada, que representa el valorde la nota de un alumno, y muestre un mensaje indicando qué nota ha obtenido teniendo en cuenta las siguientes condiciones:
