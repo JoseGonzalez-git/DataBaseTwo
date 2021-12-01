@@ -7,18 +7,16 @@
 
 1. Escriba un procedimiento que no tenga ningún parámetro de entrada ni de salida y quemuestre el texto¡Hola mundo!
 
-    ```sql
-        DROP PROCEDURE IF EXISTS hola_mundo;
-        delimiter //
-        create procedure hola_mundo(IN entrada varchar(50), OUT salida varchar(50))
+```sql
+    delimiter //
+        create procedure hola_mundo()
         begin
-        set salida = entrada;
-        end//
-        delimiter ;
+        select 'Hola mundo';
+    end//
+    delimiter ;
 
-        call hola_mundo('Hola mundo!', @salida);
-        select @salida;
-    ```
+    call hola_mundo();
+```
 
 2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensaje indicando si el número es positivo, negativo o cero.
 
