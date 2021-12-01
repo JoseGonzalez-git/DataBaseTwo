@@ -117,7 +117,28 @@
 6. Resuelva el procedimiento diseñado en el ejercicio anterior haciendo uso de la estructurade control CASE. 
 
 ```sql
-    
+    DROP PROCEDURE IF EXISTS mensaje_nota_case;
+    delimiter //
+    CREATE PROCEDURE mensaje_nota_case(IN nota NUMERIC, OUT mensaje VARCHAR(40))
+    BEGIN
+        CASE
+            WHEN nota BETWEEN 0 AND 5 THEN
+                SET mensaje = 'Insuficiente';
+            WHEN nota BETWEEN 5 AND 6 THEN
+                SET mensaje = 'Aprobado';
+                WHEN nota BETWEEN 6 AND 7 THEN
+                SET mensaje = 'Bien';
+            WHEN nota BETWEEN 7 AND 9 THEN
+                SET mensaje = 'Notable';
+            WHEN nota BETWEEN 9 AND 10 THEN
+                SET mensaje = 'Sobresaliente';
+            ELSE
+                SET mensaje = 'No es una nota válida';
+        END CASE;
+    END//
+    delimiter ;
+    CALL mensaje_nota_case(1, @mensaje);
+    SELECT @mensaje;
 ```
 
 7. Escriba un procedimiento que reciba como parámetro de entrada un valor numérico querepresente un día de la semana y que devuelva una cadena de caracteres con el nombre del día de la semana correspondiente. Por ejemplo, para el valor de entrada1deberíadevolver la cadenalunes.
