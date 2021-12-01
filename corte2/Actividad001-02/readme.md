@@ -62,13 +62,13 @@
     delimiter //
     CREATE PROCEDURE mensaje_nota(IN nota NUMERIC, OUT mensaje VARCHAR(40))
     BEGIN
-        IF nota >= 0 AND nota <= 5 THEN
+        IF nota >= 0 AND nota < 5 THEN
             SET mensaje = 'Insuficiente';
-        ELSEIF nota >= 5 AND nota <= 6 THEN
+        ELSEIF nota >= 5 AND nota < 6 THEN
             SET mensaje = 'Aprobado';
-        ELSEIF nota >= 6 AND nota <= 7 THEN
+        ELSEIF nota >= 6 AND nota < 7 THEN
             SET mensaje = 'Bien';
-        ELSEIF nota >= 7 AND nota <= 9 THEN
+        ELSEIF nota >= 7 AND nota < 9 THEN
             SET mensaje = 'Notable';
         ELSEIF nota >= 9 AND nota <= 10 THEN
             SET mensaje = 'Sobresaliente';
@@ -92,9 +92,7 @@
 6. Resuelva el procedimiento diseñado en el ejercicio anterior haciendo uso de la estructurade control CASE. 
 
 ```sql
-    delimiter //
-    end //
-    delimiter ;
+    
 ```
 
 7. Escriba un procedimiento que reciba como parámetro de entrada un valor numérico querepresente un día de la semana y que devuelva una cadena de caracteres con el nombre del día de la semana correspondiente. Por ejemplo, para el valor de entrada1deberíadevolver la cadenalunes.
