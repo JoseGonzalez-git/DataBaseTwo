@@ -67,6 +67,32 @@
 ```sql
     DROP PROCEDURE IF EXISTS mensaje_nota;
     delimiter //
+    CREATE PROCEDURE mensaje_nota(IN nota NUMERIC)
+    BEGIN
+        IF nota >= 0 AND nota < 5 THEN
+            SELECT 'Insuficiente';
+        ELSEIF nota >= 5 AND nota < 6 THEN
+            SELECT 'Aprobado';
+        ELSEIF nota >= 6 AND nota < 7 THEN
+            SELECT 'Bien';
+        ELSEIF nota >= 7 AND nota < 9 THEN
+            SELECT 'Notable';
+        ELSEIF nota >= 9 AND nota <= 10 THEN
+            SELECT 'Sobresaliente';
+        ELSE
+            SELECT 'No es una nota válida';
+        END IF;
+    END//
+    delimiter ;
+    
+    CALL mensaje_nota(8);
+```
+
+5.  Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor de la nota en formato numérico y un parámetro de salida, con unacadena de texto indicando la nota correspondiente.
+
+```sql
+    DROP PROCEDURE IF EXISTS mensaje_nota;
+    delimiter //
     CREATE PROCEDURE mensaje_nota(IN nota NUMERIC, OUT mensaje VARCHAR(40))
     BEGIN
         IF nota >= 0 AND nota < 5 THEN
@@ -86,14 +112,6 @@
     delimiter ;
     CALL mensaje_nota(1, @mensaje);
     SELECT @mensaje;
-```
-
-5.  Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor de la nota en formato numérico y un parámetro de salida, con unacadena de texto indicando la nota correspondiente.
-
-```sql
-    delimiter //
-    end //
-    delimiter ;
 ```
 
 6. Resuelva el procedimiento diseñado en el ejercicio anterior haciendo uso de la estructurade control CASE. 
