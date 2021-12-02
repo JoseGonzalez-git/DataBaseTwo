@@ -223,15 +223,81 @@
 
 4. Crear una base de datos llamada “procedimientos01” que contenga una tabla llamada operaciones.  La tabla operaciones debe tener dos columnas de tipo INT UNSIGNED,una columna llamada “numero” y otra llamada “cuadrado”.
 
-    Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear un procedimiento llamado calcular_cuadrados con   las   siguientes características.   Elprocedimiento recibe un parámetro de entrada llamadotopede tipo INT UNSIGNED y calculará el valor de los cuadrados de los primeros números naturales hasta el valor introducido como parámetro. El valor del número y de sus cuadrados deberán ser almacenados en la tabla cuadrados que hemos creado previamente.
+    Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear un procedimiento llamado calcular_cuadrados con   las   siguientes características.   El procedimiento recibe un parámetro de entrada llamado tope de tipo INT UNSIGNED y calculará el valor de los cuadrados de los primeros números naturales hasta el valor introducido como parámetro. El valor del número y de sus cuadrados deberán ser almacenados en la tabla cuadrados que hemos creado previamente.
 
-    Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de la tablaantes de insertar los nuevos valores de los cuadrados que va a calcular.
+    Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de la tabla antes de insertar los nuevos valores de los cuadrados que va a calcular.
     
-    Utilice un bucleWHILEpara resolver el procedimiento.
+    Utilice un bucle WHILE para resolver el procedimiento.
+
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_cuadrados;
+    delimiter // 
+    CREATE PROCEDURE calcular_cuadrados(IN tope INT)
+    BEGIN
+    DECLARE i INT;
+    DECLARE cuadrado INT;
+    SET i = 1;
+    DELETE FROM operaciones;
+    WHILE (i <= tope) DO
+    SET cuadrado = i * i;
+    INSERT INTO operaciones VALUES(i, cuadrado);
+    SET i = i + 1;
+    END WHILE;
+    END //
+    delimiter ;
+    CALL calcular_cuadrados(10);
+    SELECT * FROM operaciones;
+    ```
 
 5. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
 
+```SQL
+    DROP PROCEDURE IF EXISTS calcular_cuadrados;
+    delimiter // 
+    CREATE PROCEDURE calcular_cuadrados(IN tope INT)
+    BEGIN
+    DECLARE i INT;
+    DECLARE cuadrado INT;
+    SET i = 1;
+    DELETE FROM operaciones;
+    REPEAT
+    SET cuadrado = i * i;
+    INSERT INTO operaciones VALUES(i, cuadrado);
+    SET i = i + 1;
+    UNTIL (i > tope);
+    END REPEAT;
+    END //
+    delimiter ;
+    CALL calcular_cuadrados(10);
+    SELECT * FROM operaciones;
+```
+
 6. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
+
+```SQL
+    DROP PROCEDURE IF EXISTS calcular_cuadrados;
+    delimiter // 
+    CREATE PROCEDURE calcular_cuadrados(IN tope INT)
+    BEGIN
+    DECLARE i INT;
+    DECLARE cuadrado INT;
+    SET i = 1;
+    DELETE FROM operaciones;
+    ciclo: LOOP
+    SET cuadrado = i * i;
+    INSERT INTO operaciones VALUES(i, cuadrado);
+    SET i = i + 1;
+    IF (i > tope) THEN
+    LEAVE ciclo;
+    ELSE 
+     ITERATE ciclo;
+    END IF;
+    END LOOP;
+    END //
+    delimiter ;
+    CALL calcular_cuadrados(10);
+    SELECT * FROM operaciones;
+´´´
 
 7. Crear una base de datos llamada “procedimientos02” que contenga una tabla llamada ejercicio. La tabla debe tener una única columna llamada “numero” y el tipo de dato de esta columna debe ser INT UNSIGNED.
 
