@@ -480,7 +480,7 @@ El procedimiento de compra realiza los siguientes pasos:
 
 * Inicia una transacción.
 
-* Actualiza la columnasaldode la tablacuentascobrando 5 euros a la cuenta con elid_cuentaadecuado.
+* Actualiza la columnas saldo de la tabla cuentas cobrando 5 euros a la cuenta con elid_cuentaadecuado.
 
 * Inserta una una fila en la tabla entradas indicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
 
@@ -496,7 +496,7 @@ El procedimiento de compra realiza los siguientes pasos:
     BEGIN
     DECLARE error INT DEFAULT 0;
     START TRANSACTION;
-    UPDATE cuentas SET saldo = saldo - 5 WHERE id_cuenta = id_cuenta;
+    UPDATE cuentas SET saldo = (saldo - 5) WHERE id_cuenta = id_cuenta;
     INSERT INTO entradas VALUES(id_butaca,nif);
     IF (error = 0) THEN
     COMMIT;
