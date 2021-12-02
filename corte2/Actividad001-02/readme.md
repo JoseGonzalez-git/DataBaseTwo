@@ -176,29 +176,29 @@
 
 1. Escriba un procedimiento que reciba el nombre de un país como parámetro de entrada y realice una consulta sobre la tabla cliente para obtener todos los clientes que existen en la tabla de ese país.
 
-```sql
-    DROP PROCEDURE IF EXISTS clientes_pais;
-    delimiter //
-    CREATE PROCEDURE clientes_pais(IN recibe_pais VARCHAR(40))
-    BEGIN
-        SELECT codigo_cliente, nombre_cliente, pais FROM cliente WHERE pais = recibe_pais;
-    END//
-    delimiter ;
-    CALL clientes_pais('Colombia');
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS clientes_pais;
+        delimiter //
+        CREATE PROCEDURE clientes_pais(IN recibe_pais VARCHAR(40))
+        BEGIN
+            SELECT codigo_cliente, nombre_cliente, pais FROM cliente WHERE pais = recibe_pais;
+        END//
+        delimiter ;
+        CALL clientes_pais('Colombia');
+    ```
 
 2. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, que será una cadena de caracteres (Ejemplo:PayPal, Transferencia, etc.). Y devuelva comosalida el pago de máximo valor realizado para esa forma de pago. Deberá hacer uso de la tabla pago de la base de datos jardinería.
 
-```sql
-    DROP PROCEDURE IF EXISTS max_pago;
-    delimiter //
-    CREATE PROCEDURE max_pago(IN metodo_pago VARCHAR(40))
-    BEGIN
-        SELECT MAX(total) FROM pago WHERE forma_pago = metodo_pago;
-    END//
-    delimiter ;
-    CALL max_pago('PayPal');
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS max_pago;
+        delimiter //
+        CREATE PROCEDURE max_pago(IN metodo_pago VARCHAR(40))
+        BEGIN
+            SELECT MAX(total) FROM pago WHERE forma_pago = metodo_pago;
+        END//
+        delimiter ;
+        CALL max_pago('PayPal');
+    ```
 
 3. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, queserá una cadena de caracteres (Ejemplo:PayPal,Transferencia, etc). Y devuelva como salida los siguientes valores teniendo en cuenta la forma de pago seleccionada comoparámetro de entrada:
 
@@ -210,16 +210,16 @@
 
     Deberá hacer uso de la tabla pago de la base de datos jardinería.
 
-```sql
-    DROP PROCEDURE IF EXISTS pago_forma;
-    delimiter //
-    CREATE PROCEDURE pago_forma(IN metodo_pago VARCHAR(40))
-    BEGIN
-    SELECT MAX(total), MIN(total), AVG(total), SUM(total), COUNT(total) FROM pago WHERE forma_pago = metodo_pago;
-    END//
-    delimiter ;
-    CALL pago_forma('Transferencia');
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS pago_forma;
+        delimiter //
+        CREATE PROCEDURE pago_forma(IN metodo_pago VARCHAR(40))
+        BEGIN
+        SELECT MAX(total), MIN(total), AVG(total), SUM(total), COUNT(total) FROM pago WHERE forma_pago = metodo_pago;
+        END//
+        delimiter ;
+        CALL pago_forma('Transferencia');
+    ```
 
 4. Crear una base de datos llamada “procedimientos01” que contenga una tabla llamada operaciones.  La tabla operaciones debe tener dos columnas de tipo INT UNSIGNED,una columna llamada “numero” y otra llamada “cuadrado”.
 
@@ -229,75 +229,75 @@
     
     Utilice un bucle WHILE para resolver el procedimiento.
 
-    ```sql
-    DROP PROCEDURE IF EXISTS calcular_cuadrados;
-    delimiter // 
-    CREATE PROCEDURE calcular_cuadrados(IN tope INT)
-    BEGIN
-    DECLARE i INT;
-    DECLARE cuadrado INT;
-    SET i = 1;
-    DELETE FROM operaciones;
-    WHILE (i <= tope) DO
-    SET cuadrado = i * i;
-    INSERT INTO operaciones VALUES(i, cuadrado);
-    SET i = i + 1;
-    END WHILE;
-    END //
-    delimiter ;
-    CALL calcular_cuadrados(10);
-    SELECT * FROM operaciones;
-    ```
+        ```sql
+        DROP PROCEDURE IF EXISTS calcular_cuadrados;
+        delimiter // 
+        CREATE PROCEDURE calcular_cuadrados(IN tope INT)
+        BEGIN
+        DECLARE i INT;
+        DECLARE cuadrado INT;
+        SET i = 1;
+        DELETE FROM operaciones;
+        WHILE (i <= tope) DO
+        SET cuadrado = i * i;
+        INSERT INTO operaciones VALUES(i, cuadrado);
+        SET i = i + 1;
+        END WHILE;
+        END //
+        delimiter ;
+        CALL calcular_cuadrados(10);
+        SELECT * FROM operaciones;
+        ```
 
 5. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
 
-```SQL
-    DROP PROCEDURE IF EXISTS calcular_cuadrados;
-    delimiter // 
-    CREATE PROCEDURE calcular_cuadrados(IN tope INT)
-    BEGIN
-    DECLARE i INT;
-    DECLARE cuadrado INT;
-    SET i = 1;
-    DELETE FROM operaciones;
-    REPEAT
-    SET cuadrado = i * i;
-    INSERT INTO operaciones VALUES(i, cuadrado);
-    SET i = i + 1;
-    UNTIL (i > tope);
-    END REPEAT;
-    END //
-    delimiter ;
-    CALL calcular_cuadrados(10);
-    SELECT * FROM operaciones;
-```
+    ```SQL
+        DROP PROCEDURE IF EXISTS calcular_cuadrados;
+        delimiter // 
+        CREATE PROCEDURE calcular_cuadrados(IN tope INT)
+        BEGIN
+        DECLARE i INT;
+        DECLARE cuadrado INT;
+        SET i = 1;
+        DELETE FROM operaciones;
+        REPEAT
+        SET cuadrado = i * i;
+        INSERT INTO operaciones VALUES(i, cuadrado);
+        SET i = i + 1;
+        UNTIL (i > tope);
+        END REPEAT;
+        END //
+        delimiter ;
+        CALL calcular_cuadrados(10);
+        SELECT * FROM operaciones;
+    ```
 
 6. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
 
-```SQL
-    DROP PROCEDURE IF EXISTS calcular_cuadrados;
-    delimiter // 
-    CREATE PROCEDURE calcular_cuadrados(IN tope INT)
-    BEGIN
-    DECLARE i INT;
-    DECLARE cuadrado INT;
-    SET i = 1;
-    DELETE FROM operaciones;
-    ciclo: LOOP
-    SET cuadrado = i * i;
-    INSERT INTO operaciones VALUES(i, cuadrado);
-    SET i = i + 1;
-    IF (i > tope) THEN
-    LEAVE ciclo;
-    ELSE 
-     ITERATE ciclo;
-    END IF;
-    END LOOP;
-    END //
-    delimiter ;
-    CALL calcular_cuadrados(10);
-    SELECT * FROM operaciones;
-```
+    ```SQL
+        DROP PROCEDURE IF EXISTS calcular_cuadrados;
+        delimiter // 
+        CREATE PROCEDURE calcular_cuadrados(IN tope INT)
+        BEGIN
+        DECLARE i INT;
+        DECLARE cuadrado INT;
+        SET i = 1;
+        DELETE FROM operaciones;
+        ciclo: LOOP
+        SET cuadrado = i * i;
+        INSERT INTO operaciones VALUES(i, cuadrado);
+        SET i = i + 1;
+        IF (i > tope) THEN
+        LEAVE ciclo;
+        ELSE 
+        ITERATE ciclo;
+        END IF;
+        END LOOP;
+        END //
+        delimiter ;
+        CALL calcular_cuadrados(10);
+        SELECT * FROM operaciones;
+    ```
 
 7. Crear una base de datos llamada “procedimientos02” que contenga una tabla llamada ejercicio. La tabla debe tener una única columna llamada “numero” y el tipo de dato de esta columna debe ser INT UNSIGNED.
 
@@ -464,51 +464,51 @@
 
 1. Crea una base de datos llamada cine que contengados tablas con las siguientes columnas.
 
-Tabla cuentas:
+    Tabla cuentas:
 
-* id_cuenta: entero sin signo (clave primaria).
-* saldo: real sin signo.
+    * id_cuenta: entero sin signo (clave primaria).
+    * saldo: real sin signo.
 
-Tabla entradas:
+    Tabla entradas:
 
-* id_butaca: entero sin signo (clave primaria). 
-* nif: cadena de 9 caracteres.
+    * id_butaca: entero sin signo (clave primaria). 
+    * nif: cadena de 9 caracteres.
 
-Una   vez   creada   la   base   de   datos   y   las   tablas   deberá crear   un procedimiento llamado comprar_entrada con   las   siguientes   características.   El procedimiento recibe 3 parámetros  de entrada(nif,id_cuenta,id_butaca) y devolverá como salida un parámetro llamado error que tendrá un valor igual a 0 si la compra de la entrada se ha podido realizar con éxito y un valor igual a 1 en caso contrario.
+    Una   vez   creada   la   base   de   datos   y   las   tablas   deberá crear   un procedimiento llamado comprar_entrada con   las   siguientes   características.   El procedimiento recibe 3 parámetros  de entrada(nif,id_cuenta,id_butaca) y devolverá como salida un parámetro llamado error que tendrá un valor igual a 0 si la compra de la entrada se ha podido realizar con éxito y un valor igual a 1 en caso contrario.
 
-El procedimiento de compra realiza los siguientes pasos:
+    El procedimiento de compra realiza los siguientes pasos:
 
-* Inicia una transacción.
+    * Inicia una transacción.
 
-* Actualiza la columnasaldode la tablacuentascobrando 5 euros a la cuenta con elid_cuentaadecuado.
+    * Actualiza la columna saldo de la tabla cuentas cobrando 5 euros a la cuenta con elid_cuenta adecuado.
 
-* Inserta una una fila en la tabla entradas indicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
+    * Inserta una una fila en la tabla entradas indicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
 
-* Comprueba si ha ocurrido algún error en las operaciones anteriores. Si no ocurre ningún error entonces aplica un COMMIT a la transacción y si ha ocurrido algún error aplica un ROLLBACK.Deberá manejar los siguientes errores que puedan ocurrir durante el proceso.
+    * Comprueba si ha ocurrido algún error en las operaciones anteriores. Si no ocurre ningún error entonces aplica un COMMIT a la transacción y si ha ocurrido algún error aplica un ROLLBACK.Deberá manejar los siguientes errores que puedan ocurrir durante el proceso.
 
-* ERROR 1264 (Out of range value).
-* ERROR 1062 (Duplicate entry for PRIMARY KEY).
+    * ERROR 1264 (Out of range value).
+    * ERROR 1062 (Duplicate entry for PRIMARY KEY).
 
-```sql
-    DROP PROCEDURE IF EXISTS comprar_entrada;
-    delimiter //
-    CREATE PROCEDURE comprar_entrada(IN nif VARCHAR(9),IN id_cuenta INT UNSIGNED,IN id_butaca INT UNSIGNED)
-    BEGIN
-    DECLARE error INT DEFAULT 0;
-    START TRANSACTION;
-    UPDATE cuentas SET saldo = saldo - 5 WHERE id_cuenta = id_cuenta;
-    INSERT INTO entradas VALUES(id_butaca,nif);
-    IF (error = 0) THEN
-    COMMIT;
-    ELSE
-    ROLLBACK;
-    END IF;
-    END //
-    delimiter ;
-    CALL comprar_entrada('12345678Z',1,1);
-    SELECT * FROM cuentas;
-    SELECT * FROM entradas;
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS comprar_entrada;
+        delimiter //
+        CREATE PROCEDURE comprar_entrada(IN nif VARCHAR(9),IN id_cuenta INT UNSIGNED,IN id_butaca INT UNSIGNED)
+        BEGIN
+        DECLARE error INT DEFAULT 0;
+        START TRANSACTION;
+        UPDATE cuentas SET saldo = saldo - 5 WHERE id_cuenta = id_cuenta;
+        INSERT INTO entradas VALUES(id_butaca,nif);
+        IF (error = 0) THEN
+        COMMIT;
+        ELSE
+        ROLLBACK;
+        END IF;
+        END //
+        delimiter ;
+        CALL comprar_entrada('12345678Z',1,1);
+        SELECT * FROM cuentas;
+        SELECT * FROM entradas;
+    ```
 
 
 2. ¿Qué ocurre cuando intentamos comprar una entrada y le pasamos como parámetro un número de cuenta que no existe en la tabla cuentas? ¿Ocurre algún error o podemos comprar la entrada?  En caso de que exista algún error, ¿cómo podríamos resolverlo?
@@ -521,4 +521,4 @@ El procedimiento de compra realiza los siguientes pasos:
 
 3. Escribe una función para la base de datostiendaque devuelva el valor máximo del preciode los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
 
-4. Escribe una función para la base de datostiendaque devuelva el valor mínimo del preciode los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
+4. Escribe una función para la base de datos tienda que devuelva el valor mínimo del preciode los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
