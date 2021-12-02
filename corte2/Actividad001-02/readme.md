@@ -297,19 +297,79 @@
     delimiter ;
     CALL calcular_cuadrados(10);
     SELECT * FROM operaciones;
-´´´
+```
 
 7. Crear una base de datos llamada “procedimientos02” que contenga una tabla llamada ejercicio. La tabla debe tener una única columna llamada “numero” y el tipo de dato de esta columna debe ser INT UNSIGNED.
 
-    Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear   un procedimiento llamado calcular_númeroscon   las   siguientes   características.   El procedimiento   recibe   un   parámetro   de   entrada   llamado valor_inicialde   tipo INT UNSIGNED y deberá almacenar en la tabla ejercicio toda la secuencia de números desde el valor inicial pasado como entrada hasta el 1.
+    Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear   un procedimiento llamado calcular_números con   las   siguientes   características.   El procedimiento   recibe   un   parámetro   de   entrada   llamado valor_inicial de tipo INT UNSIGNED y deberá almacenar en la tabla ejercicio toda la secuencia de números desde el valor inicial pasado como entrada hasta el 1.
 
     Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de las tablas antes de insertar los nuevos valores.
 
     Utilice un bucle WHILE para resolver el procedimiento.
 
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_numeros;
+    delimiter //
+    CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+    BEGIN
+    DECLARE i INT;
+    SET i = valor_inicial;
+    DELETE FROM ejercicio;
+    WHILE (i != 0) DO
+    INSERT INTO ejercicio VALUES(i);
+    SET i = i - 1;
+    END WHILE;
+    END //
+    delimiter ;
+    CALL calcular_numeros(10);
+    SELECT * FROM ejercicio;
+    ```
+
 8. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior. 
 
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_numeros;
+    delimiter //
+    CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+    BEGIN
+    DECLARE i INT;
+    SET i = valor_inicial;
+    DELETE FROM ejercicio;
+    REPEAT
+    INSERT INTO ejercicio VALUES(i);
+    SET i = i - 1;
+    UNTIL (i == 0);
+    END REPEAT;
+    END //
+    delimiter ;
+    CALL calcular_numeros(10);
+    SELECT * FROM ejercicio;
+    ```
+
 9. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
+
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_numeros;
+    delimiter //
+    CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+    BEGIN
+    DECLARE i INT;
+    SET i = valor_inicial;
+    DELETE FROM ejercicio;
+    ciclo: LOOP
+    INSERT INTO ejercicio VALUES(i);
+    SET i = i - 1;
+    IF (i == 0) THEN
+    LEAVE ciclo;
+    ELSE 
+     ITERATE ciclo;
+    END IF;
+    END LOOP;
+    END //
+    delimiter ;
+    CALL calcular_numeros(10);
+    SELECT * FROM ejercicio;
+    ```
 
 10. Crea unabase de datos llamada procedimientos que contenga una tabla llamada pares y otra tabla llamada impares. Las dos tablas deben tener única columna llamada número y el tipo de dato de esta columna debe ser INT UNSIGNED. 
 
@@ -319,10 +379,87 @@
 
     Utilice un bucle WHILE para resolver el procedimiento.
 
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_pares_impares;
+    delimiter //
+    CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+    BEGIN
+    DECLARE i INT;
+    SET i = 1;
+    DELETE FROM pares;
+    DELETE FROM impares;
+    WHILE (i <= tope) DO
+    IF (i % 2 = 0) THEN
+    INSERT INTO pares VALUES(i);
+    ELSE
+    INSERT INTO impares VALUES(i);
+    END IF;
+    SET i = i + 1;
+    END WHILE;
+    END //
+    delimiter ;
+    CALL calcular_pares_impares(10);
+    SELECT * FROM pares;
+    SELECT * FROM impares;
+    ```
+
 11. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
+
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_pares_impares;
+    delimiter //
+    CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+    BEGIN
+    DECLARE i INT;
+    SET i = 1;
+    DELETE FROM pares;
+    DELETE FROM impares;
+    REPEAT
+    IF (i % 2 = 0) THEN
+    INSERT INTO pares VALUES(i);
+    ELSE
+    INSERT INTO impares VALUES(i);
+    END IF;
+    SET i = i + 1;
+    UNTIL (i > tope);
+    END REPEAT;
+    END //
+    delimiter ;
+    CALL calcular_pares_impares(10);
+    SELECT * FROM pares;
+    SELECT * FROM impares;
+    ```
 
 12. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
 
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_pares_impares;
+    delimiter //
+    CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+    BEGIN
+    DECLARE i INT;
+    SET i = 1;
+    DELETE FROM pares;
+    DELETE FROM impares;
+    ciclo: LOOP
+    IF (i % 2 = 0) THEN
+    INSERT INTO pares VALUES(i);
+    ELSE
+    INSERT INTO impares VALUES(i);
+    END IF;
+    SET i = i + 1;
+    IF (i > tope) THEN
+    LEAVE ciclo;
+    ELSE 
+     ITERATE ciclo;
+    END IF;
+    END LOOP;
+    END //
+    delimiter ;
+    CALL calcular_pares_impares(10);
+    SELECT * FROM pares;
+    SELECT * FROM impares;
+    ```
 ## Transacciones con procedimientos almacenados
 
 1. Crea una base de datos llamada cine que contengados tablas con las siguientes columnas.
