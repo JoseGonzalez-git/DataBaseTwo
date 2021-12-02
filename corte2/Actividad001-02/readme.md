@@ -480,7 +480,7 @@
 
     * Inicia una transacción.
 
-    * Actualiza la columna saldo de la tabla cuentas cobrando 5 euros a la cuenta con elid_cuenta adecuado.
+* Actualiza la columnas saldo de la tabla cuentas cobrando 5 euros a la cuenta con elid_cuentaadecuado.
 
     * Inserta una una fila en la tabla entradas indicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
 
@@ -489,26 +489,26 @@
     * ERROR 1264 (Out of range value).
     * ERROR 1062 (Duplicate entry for PRIMARY KEY).
 
-    ```sql
-        DROP PROCEDURE IF EXISTS comprar_entrada;
-        delimiter //
-        CREATE PROCEDURE comprar_entrada(IN nif VARCHAR(9),IN id_cuenta INT UNSIGNED,IN id_butaca INT UNSIGNED)
-        BEGIN
-        DECLARE error INT DEFAULT 0;
-        START TRANSACTION;
-        UPDATE cuentas SET saldo = saldo - 5 WHERE id_cuenta = id_cuenta;
-        INSERT INTO entradas VALUES(id_butaca,nif);
-        IF (error = 0) THEN
-        COMMIT;
-        ELSE
-        ROLLBACK;
-        END IF;
-        END //
-        delimiter ;
-        CALL comprar_entrada('12345678Z',1,1);
-        SELECT * FROM cuentas;
-        SELECT * FROM entradas;
-    ```
+```sql
+    DROP PROCEDURE IF EXISTS comprar_entrada;
+    delimiter //
+    CREATE PROCEDURE comprar_entrada(IN nif VARCHAR(9),IN id_cuenta INT UNSIGNED,IN id_butaca INT UNSIGNED)
+    BEGIN
+    DECLARE error INT DEFAULT 0;
+    START TRANSACTION;
+    UPDATE cuentas SET saldo = (saldo - 5) WHERE id_cuenta = id_cuenta;
+    INSERT INTO entradas VALUES(id_butaca,nif);
+    IF (error = 0) THEN
+    COMMIT;
+    ELSE
+    ROLLBACK;
+    END IF;
+    END //
+    delimiter ;
+    CALL comprar_entrada('12345678Z',1,1);
+    SELECT * FROM cuentas;
+    SELECT * FROM entradas;
+```
 
 
 2. ¿Qué ocurre cuando intentamos comprar una entrada y le pasamos como parámetro un número de cuenta que no existe en la tabla cuentas? ¿Ocurre algún error o podemos comprar la entrada?  En caso de que exista algún error, ¿cómo podríamos resolverlo?
