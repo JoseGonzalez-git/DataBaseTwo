@@ -482,20 +482,42 @@ El procedimiento de compra realiza los siguientes pasos:
 
 * Actualiza la columnasaldode la tablacuentascobrando 5 euros a la cuenta con elid_cuentaadecuado.
 
-* Inserta una una fila en la tablaentradasindicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
+* Inserta una una fila en la tabla entradas indicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
 
 * Comprueba si ha ocurrido algún error en las operaciones anteriores. Si no ocurre ningún error entonces aplica un COMMIT a la transacción y si ha ocurrido algún error aplica un ROLLBACK.Deberá manejar los siguientes errores que puedan ocurrir durante el proceso.
 
 * ERROR 1264 (Out of range value).
 * ERROR 1062 (Duplicate entry for PRIMARY KEY).
 
-2. ¿Qué ocurre cuando intentamos comprar una entrada y le pasamos como parámetro unnúmero de cuenta que no existe en la tablacuentas? ¿Ocurre algún error o podemoscomprar la entrada?  En caso de que exista algún error, ¿cómo podríamos resolverlo?
+```sql
+    DROP PROCEDURE IF EXISTS comprar_entrada;
+    delimiter //
+    CREATE PROCEDURE comprar_entrada(IN nif VARCHAR(9),IN id_cuenta INT UNSIGNED,IN id_butaca INT UNSIGNED)
+    BEGIN
+    DECLARE error INT DEFAULT 0;
+    START TRANSACTION;
+    UPDATE cuentas SET saldo = saldo - 5 WHERE id_cuenta = id_cuenta;
+    INSERT INTO entradas VALUES(id_butaca,nif);
+    IF (error = 0) THEN
+    COMMIT;
+    ELSE
+    ROLLBACK;
+    END IF;
+    END //
+    delimiter ;
+    CALL comprar_entrada('12345678Z',1,1);
+    SELECT * FROM cuentas;
+    SELECT * FROM entradas;
+```
+
+
+2. ¿Qué ocurre cuando intentamos comprar una entrada y le pasamos como parámetro un número de cuenta que no existe en la tabla cuentas? ¿Ocurre algún error o podemos comprar la entrada?  En caso de que exista algún error, ¿cómo podríamos resolverlo?
 
 ## Funciones con sentencias SQL
 
-1. Escribe una función para la base de datostiendaque devuelva el número total deproductos que hay en la tablaproductos.
+1. Escribe una función para la base de datos tienda que devuelva el número total de productos que hay en la tabla productos.
 
-2. Escribe una función para la base de datostiendaque devuelva el valor medio del preciode los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
+2. Escribe una función para la base de datos tienda que devuelva el valor medio del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
 
 3. Escribe una función para la base de datostiendaque devuelva el valor máximo del preciode los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
 
