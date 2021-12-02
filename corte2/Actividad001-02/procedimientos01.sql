@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS procedimientos01;
-CREATE DATABASE procedimientos02 CHARACTER SET utf8mb4;
-USE procedimientos02 -A;
+CREATE DATABASE procedimientos01 CHARACTER SET utf8mb4;
+USE procedimientos01 -A;
 
 CREATE TABLE operaciones (
     numero INT UNSIGNED,
