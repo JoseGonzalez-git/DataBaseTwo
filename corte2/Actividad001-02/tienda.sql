@@ -30,7 +30,7 @@ INSERT INTO fabricante (nombre) VALUES ('Xiaomi');
 INSERT INTO productos ( nombre, precio, stock, fabricante_id) VALUES ('iPhone X', 932.99, 10, 1);
 INSERT INTO productos ( nombre, precio, stock, fabricante_id) VALUES ('iPhone XS', 343.99, 10, 1);
 INSERT INTO productos ( nombre, precio, stock, fabricante_id) VALUES ('Samsung Galaxy S10', 514.99, 10, 2);
-INSERT INTO producción ( nombre, precio, stock, fabricante_id) VALUES ('Sony Xperia XZ', 543.99, 10, 3);
+INSERT INTO productos ( nombre, precio, stock, fabricante_id) VALUES ('Sony Xperia XZ', 543.99, 10, 3);
 INSERT INTO productos ( nombre, precio, stock, fabricante_id) VALUES ('LG G6', 856.99, 10, 4);
 INSERT INTO productos ( nombre, precio, stock, fabricante_id) VALUES ('Motorola G8', 875.99, 10, 5);
 INSERT INTO productos ( nombre, precio, stock, fabricante_id) VALUES ('Huawei Mate 20', 943.99, 10, 6);

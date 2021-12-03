@@ -14,4 +14,5 @@ nif CHAR(9) NOT NULL,
 PRIMARY KEY (id_butaca)
 );
 
-INSERT INTO cuentas (id_cuenta, saldo) VALUES (1, 20.67);
+INSERT INTO cuentas (id_cuenta, saldo) VALUES (1, 20);
+INSERT INTO cuentas (id_cuenta, saldo) VALUES (2, 10);

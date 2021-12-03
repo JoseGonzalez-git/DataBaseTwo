@@ -7,53 +7,53 @@
 
 1. Escriba un procedimiento que no tenga ningún parámetro de entrada ni de salida y quemuestre el texto¡Hola mundo!
 
-```sql
-    DROP PROCEDURE IF EXISTS hola_mundo ;
-    delimiter //
-        CREATE PROCEDURE hola_mundo()
-        BEGIN
-        SELECT 'Hola mundo';
-    END//
-    delimiter ;
+    ```sql
+        DROP PROCEDURE IF EXISTS hola_mundo ;
+        delimiter //
+            CREATE PROCEDURE hola_mundo()
+            BEGIN
+            SELECT 'Hola mundo';
+        END//
+        delimiter ;
 
-    CALL hola_mundo();
-```
+        CALL hola_mundo();
+    ```
 
 2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensaje indicando si el número es positivo, negativo o cero.
 
-```sql
-    DROP PROCEDURE IF EXISTS numposneg ;
-    delimiter //
-    CREATE PROCEDURE numposneg(IN numero NUMERIC)
-    BEGIN IF numero > 0 THEN SELECT 'Numero positivo';
-    ELSEIF numero < 0 THEN SELECT 'Nuemro negativo';
-    ELSE SELECT 'El numero es cero';
-    END IF;
-    END//
-    delimiter ;
+    ```sql
+        DROP PROCEDURE IF EXISTS numposneg ;
+        delimiter //
+        CREATE PROCEDURE numposneg(IN numero NUMERIC)
+        BEGIN IF numero > 0 THEN SELECT 'Numero positivo';
+        ELSEIF numero < 0 THEN SELECT 'Nuemro negativo';
+        ELSE SELECT 'El numero es cero';
+        END IF;
+        END//
+        delimiter ;
 
-    CALL numposneg(-9);
-```
+        CALL numposneg(-9);
+    ```
 
 3. Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor un número real, y un parámetro de salida, con una cadena decaracteres indicando si el número es positivo, negativo o cero.
 
-```sql
-    DROP PROCEDURE IF EXISTS mensaje_tipo;
-    DELIMITER //
-    CREATE PROCEDURE mensaje_tipo(IN numero NUMERIC, OUT mensaje VARCHAR(40))
-    BEGIN
-        IF numero > 0 THEN
-            SET mensaje = 'Positivo';
-        ELSEIF numero < 0 THEN
-            SET mensaje = 'Negativo';
-        ELSE
-            SET mensaje = 'Cero';
-        END IF;
-    END//
-    DELIMITER ;
-    CALL mensaje_tipo(1, @mensaje);
-    select @mensaje;
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS mensaje_tipo;
+        DELIMITER //
+        CREATE PROCEDURE mensaje_tipo(IN numero NUMERIC, OUT mensaje VARCHAR(40))
+        BEGIN
+            IF numero > 0 THEN
+                SET mensaje = 'Positivo';
+            ELSEIF numero < 0 THEN
+                SET mensaje = 'Negativo';
+            ELSE
+                SET mensaje = 'Cero';
+            END IF;
+        END//
+        DELIMITER ;
+        CALL mensaje_tipo(1, @mensaje);
+        select @mensaje;
+    ```
 
 4. Escriba un procedimiento que reciba un número real de entrada, que representa el valorde la nota de un alumno, y muestre un mensaje indicando qué nota ha obtenido teniendo en cuenta las siguientes condiciones:
 
@@ -64,113 +64,113 @@
 * [9, 10] = Sobresaliente
 * En cualquier otro caso la nota no será válida
 
-```sql
-    DROP PROCEDURE IF EXISTS mensaje_nota;
-    delimiter //
-    CREATE PROCEDURE mensaje_nota(IN nota NUMERIC)
-    BEGIN
-        IF nota >= 0 AND nota < 5 THEN
-            SELECT 'Insuficiente';
-        ELSEIF nota >= 5 AND nota < 6 THEN
-            SELECT 'Aprobado';
-        ELSEIF nota >= 6 AND nota < 7 THEN
-            SELECT 'Bien';
-        ELSEIF nota >= 7 AND nota < 9 THEN
-            SELECT 'Notable';
-        ELSEIF nota >= 9 AND nota <= 10 THEN
-            SELECT 'Sobresaliente';
-        ELSE
-            SELECT 'No es una nota válida';
-        END IF;
-    END//
-    delimiter ;
-    
-    CALL mensaje_nota(8);
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS mensaje_nota;
+        delimiter //
+        CREATE PROCEDURE mensaje_nota(IN nota NUMERIC)
+        BEGIN
+            IF nota >= 0 AND nota < 5 THEN
+                SELECT 'Insuficiente';
+            ELSEIF nota >= 5 AND nota < 6 THEN
+                SELECT 'Aprobado';
+            ELSEIF nota >= 6 AND nota < 7 THEN
+                SELECT 'Bien';
+            ELSEIF nota >= 7 AND nota < 9 THEN
+                SELECT 'Notable';
+            ELSEIF nota >= 9 AND nota <= 10 THEN
+                SELECT 'Sobresaliente';
+            ELSE
+                SELECT 'No es una nota válida';
+            END IF;
+        END//
+        delimiter ;
+        
+        CALL mensaje_nota(8);
+    ```
 
 5.  Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor de la nota en formato numérico y un parámetro de salida, con unacadena de texto indicando la nota correspondiente.
 
-```sql
-    DROP PROCEDURE IF EXISTS mensaje_nota;
-    delimiter //
-    CREATE PROCEDURE mensaje_nota(IN nota NUMERIC, OUT mensaje VARCHAR(40))
-    BEGIN
-        IF nota >= 0 AND nota < 5 THEN
-            SET mensaje = 'Insuficiente';
-        ELSEIF nota >= 5 AND nota < 6 THEN
-            SET mensaje = 'Aprobado';
-        ELSEIF nota >= 6 AND nota < 7 THEN
-            SET mensaje = 'Bien';
-        ELSEIF nota >= 7 AND nota < 9 THEN
-            SET mensaje = 'Notable';
-        ELSEIF nota >= 9 AND nota <= 10 THEN
-            SET mensaje = 'Sobresaliente';
-        ELSE
-            SET mensaje = 'No es una nota válida';
-        END IF;
-    END//
-    delimiter ;
-    CALL mensaje_nota(1, @mensaje);
-    SELECT @mensaje;
-```
-
-6. Resuelva el procedimiento diseñado en el ejercicio anterior haciendo uso de la estructurade control CASE. 
-
-```sql
-    DROP PROCEDURE IF EXISTS mensaje_nota_case;
-    delimiter //
-    CREATE PROCEDURE mensaje_nota_case(IN nota NUMERIC, OUT mensaje VARCHAR(40))
-    BEGIN
-        CASE
-            WHEN nota BETWEEN 0 AND 5 THEN
+    ```sql
+        DROP PROCEDURE IF EXISTS mensaje_nota;
+        delimiter //
+        CREATE PROCEDURE mensaje_nota(IN nota NUMERIC, OUT mensaje VARCHAR(40))
+        BEGIN
+            IF nota >= 0 AND nota < 5 THEN
                 SET mensaje = 'Insuficiente';
-            WHEN nota BETWEEN 5 AND 6 THEN
+            ELSEIF nota >= 5 AND nota < 6 THEN
                 SET mensaje = 'Aprobado';
-                WHEN nota BETWEEN 6 AND 7 THEN
+            ELSEIF nota >= 6 AND nota < 7 THEN
                 SET mensaje = 'Bien';
-            WHEN nota BETWEEN 7 AND 9 THEN
+            ELSEIF nota >= 7 AND nota < 9 THEN
                 SET mensaje = 'Notable';
-            WHEN nota BETWEEN 9 AND 10 THEN
+            ELSEIF nota >= 9 AND nota <= 10 THEN
                 SET mensaje = 'Sobresaliente';
             ELSE
                 SET mensaje = 'No es una nota válida';
-        END CASE;
-    END//
-    delimiter ;
-    CALL mensaje_nota_case(1, @mensaje);
-    SELECT @mensaje;
-```
+            END IF;
+        END//
+        delimiter ;
+        CALL mensaje_nota(1, @mensaje);
+        SELECT @mensaje;
+    ```
+
+6. Resuelva el procedimiento diseñado en el ejercicio anterior haciendo uso de la estructurade control CASE. 
+
+    ```sql
+        DROP PROCEDURE IF EXISTS mensaje_nota_case;
+        delimiter //
+        CREATE PROCEDURE mensaje_nota_case(IN nota NUMERIC, OUT mensaje VARCHAR(40))
+        BEGIN
+            CASE
+                WHEN nota BETWEEN 0 AND 5 THEN
+                    SET mensaje = 'Insuficiente';
+                WHEN nota BETWEEN 5 AND 6 THEN
+                    SET mensaje = 'Aprobado';
+                    WHEN nota BETWEEN 6 AND 7 THEN
+                    SET mensaje = 'Bien';
+                WHEN nota BETWEEN 7 AND 9 THEN
+                    SET mensaje = 'Notable';
+                WHEN nota BETWEEN 9 AND 10 THEN
+                    SET mensaje = 'Sobresaliente';
+                ELSE
+                    SET mensaje = 'No es una nota válida';
+            END CASE;
+        END//
+        delimiter ;
+        CALL mensaje_nota_case(1, @mensaje);
+        SELECT @mensaje;
+    ```
 
 7. Escriba un procedimiento que reciba como parámetro de entrada un valor numérico querepresente un día de la semana y que devuelva una cadena de caracteres con el nombre del día de la semana correspondiente. Por ejemplo, para el valor de entrada 1 debería devolver la cadena lunes.
 
-```sql
-    DROP PROCEDURE IF EXISTS dia_semana;
-    delimiter //
-    CREATE PROCEDURE dia_semana(IN nota NUMERIC, OUT mensaje VARCHAR(40))
-    BEGIN
-        CASE nota
-            WHEN 0 THEN
-                SET mensaje = 'Domingo';
-            WHEN 1 THEN
-                SET mensaje = 'Lunes';
-            WHEN 2 THEN
-                SET mensaje = 'Martes';
-            WHEN 3 THEN
-                SET mensaje = 'Miercoles';
-            WHEN 4 THEN
-                SET mensaje = 'Jueves';
-			WHEN 5 THEN
-                SET mensaje = 'Viernes';
-			WHEN 6 THEN
-                SET mensaje = 'Sabado';
-            ELSE
-                SET mensaje = 'No es un dia valido';
-        END CASE;
-    END//
-    delimiter ;
-    CALL dia_semana(10, @mensaje);
-    SELECT @mensaje;
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS dia_semana;
+        delimiter //
+        CREATE PROCEDURE dia_semana(IN nota NUMERIC, OUT mensaje VARCHAR(40))
+        BEGIN
+            CASE nota
+                WHEN 0 THEN
+                    SET mensaje = 'Domingo';
+                WHEN 1 THEN
+                    SET mensaje = 'Lunes';
+                WHEN 2 THEN
+                    SET mensaje = 'Martes';
+                WHEN 3 THEN
+                    SET mensaje = 'Miercoles';
+                WHEN 4 THEN
+                    SET mensaje = 'Jueves';
+                WHEN 5 THEN
+                    SET mensaje = 'Viernes';
+                WHEN 6 THEN
+                    SET mensaje = 'Sabado';
+                ELSE
+                    SET mensaje = 'No es un dia valido';
+            END CASE;
+        END//
+        delimiter ;
+        CALL dia_semana(10, @mensaje);
+        SELECT @mensaje;
+    ```
 
 ## Procedimientos con sentencias SQL1.
 
@@ -480,7 +480,7 @@
 
     * Inicia una transacción.
 
-* Actualiza la columnas saldo de la tabla cuentas cobrando 5 euros a la cuenta con elid_cuentaadecuado.
+* Actualiza la columnas saldo de la tabla cuentas cobrando 5 euros a la cuenta con el id_cuenta adecuado.
 
     * Inserta una una fila en la tabla entradas indicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
 
@@ -489,36 +489,160 @@
     * ERROR 1264 (Out of range value).
     * ERROR 1062 (Duplicate entry for PRIMARY KEY).
 
-```sql
-    DROP PROCEDURE IF EXISTS comprar_entrada;
-    delimiter //
-    CREATE PROCEDURE comprar_entrada(IN nif VARCHAR(9),IN id_cuenta INT UNSIGNED,IN id_butaca INT UNSIGNED)
-    BEGIN
-    DECLARE error INT DEFAULT 0;
-    START TRANSACTION;
-    UPDATE cuentas SET saldo = (saldo - 5) WHERE id_cuenta = id_cuenta;
-    INSERT INTO entradas VALUES(id_butaca,nif);
-    IF (error = 0) THEN
-    COMMIT;
-    ELSE
-    ROLLBACK;
-    END IF;
-    END //
-    delimiter ;
-    CALL comprar_entrada('12345678Z',1,1);
-    SELECT * FROM cuentas;
-    SELECT * FROM entradas;
-```
+    ```sql
+        DROP PROCEDURE IF EXISTS comprar_entrada; 
+        delimiter //
+        CREATE PROCEDURE comprar_entrada (IN nif VARCHAR(9),
+                                        IN id_cuenta INT UNSIGNED, 
+                                        IN id_butaca INT UNSIGNED,
+                                        OUT error TINYINT UNSIGNED)
+        BEGIN 
+            DECLARE EXIT HANDLER FOR 1264, 1062 
+            BEGIN 
+            SET error= 1;
+                ROLLBACK;
+            END;
+            
+        START TRANSACTION;
+        SET error = 0;
+
+        UPDATE cuentas SET saldo = saldo - 5 
+        WHERE cuentas.id_cuenta = id_cuenta;
+
+        INSERT INTO entradas VALUES(id_butaca,nif);
+        COMMIT;
+        END//
+        delimiter ;
+
+        CALL comprar_entrada('11111111A', 1, 10,@error);
+        CALL comprar_entrada('11111111A', 1, 11,@error);
+        CALL comprar_entrada('11111111A', 1, 12,@error);
+        CALL comprar_entrada('11111111A', 1, 13,@error);
+        CALL comprar_entrada('11111111A', 1, 14,@error);
+        CALL comprar_entrada('22222222B', 2, 10,@error);
+
+        SELECT @error;
+        SELECT * FROM cuentas;
+        SELECT * FROM entradas;
+    ```
 
 
 2. ¿Qué ocurre cuando intentamos comprar una entrada y le pasamos como parámetro un número de cuenta que no existe en la tabla cuentas? ¿Ocurre algún error o podemos comprar la entrada?  En caso de que exista algún error, ¿cómo podríamos resolverlo?
+    ```sql
+        DROP PROCEDURE IF EXISTS comprar_entrada;
+        delimiter //
+        CREATE PROCEDURE comprar_entrada (IN nif VARCHAR(9),
+                                        IN id_cuenta INT UNSIGNED, 
+                                        IN id_butaca INT UNSIGNED,
+                                        OUT error TINYINT UNSIGNED)
+        BEGIN 
+            DECLARE saldo_cliente DECIMAL UNSIGNED;
+            DECLARE EXIT HANDLER FOR 1264, 1062 
+            BEGIN 
+            SET error= 1;
+                ROLLBACK;
+            END;
+            SET error = 0;
+            SET saldo_cliente = (SELECT saldo FROM cuentas WHERE cuentas.id_cuenta = id_cuenta);
+        IF saldo_cliente >= 5 THEN 
+            START TRANSACTION;
+            UPDATE cuentas SET saldo = saldo- 5 
+            WHERE cuentas.id_cuenta = id_cuenta;
+            INSERT INTO entradas VALUES(id_butaca,nif);
+        IF error = 0 THEN
+            COMMIT;
+        ELSE
+            ROLLBACK;
+        END IF;
+        ELSE
+            SET error = 1;
+            END IF;
+        END//
+        delimiter ;
+
+        CALL comprar_entrada('44444444A',3,11,@error);
+        SELECT * FROM cuentas;
+        SELECT * FROM entradas;
+        SELECT@error;
+    ```
 
 ## Funciones con sentencias SQL
 
 1. Escribe una función para la base de datos tienda que devuelva el número total de productos que hay en la tabla productos.
 
-2. Escribe una función para la base de datos tienda que devuelva el valor medio del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
+    ```sql
+        DROP FUNCTION IF EXISTS numero_total_productos;
+        delimiter //
+        CREATE FUNCTION numero_total_productos()
+            RETURNS INT
+            READS SQL DATA
+            DETERMINISTIC
+        BEGIN
+        DECLARE total INT;
+            SET total = (SELECT COUNT(*) FROM productos);
+            RETURN total;
+        END; //
+        delimiter ;
 
-3. Escribe una función para la base de datostiendaque devuelva el valor máximo del preciode los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
+        SELECT numero_total_productos();
+    ```
 
-4. Escribe una función para la base de datos tienda que devuelva el valor mínimo del preciode los productos de un determinado fabricante que se recibirá como parámetro de entrada.El parámetro de entrada será el nombre del fabricante.
+2. Escribe una función para la base de datos tienda que devuelva el valor medio del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada. El parámetro de entrada será el nombre del fabricante.
+
+    ```sql
+        DROP FUNCTION IF EXISTS precio_medio;
+        delimiter //
+        CREATE FUNCTION precio_medio(nombre_fabricante VARCHAR(50))
+            RETURNS float
+            READS SQL DATA
+            DETERMINISTIC
+        BEGIN
+        DECLARE media float;
+            SET media = (SELECT AVG(productos.precio) FROM productos 
+            INNER JOIN fabricante ON fabricante.id = productos.fabricante_id WHERE fabricante.nombre = nombre_fabricante);
+            RETURN media;
+        END; //
+        delimiter ;
+
+        SELECT precio_medio('Apple');
+    ```
+
+3. Escribe una función para la base de datos tienda que devuelva el valor máximo del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada. El parámetro de entrada será el nombre del fabricante.
+
+    ```sql
+        DROP FUNCTION IF EXISTS precio_medio;
+        delimiter //
+        CREATE FUNCTION precio_medio(nombre_fabricante VARCHAR(50))
+            RETURNS float
+            READS SQL DATA
+            DETERMINISTIC
+        BEGIN
+        DECLARE media float;
+            SET media = (SELECT MAX(productos.precio) FROM productos 
+            INNER JOIN fabricante ON fabricante.id = productos.fabricante_id WHERE fabricante.nombre = nombre_fabricante);
+            RETURN media;
+        END; //
+        delimiter ;
+
+        SELECT precio_medio('Apple');
+    ```
+
+4. Escribe una función para la base de datos tienda que devuelva el valor mínimo del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada. El parámetro de entrada será el nombre del fabricante.
+
+    ```sql
+        DROP FUNCTION IF EXISTS precio_medio;
+        delimiter //
+        CREATE FUNCTION precio_medio(nombre_fabricante VARCHAR(50))
+            RETURNS float
+            READS SQL DATA
+            DETERMINISTIC
+        BEGIN
+        DECLARE media float;
+            SET media = (SELECT MIN(productos.precio) FROM productos 
+            INNER JOIN fabricante ON fabricante.id = productos.fabricante_id WHERE fabricante.nombre = nombre_fabricante);
+            RETURN media;
+        END; //
+        delimiter ;
+
+        SELECT precio_medio('Apple');
+    ```
