@@ -192,6 +192,8 @@
 <center><img src="./img/1-7-1.png"></center>
 <center><img src="./img/1-7-2.png"></center>
 
+<div style="page-break-after: always;"></div>
+
 ## Procedimientos con sentencias SQL1.
 
 1. Escriba un procedimiento que reciba el nombre de un país como parámetro de entrada y realice una consulta sobre la tabla cliente para obtener todos los clientes que existen en la tabla de ese país.
@@ -340,6 +342,8 @@ Utilice un bucle WHILE para resolver el procedimiento.
 
 7. Crear una base de datos llamada “procedimientos02” que contenga una tabla llamada ejercicio. La tabla debe tener una única columna llamada “numero” y el tipo de dato de esta columna debe ser INT UNSIGNED.
 
+<div style="page-break-after: always;"></div>
+
 ### Cargue de la Base de datos
 
 <center><img src="./img/cargue-proc02.png"></center>
@@ -421,6 +425,9 @@ CALL calcular_numeros(14);
 <center><img src="./img/2-9-2.png"></center>
 
 10. Crea unabase de datos llamada procedimientos que contenga una tabla llamada pares y otra tabla llamada impares. Las dos tablas deben tener única columna llamada número y el tipo de dato de esta columna debe ser INT UNSIGNED. 
+
+
+<div style="page-break-after: always;"></div>
 
 ### Cargue de la Base de datos
 
