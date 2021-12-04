@@ -2,10 +2,15 @@
 ## Autores
 - Isaac Damian Arrieta Mercado
 - Jose Alejandro Gonzalez Ortiz
+## Cargue De La Base De Datos Jardineria
+
+<center><img src="./img/carga-jardineria.png"></center>
+<div style="page-break-after: always;"></div>
+
 
 ## Procedimientos sin sentencias
 
-1. Escriba un procedimiento que no tenga ningún parámetro de entrada ni de salida y quemuestre el texto¡Hola mundo!
+1. Escriba un procedimiento que no tenga ningún parámetro de entrada ni de salida y que muestre el texto ¡Hola mundo!
 
     ```sql
         DROP PROCEDURE IF EXISTS hola_mundo ;
@@ -18,6 +23,8 @@
 
         CALL hola_mundo();
     ```
+
+<center><img src="./img/1-1.png"></center>
 
 2. Escriba un procedimiento que reciba un número real de entrada y muestre un mensaje indicando si el número es positivo, negativo o cero.
 
@@ -34,6 +41,8 @@
 
         CALL numposneg(-9);
     ```
+
+<center><img src="./img/1-2.png"></center>
 
 3. Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor un número real, y un parámetro de salida, con una cadena decaracteres indicando si el número es positivo, negativo o cero.
 
@@ -54,6 +63,8 @@
         CALL mensaje_tipo(1, @mensaje);
         select @mensaje;
     ```
+
+<center><img src="./img/1-3.png"></center>
 
 4. Escriba un procedimiento que reciba un número real de entrada, que representa el valorde la nota de un alumno, y muestre un mensaje indicando qué nota ha obtenido teniendo en cuenta las siguientes condiciones:
 
@@ -88,6 +99,8 @@
         CALL mensaje_nota(8);
     ```
 
+<center><img src="./img/1-4.png"></center>
+
 5.  Modifique el procedimiento diseñado en el ejercicio anterior para que tenga un parámetrode entrada, con el valor de la nota en formato numérico y un parámetro de salida, con unacadena de texto indicando la nota correspondiente.
 
     ```sql
@@ -113,6 +126,8 @@
         CALL mensaje_nota(1, @mensaje);
         SELECT @mensaje;
     ```
+
+<center><img src="./img/1-5.png"></center>
 
 6. Resuelva el procedimiento diseñado en el ejercicio anterior haciendo uso de la estructurade control CASE. 
 
@@ -140,6 +155,8 @@
         CALL mensaje_nota_case(1, @mensaje);
         SELECT @mensaje;
     ```
+
+<center><img src="./img/1-6.png"></center>
 
 7. Escriba un procedimiento que reciba como parámetro de entrada un valor numérico querepresente un día de la semana y que devuelva una cadena de caracteres con el nombre del día de la semana correspondiente. Por ejemplo, para el valor de entrada 1 debería devolver la cadena lunes.
 
@@ -172,6 +189,9 @@
         SELECT @mensaje;
     ```
 
+<center><img src="./img/1-7-1.png"></center>
+<center><img src="./img/1-7-2.png"></center>
+
 ## Procedimientos con sentencias SQL1.
 
 1. Escriba un procedimiento que reciba el nombre de un país como parámetro de entrada y realice una consulta sobre la tabla cliente para obtener todos los clientes que existen en la tabla de ese país.
@@ -187,6 +207,8 @@
         CALL clientes_pais('Colombia');
     ```
 
+<center><img src="./img/2-1.png"></center>
+
 2. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, que será una cadena de caracteres (Ejemplo:PayPal, Transferencia, etc.). Y devuelva comosalida el pago de máximo valor realizado para esa forma de pago. Deberá hacer uso de la tabla pago de la base de datos jardinería.
 
     ```sql
@@ -199,6 +221,8 @@
         delimiter ;
         CALL max_pago('PayPal');
     ```
+
+<center><img src="./img/2-2.png"></center>
 
 3. Escriba un procedimiento que reciba como parámetro de entrada una forma de pago, queserá una cadena de caracteres (Ejemplo:PayPal,Transferencia, etc). Y devuelva como salida los siguientes valores teniendo en cuenta la forma de pago seleccionada comoparámetro de entrada:
 
@@ -221,55 +245,65 @@
         CALL pago_forma('Transferencia');
     ```
 
+<center><img src="./img/2-3.png"></center>
+
+
 4. Crear una base de datos llamada “procedimientos01” que contenga una tabla llamada operaciones.  La tabla operaciones debe tener dos columnas de tipo INT UNSIGNED,una columna llamada “numero” y otra llamada “cuadrado”.
 
-    Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear un procedimiento llamado calcular_cuadrados con   las   siguientes características.   El procedimiento recibe un parámetro de entrada llamado tope de tipo INT UNSIGNED y calculará el valor de los cuadrados de los primeros números naturales hasta el valor introducido como parámetro. El valor del número y de sus cuadrados deberán ser almacenados en la tabla cuadrados que hemos creado previamente.
+### Cargue de la Base de datos
 
-    Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de la tabla antes de insertar los nuevos valores de los cuadrados que va a calcular.
-    
-    Utilice un bucle WHILE para resolver el procedimiento.
+<center><img src="./img/cargue-proc01.png"></center>
 
-        ```sql
-        DROP PROCEDURE IF EXISTS calcular_cuadrados;
-        delimiter // 
-        CREATE PROCEDURE calcular_cuadrados(IN tope INT)
-        BEGIN
-        DECLARE i INT;
-        DECLARE cuadrado INT;
-        SET i = 1;
-        DELETE FROM operaciones;
-        WHILE (i <= tope) DO
-        SET cuadrado = i * i;
-        INSERT INTO operaciones VALUES(i, cuadrado);
-        SET i = i + 1;
-        END WHILE;
-        END //
-        delimiter ;
-        CALL calcular_cuadrados(10);
-        SELECT * FROM operaciones;
-        ```
+Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear un procedimiento llamado calcular_cuadrados con   las   siguientes características.   El procedimiento recibe un parámetro de entrada llamado tope de tipo INT UNSIGNED y calculará el valor de los cuadrados de los primeros números naturales hasta el valor introducido como parámetro. El valor del número y de sus cuadrados deberán ser almacenados en la tabla cuadrados que hemos creado previamente.
+
+Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de la tabla antes de insertar los nuevos valores de los cuadrados que va a calcular.
+
+Utilice un bucle WHILE para resolver el procedimiento.
+
+    ```sql
+    DROP PROCEDURE IF EXISTS calcular_cuadrados;
+    delimiter // 
+    CREATE PROCEDURE calcular_cuadrados(IN tope INT)
+    BEGIN
+    DECLARE i INT;
+    DECLARE cuadrado INT;
+    SET i = 1;
+    DELETE FROM operaciones;
+    WHILE (i <= tope) DO
+    SET cuadrado = i * i;
+    INSERT INTO operaciones VALUES(i, cuadrado);
+    SET i = i + 1;
+    END WHILE;
+    END //
+    delimiter ;
+    CALL calcular_cuadrados(10);
+    SELECT * FROM operaciones;
+    ```
+
+<center><img src="./img/2-4.png"></center>
+<center><img src="./img/2-1.png"></center>
 
 5. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
 
     ```SQL
         DROP PROCEDURE IF EXISTS calcular_cuadrados;
-        delimiter // 
+        delimiter $$
         CREATE PROCEDURE calcular_cuadrados(IN tope INT)
         BEGIN
-        DECLARE i INT;
-        DECLARE cuadrado INT;
-        SET i = 1;
-        DELETE FROM operaciones;
-        REPEAT
-        SET cuadrado = i * i;
-        INSERT INTO operaciones VALUES(i, cuadrado);
-        SET i = i + 1;
-        UNTIL (i > tope);
-        END REPEAT;
-        END //
-        delimiter ;
+            DECLARE i INT;
+            DECLARE cuadrado INT;
+            SET i = 1;
+            DELETE FROM operaciones;
+            REPEAT
+                SET cuadrado = i * i;
+                INSERT INTO operaciones VALUES(i, cuadrado);
+                SET i = i + 1;
+            UNTIL (i < tope);
+            END REPEAT ;
+            SELECT * FROM operaciones;
+        END; $$
         CALL calcular_cuadrados(10);
-        SELECT * FROM operaciones;
+        
     ```
 
 6. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
@@ -293,7 +327,7 @@
         ITERATE ciclo;
         END IF;
         END LOOP;
-        END //
+        END; //
         delimiter ;
         CALL calcular_cuadrados(10);
         SELECT * FROM operaciones;

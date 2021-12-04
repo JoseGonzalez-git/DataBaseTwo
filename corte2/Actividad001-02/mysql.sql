@@ -155,7 +155,7 @@ INSERT INTO producto VALUES ('EA-82','Higuera','Frutales','16/18','Frutales Tala
 INSERT INTO detalle_pedido VALUES (1,'BRA-67',10,70,3);
 INSERT INTO detalle_pedido VALUES (2,'CO-4',3,29,6);
 INSERT INTO detalle_pedido VALUES (3,'I-48',120,9,6);
-INSERT INTO detalle_pedido VALUES (4,'FR-31',12,8,7);
+INSERT INTO detalle_pedido VALUES (4,'FR-106',12,8,7);
 INSERT INTO detalle_pedido VALUES (8,'ES-31',3,11,1);
 INSERT INTO detalle_pedido VALUES (9,'USE-001',80,1,3);
 INSERT INTO detalle_pedido VALUES (10,'EA-82',5,70,2);
