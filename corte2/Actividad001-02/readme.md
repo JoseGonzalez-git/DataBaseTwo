@@ -281,30 +281,32 @@ Utilice un bucle WHILE para resolver el procedimiento.
     ```
 
 <center><img src="./img/2-4.png"></center>
-<center><img src="./img/2-1.png"></center>
+<center><img src="./img/2-4-1.png"></center>
 
 5. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
 
     ```SQL
         DROP PROCEDURE IF EXISTS calcular_cuadrados;
-        delimiter $$
+        delimiter //
         CREATE PROCEDURE calcular_cuadrados(IN tope INT)
         BEGIN
-            DECLARE i INT;
-            DECLARE cuadrado INT;
-            SET i = 1;
-            DELETE FROM operaciones;
-            REPEAT
-                SET cuadrado = i * i;
-                INSERT INTO operaciones VALUES(i, cuadrado);
-                SET i = i + 1;
-            UNTIL (i < tope);
-            END REPEAT ;
-            SELECT * FROM operaciones;
-        END; $$
+        DECLARE i INT;
+        DECLARE cuadrado INT;
+        SET i = 1;
+        DELETE FROM operaciones;
+        REPEAT
+        SET cuadrado = i * i;
+        INSERT INTO operaciones VALUES(i, cuadrado);
+        SET i = i + 1;
+        UNTIL (i < tope)
+        END REPEAT ;
+        END//
+        delimiter ;
         CALL calcular_cuadrados(10);
-        
+        SELECT * FROM operaciones;
     ```
+
+<center><img src="./img/2-5.png"></center>
 
 6. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
 
@@ -333,31 +335,40 @@ Utilice un bucle WHILE para resolver el procedimiento.
         SELECT * FROM operaciones;
     ```
 
+<center><img src="./img/2-6.png"></center>
+<center><img src="./img/2-6-1.png"></center>
+
 7. Crear una base de datos llamada “procedimientos02” que contenga una tabla llamada ejercicio. La tabla debe tener una única columna llamada “numero” y el tipo de dato de esta columna debe ser INT UNSIGNED.
 
-    Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear   un procedimiento llamado calcular_números con   las   siguientes   características.   El procedimiento   recibe   un   parámetro   de   entrada   llamado valor_inicial de tipo INT UNSIGNED y deberá almacenar en la tabla ejercicio toda la secuencia de números desde el valor inicial pasado como entrada hasta el 1.
+### Cargue de la Base de datos
 
-    Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de las tablas antes de insertar los nuevos valores.
+<center><img src="./img/cargue-proc02.png"></center>
 
-    Utilice un bucle WHILE para resolver el procedimiento.
+Una   vez   creada   la   base   de   datos   y   la   tabla   deberá crear   un procedimiento llamado calcular_números con   las   siguientes   características.   El procedimiento   recibe   un   parámetro   de   entrada   llamado valor_inicial de tipo INT UNSIGNED y deberá almacenar en la tabla ejercicio toda la secuencia de números desde el valor inicial pasado como entrada hasta el 1.
 
-    ```sql
-    DROP PROCEDURE IF EXISTS calcular_numeros;
-    delimiter //
-    CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
-    BEGIN
-    DECLARE i INT;
-    SET i = valor_inicial;
-    DELETE FROM ejercicio;
-    WHILE (i != 0) DO
-    INSERT INTO ejercicio VALUES(i);
-    SET i = i - 1;
-    END WHILE;
-    END //
-    delimiter ;
-    CALL calcular_numeros(10);
-    SELECT * FROM ejercicio;
-    ```
+Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de las tablas antes de insertar los nuevos valores.
+
+Utilice un bucle WHILE para resolver el procedimiento.
+
+```sql
+DROP PROCEDURE IF EXISTS calcular_numeros;
+delimiter //
+CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+BEGIN
+DECLARE i INT;
+SET i = valor_inicial;
+DELETE FROM ejercicio;
+WHILE (i != 0) DO
+INSERT INTO ejercicio VALUES(i);
+SET i = i - 1;
+END WHILE;
+END //
+delimiter ;
+CALL calcular_numeros(10);
+SELECT * FROM ejercicio;
+```
+
+<center><img src="./img/2-7.png"></center>
 
 8. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior. 
 
@@ -372,97 +383,112 @@ Utilice un bucle WHILE para resolver el procedimiento.
     REPEAT
     INSERT INTO ejercicio VALUES(i);
     SET i = i - 1;
-    UNTIL (i == 0);
+    UNTIL (i = 0)
     END REPEAT;
-    END //
+    END; //
     delimiter ;
-    CALL calcular_numeros(10);
+    CALL calcular_numeros(12);
     SELECT * FROM ejercicio;
     ```
+<center><img src="./img/2-8.png"></center>
 
 9. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
 
-    ```sql
-    DROP PROCEDURE IF EXISTS calcular_numeros;
-    delimiter //
-    CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
-    BEGIN
-    DECLARE i INT;
-    SET i = valor_inicial;
-    DELETE FROM ejercicio;
-    ciclo: LOOP
-    INSERT INTO ejercicio VALUES(i);
-    SET i = i - 1;
-    IF (i == 0) THEN
-    LEAVE ciclo;
-    ELSE 
-     ITERATE ciclo;
-    END IF;
-    END LOOP;
-    END //
-    delimiter ;
-    CALL calcular_numeros(10);
-    SELECT * FROM ejercicio;
-    ```
+```sql
+DROP PROCEDURE IF EXISTS calcular_numeros;
+delimiter //
+CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+BEGIN
+DECLARE i INT;
+SET i = valor_inicial;
+DELETE FROM ejercicio;
+ciclo: LOOP
+INSERT INTO ejercicio VALUES(i);
+SET i = i - 1;
+IF (i = 0) THEN
+LEAVE ciclo;
+ELSE 
+    ITERATE ciclo;
+END IF;
+END LOOP;
+SELECT * FROM ejercicio;
+END //
+delimiter ;
+CALL calcular_numeros(14);
+```
+
+<center><img src="./img/2-9-1.png"></center> 
+<center><img src="./img/2-9-2.png"></center>
 
 10. Crea unabase de datos llamada procedimientos que contenga una tabla llamada pares y otra tabla llamada impares. Las dos tablas deben tener única columna llamada número y el tipo de dato de esta columna debe ser INT UNSIGNED. 
 
-    Una   vez   creada   la   base   de   datos   y   las   tablas   deberácrear   un procedimiento llamado calcular_pares_impares con   las   siguientes   características.   El procedimiento recibe un parámetro de entrada llamado tope de tipo INT UNSIGNED y deberá almacenar en la tabla pares aquellos números pares que existan entre el número 1el valor introducido como parámetro. Habrá que realizar la misma operación para  almacenar los números impares en la tabla impares.
+### Cargue de la Base de datos
 
-    Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de las tablas antes de insertar los nuevos valores. 
+<center><img src="./img/cargue-procs.png"></center>
 
-    Utilice un bucle WHILE para resolver el procedimiento.
+Una   vez   creada   la   base   de   datos   y   las   tablas   deberácrear   un procedimiento llamado calcular_pares_impares con   las   siguientes   características.   El procedimiento recibe un parámetro de entrada llamado tope de tipo INT UNSIGNED y deberá almacenar en la tabla pares aquellos números pares que existan entre el número 1el valor introducido como parámetro. Habrá que realizar la misma operación para  almacenar los números impares en la tabla impares.
 
-    ```sql
-    DROP PROCEDURE IF EXISTS calcular_pares_impares;
-    delimiter //
-    CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
-    BEGIN
-    DECLARE i INT;
-    SET i = 1;
-    DELETE FROM pares;
-    DELETE FROM impares;
-    WHILE (i <= tope) DO
-    IF (i % 2 = 0) THEN
-    INSERT INTO pares VALUES(i);
-    ELSE
-    INSERT INTO impares VALUES(i);
-    END IF;
-    SET i = i + 1;
-    END WHILE;
-    END //
-    delimiter ;
-    CALL calcular_pares_impares(10);
-    SELECT * FROM pares;
-    SELECT * FROM impares;
-    ```
+Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de las tablas antes de insertar los nuevos valores. 
+
+Utilice un bucle WHILE para resolver el procedimiento.
+
+```sql
+DROP PROCEDURE IF EXISTS calcular_pares_impares;
+delimiter //
+CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+BEGIN
+DECLARE i INT;
+SET i = 1;
+DELETE FROM pares;
+DELETE FROM impares;
+WHILE (i <= tope) DO
+IF (i % 2 = 0) THEN
+INSERT INTO pares VALUES(i);
+ELSE
+INSERT INTO impares VALUES(i);
+END IF;
+SET i = i + 1;
+END WHILE;
+END //
+delimiter ;
+CALL calcular_pares_impares(10);
+SELECT * FROM pares;
+SELECT * FROM impares;
+```
+
+<center><img src="./img/2-10-1.png"></center> 
+<center><img src="./img/2-10-2.png"></center>
+<center><img src="./img/2-10-3.png"></center> 
 
 11. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
 
-    ```sql
-    DROP PROCEDURE IF EXISTS calcular_pares_impares;
-    delimiter //
-    CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
-    BEGIN
-    DECLARE i INT;
-    SET i = 1;
-    DELETE FROM pares;
-    DELETE FROM impares;
-    REPEAT
-    IF (i % 2 = 0) THEN
-    INSERT INTO pares VALUES(i);
-    ELSE
-    INSERT INTO impares VALUES(i);
-    END IF;
-    SET i = i + 1;
-    UNTIL (i > tope);
-    END REPEAT;
-    END //
-    delimiter ;
-    CALL calcular_pares_impares(10);
-    SELECT * FROM pares;
-    SELECT * FROM impares;
-    ```
+```sql
+DROP PROCEDURE IF EXISTS calcular_pares_impares;
+delimiter //
+CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+BEGIN
+DECLARE i INT;
+SET i = 1;
+DELETE FROM pares;
+DELETE FROM impares;
+REPEAT
+IF (i % 2 = 0) THEN
+INSERT INTO pares VALUES(i);
+ELSE
+INSERT INTO impares VALUES(i);
+END IF;
+SET i = i + 1;
+UNTIL (i > tope)
+END REPEAT;
+END //
+delimiter ;
+CALL calcular_pares_impares(10);
+SELECT * FROM pares;
+SELECT * FROM impares;
+```
+
+<center><img src="./img/2-11-1.png"></center> 
+<center><img src="./img/2-11-2.png"></center>
 
 12. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
 
@@ -494,6 +520,10 @@ Utilice un bucle WHILE para resolver el procedimiento.
     SELECT * FROM pares;
     SELECT * FROM impares;
     ```
+
+<center><img src="./img/2-12.png"></center> 
+<center><img src="./img/2-12-1.png"></center>
+
 ## Transacciones con procedimientos almacenados
 
 1. Crea una base de datos llamada cine que contengados tablas con las siguientes columnas.
@@ -507,6 +537,10 @@ Utilice un bucle WHILE para resolver el procedimiento.
 
     * id_butaca: entero sin signo (clave primaria). 
     * nif: cadena de 9 caracteres.
+
+### Cargue de la Base de datos
+
+<center><img src="./img/cargue-procs.png"></center>
 
     Una   vez   creada   la   base   de   datos   y   las   tablas   deberá crear   un procedimiento llamado comprar_entrada con   las   siguientes   características.   El procedimiento recibe 3 parámetros  de entrada(nif,id_cuenta,id_butaca) y devolverá como salida un parámetro llamado error que tendrá un valor igual a 0 si la compra de la entrada se ha podido realizar con éxito y un valor igual a 1 en caso contrario.
 
@@ -522,6 +556,7 @@ Utilice un bucle WHILE para resolver el procedimiento.
 
     * ERROR 1264 (Out of range value).
     * ERROR 1062 (Duplicate entry for PRIMARY KEY).
+
 
     ```sql
         DROP PROCEDURE IF EXISTS comprar_entrada; 
@@ -560,6 +595,9 @@ Utilice un bucle WHILE para resolver el procedimiento.
         SELECT * FROM entradas;
     ```
 
+<center><img src="./img/3-1.png"></center>
+<center><img src="./img/3-2.png"></center>
+<center><img src="./img/3-3.png"></center>  
 
 2. ¿Qué ocurre cuando intentamos comprar una entrada y le pasamos como parámetro un número de cuenta que no existe en la tabla cuentas? ¿Ocurre algún error o podemos comprar la entrada?  En caso de que exista algún error, ¿cómo podríamos resolverlo?
     ```sql
@@ -600,7 +638,15 @@ Utilice un bucle WHILE para resolver el procedimiento.
         SELECT@error;
     ```
 
+<center><img src="./img/3-4.png"></center>  
+<center><img src="./img/3-4-1.png"></center>  
+ 
+
 ## Funciones con sentencias SQL
+
+### Cargue de la Base de datos
+
+<center><img src="./img/cargue-tienda.png"></center>
 
 1. Escribe una función para la base de datos tienda que devuelva el número total de productos que hay en la tabla productos.
 
@@ -620,6 +666,8 @@ Utilice un bucle WHILE para resolver el procedimiento.
 
         SELECT numero_total_productos();
     ```
+
+<center><img src="./img/4-1.png"></center>
 
 2. Escribe una función para la base de datos tienda que devuelva el valor medio del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada. El parámetro de entrada será el nombre del fabricante.
 
@@ -641,6 +689,8 @@ Utilice un bucle WHILE para resolver el procedimiento.
         SELECT precio_medio('Apple');
     ```
 
+<center><img src="./img/4-2.png"></center>
+
 3. Escribe una función para la base de datos tienda que devuelva el valor máximo del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada. El parámetro de entrada será el nombre del fabricante.
 
     ```sql
@@ -661,6 +711,8 @@ Utilice un bucle WHILE para resolver el procedimiento.
         SELECT precio_medio('Apple');
     ```
 
+<center><img src="./img/4-3.png"></center>
+
 4. Escribe una función para la base de datos tienda que devuelva el valor mínimo del precio de los productos de un determinado fabricante que se recibirá como parámetro de entrada. El parámetro de entrada será el nombre del fabricante.
 
     ```sql
@@ -680,3 +732,5 @@ Utilice un bucle WHILE para resolver el procedimiento.
 
         SELECT precio_medio('Apple');
     ```
+
+<center><img src="./img/4-4.png"></center>
