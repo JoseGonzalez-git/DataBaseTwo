@@ -1,27 +1,63 @@
 -- Database: Mites02
+DROP TABLE IF EXISTS alumnos;
 
 CREATE TABLE alumnos (
   id INTEGER NOT NULL,
   nombre VARCHAR(30) NOT NULL,
   apellido1 VARCHAR(50) NOT NULL,
   apellido2 VARCHAR(50) NOT NULL,
-  email VARCHAR(255) NOT NULL,
+  email VARCHAR(255),
   PRIMARY KEY (id)
 );
 
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (1, 'Ugo', 'Pettis', 'Maplestone', 'umaplestone0@sfgate.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (2, 'Charline', 'Spraggon', 'Osgodby', 'cosgodby1@smh.com.au');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (3, 'Gay', 'Beetles', 'Duker', 'gduker2@tmall.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (4, 'Eddie', 'Fairbrother', 'Mottinelli', 'emottinelli3@seattletimes.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (5, 'Kippy', 'Gaythorpe', 'Speeding', 'kspeeding4@reference.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (6, 'Karlee', 'Grigoroni', 'Arson', 'karson5@gmpg.org');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (7, 'Bernete', 'Simoes', 'Durbin', 'bdurbin6@engadget.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (8, 'Abbie', 'Rahl', 'Stoddard', 'astoddard7@yahoo.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (9, 'Annora', 'Lerigo', 'Froome', 'afroome8@miitbeian.gov.cn');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (10, 'Ivar', 'Sclater', 'Rissen', 'irissen9@e-recht24.de');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (11, 'Deerdre', 'Largan', 'Salisbury', 'dsalisburya@delicious.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (12, 'Julian', 'Rehm', 'Heikkinen', 'jheikkinenb@china.com.cn');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (13, 'Ynes', 'Matteacci', 'Fieldstone', 'yfieldstonec@netlog.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (14, 'Robyn', 'Charley', 'Griffoen', 'rgriffoend@bing.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (15, 'Eartha', 'Haugh', 'Duiguid', 'eduiguide@nymag.com');
-insert into alumnos (id, nombre, apellido1, apellido2, email) values (16, 'Jewell', 'Bramford', 'Moring', 'jmoringf@reddit.com');
+create or replace procedure crear_email(
+  in nombre VARCHAR(30),
+  in apellido1 VARCHAR(50),
+  in apellido2 VARCHAR(50),
+  in dominio VARCHAR(50),
+  inout email VARCHAR(255)
+)
+language plpgsql    
+as $$
+begin
+  email = CONCAT(
+    substring(nombre,1,1),
+    substring(apellido1,1,3),
+    substring(apellido2,1,3),
+    '@',
+    dominio
+    );
+  
+  email = lower(email);
+end;
+$$ ;
+
+create or replace function trigger_crear_email_before_insert()
+returns trigger as $body$
+DECLARE email VARCHAR(150);
+DECLARE dominio VARCHAR(50);
+begin
+	dominio = 'sierranevada.org';
+    if new.email is NULL THEN
+      call crear_email(
+        new.nombre,
+        new.apellido1,
+        new.apellido2,
+        dominio,
+        email
+      );
+      new.email = email;
+    END IF;
+	return new;
+end
+$body$ language plpgsql;
+
+create trigger trigger_crear_email_before_insert
+BEFORE INSERT
+ON alumnos FOR EACH ROW
+execute procedure trigger_crear_email_before_insert();
+
+INSERT INTO alumnos VALUES (1,'Isaac', 'Arrieta', 'Mercado', NULL);
+INSERT INTO alumnos VALUES (2,'Jose', 'Gonzales', 'Ortiz', 'jgonort@sierranevada.org');
+
+SELECT * FROM alumnos;
