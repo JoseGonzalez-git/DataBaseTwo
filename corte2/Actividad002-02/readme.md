@@ -61,6 +61,7 @@ Tabla alumnos:
 
     SELECT * FROM alumnos;
     ```
+    <center><img src="./img/1.png"></center>
 
     Trigger2: trigger_check_nota_before_update
 
@@ -96,6 +97,7 @@ Tabla alumnos:
 
     SELECT * FROM alumnos;
     ```
+    <center><img src="./img/2.png"></center>
 
 2. Crear una base de datos llamada Mitest02 que contenga una tabla llamada alumnos con las siguientes columnas.
 Tabla alumnos: 
@@ -164,8 +166,8 @@ Tabla alumnos:
     Una vez creada la tabla escriba un trigger con las siguientes características:
 
     * Trigger: trigger_crear_email_before_inserto
-        * Se ejecuta sobre la tablaalumnos.
-        * Se ejecutaantesde una operación deinserción.
+        * Se ejecuta sobre la tabla alumnos.
+        * Se ejecuta antes de una operación de inserción.
         * Si el nuevo valor del email que se quiere insertar es NULL, entonces se le creará automáticamente una dirección de email y se insertará en la tabla.
         * Si el nuevo valor del email no es NULL se guardará en la tabla el valor del email.
 
@@ -200,6 +202,7 @@ Tabla alumnos:
 
     SELECT * FROM alumnos;
     ```
+    <center><img src="./img/3.png"></center>
 
 3. Modificar el ejercicio anterior y añade un nuevo trigger que las siguientes características:
 
@@ -266,6 +269,8 @@ Tabla alumnos:
     SELECT * FROM alumnos;
     SELECT * FROM log_cambios_email;
     ```
+    <center><img src="./img/4.png"></center>
+    <center><img src="./img/5.png"></center>
 
 4. Modificar el ejercicio anterior y añade un nuevo trigger que   tenga las siguientescaracterísticas:
 
@@ -329,3 +334,6 @@ Tabla alumnos:
     SELECT * FROM alumnos;
     SELECT * FROM log_alumnos_eliminados;
     ```
+
+    <center><img src="./img/6.png"></center>
+    <center><img src="./img/7.png"></center>
