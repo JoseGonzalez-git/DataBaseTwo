@@ -5,7 +5,7 @@
 
 ## Ejercicios
 
-1. Crear unabase de datosllamadaMitest01que contengauna tablallamadaalumnosconlas siguientes columnas.
+1. Crear unabase de datos llamada Mitest01 que contenga una tabla llamada alumnos con las siguientes columnas.
 Tabla alumnos:
     * id(entero sin signo)
     * nombre(cadena de caracteres)
@@ -26,7 +26,7 @@ Tabla alumnos:
     );
     ```
 
-    Una vez creada la tabla escribados triggerscon las siguientes características:  
+    Una vez creada la tabla escriba dos triggers con las siguientes características:  
 
     Trigger 1:trigger_check_nota_before_inserto
 
@@ -272,12 +272,12 @@ Tabla alumnos:
     <center><img src="./img/4.png"></center>
     <center><img src="./img/5.png"></center>
 
-4. Modificar el ejercicio anterior y añade un nuevo trigger que   tenga las siguientescaracterísticas:
+4. Modificar el ejercicio anterior y añade un nuevo trigger que   tenga las siguientes características:
 
     Trigger: trigger_guardar_alumnos_eliminados:
     * Se ejecuta sobre la tabla alumnos.
     * Se ejecuta despuésde una operación de borrado.
-    * Cada vez que se elimine un alumno de la tabla alumnosse deberá insertar unnuevo registro en una tabla llamada log_alumnos_eliminados.
+    * Cada vez que se elimine un alumno de la tabla alumnos se deberá insertar unnuevo registro en una tabla llamada log_alumnos_eliminados.
 
     La tabla log_alumnos_eliminados contiene los siguientes campos:
     * id: clave primaria (entero autonumérico)
