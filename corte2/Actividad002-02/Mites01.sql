@@ -1,6 +1,6 @@
 -- Database: Mites01
 
-drop table if exists alumnos;
+DROP TABLE IF EXISTS alumnos;
 
 CREATE TABLE alumnos (
   id INTEGER NOT NULL,
